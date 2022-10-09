@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "686107835561",
+    "firebase_url": "https://ohmygash-e61ac-default-rtdb.firebaseio.com",
+    "project_id": "ohmygash-e61ac",
+    "storage_bucket": "ohmygash-e61ac.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:686107835561:android:3ab901a60409c387377db8",
+        "android_client_info": {
+          "package_name": "com.example.ohmygash"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "686107835561-eheme5lepiqqoi9075epcmqqueuk9m6e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfiuvYxNCmCi37Oiddugjt-8spGx_n_dE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "686107835561-eheme5lepiqqoi9075epcmqqueuk9m6e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

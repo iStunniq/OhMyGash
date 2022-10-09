@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primaryDarkColor"
+    tools:context=".Login">
+
+    <Button
+        android:id="@+id/RegisterNewGeneral"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="132dp"
+        android:text="Register"
+        android:textColor="#253D85"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.455"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/generalRegisterPassword" />
+
+    <Button
+        android:id="@+id/StationToRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Go Back"
+        android:textColor="#253D85"
+        app:layout_constraintEnd_toEndOf="@+id/RegisterNewGeneral"
+        app:layout_constraintStart_toStartOf="@+id/RegisterNewGeneral"
+        app:layout_constraintTop_toBottomOf="@+id/RegisterNewGeneral" />
+
+    <TextView
+        android:id="@+id/Title"
+        android:layout_width="280dp"
+        android:layout_height="100dp"
+        android:text="General Account for Drivers"
+        android:textAlignment="center"
+        android:textColor="@color/primaryColor"
+        android:textSize="35sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.071" />
+
+    <TextView
+        android:id="@+id/text1"
+        android:layout_width="120dp"
+        android:layout_height="28dp"
+        android:text="Name:"
+        android:textAlignment="viewEnd"
+        android:textColor="@color/primaryColor"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/generalRegisterName"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toTopOf="@+id/generalRegisterName" />
+
+    <TextView
+        android:id="@+id/text3"
+        android:layout_width="120dp"
+        android:layout_height="33dp"
+        android:text="Email:"
+        android:textAlignment="viewEnd"
+        android:textColor="@color/primaryColor"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/generalRegisterEmail"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toTopOf="@+id/generalRegisterEmail" />
+
+    <TextView
+        android:id="@+id/text4"
+        android:layout_width="120dp"
+        android:layout_height="33dp"
+        android:text="Password:"
+        android:textAlignment="viewEnd"
+        android:textColor="@color/primaryColor"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/generalRegisterPassword"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toTopOf="@+id/generalRegisterPassword" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="136dp" />
+
+    <EditText
+        android:id="@+id/generalRegisterName"
+        android:layout_width="247dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="24dp"
+        android:autofillHints=""
+        android:backgroundTint="@color/primaryColor"
+        android:ems="10"
+        android:hint="Display Name"
+        android:inputType="textPersonName"
+        android:minHeight="40dp"
+        android:textColor="@color/textColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/text1"
+        app:layout_constraintTop_toBottomOf="@+id/Title" />
+
+    <EditText
+        android:id="@+id/generalRegisterEmail"
+        android:layout_width="247dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="12dp"
+        android:autofillHints=""
+        android:backgroundTint="@color/primaryColor"
+        android:ems="10"
+        android:hint="Login Email"
+        android:inputType="textPersonName"
+        android:minHeight="40dp"
+        android:textColor="@color/textColor"
+        app:layout_constraintEnd_toEndOf="@+id/generalRegisterName"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/generalRegisterName"
+        app:layout_constraintTop_toBottomOf="@+id/generalRegisterName" />
+
+    <EditText
+        android:id="@+id/generalRegisterPassword"
+        android:layout_width="247dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="12dp"
+        android:autofillHints=""
+        android:backgroundTint="@color/primaryColor"
+        android:ems="10"
+        android:hint="Login Password"
+        android:inputType="textPassword"
+        android:minHeight="40dp"
+        android:textColor="@color/textColor"
+        app:layout_constraintEnd_toEndOf="@+id/generalRegisterEmail"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/generalRegisterEmail"
+        app:layout_constraintTop_toBottomOf="@+id/generalRegisterEmail" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

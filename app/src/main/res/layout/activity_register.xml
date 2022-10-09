@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primaryDarkColor"
+    tools:context=".Login">
+
+    <Button
+        android:id="@+id/GeneralRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
+        android:text="General Use"
+        android:textColor="#253D85"
+        app:layout_constraintEnd_toEndOf="@+id/Title"
+        app:layout_constraintStart_toStartOf="@+id/Title"
+        app:layout_constraintTop_toBottomOf="@+id/Title" />
+
+    <Button
+        android:id="@+id/WorkshopRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Workshop"
+        android:textColor="#253D85"
+        app:layout_constraintEnd_toEndOf="@+id/GeneralRegister"
+        app:layout_constraintHorizontal_bias="0.529"
+        app:layout_constraintStart_toStartOf="@+id/GeneralRegister"
+        app:layout_constraintTop_toBottomOf="@+id/GeneralRegister" />
+
+    <Button
+        android:id="@+id/StationRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:text="Gas Station"
+        android:textColor="#253D85"
+        app:layout_constraintEnd_toEndOf="@+id/WorkshopRegister"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/WorkshopRegister"
+        app:layout_constraintTop_toBottomOf="@+id/WorkshopRegister" />
+
+    <Button
+        android:id="@+id/StationToRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Go Back"
+        android:textColor="#253D85"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/StationRegister"
+        app:layout_constraintHorizontal_bias="0.514"
+        app:layout_constraintStart_toStartOf="@+id/StationRegister"
+        app:layout_constraintTop_toBottomOf="@+id/StationRegister"
+        app:layout_constraintVertical_bias="0.46" />
+
+    <TextView
+        android:id="@+id/Title"
+        android:layout_width="276dp"
+        android:layout_height="157dp"
+        android:text="Select Account Type To Register"
+        android:textAlignment="center"
+        android:textColor="@color/primaryColor"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.095" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

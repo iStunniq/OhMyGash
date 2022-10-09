@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">OhMyGash</string>
+    <string name="API_KEY">AIzaSyD0KrHAVndgkK5dPQxMxH90D-lyZGPkSLA</string>
+    <string name="nameKey">name</string>
+    <string name="passKey">password</string>
+    <string name="emailKey">email</string>
+    <string name="usernameKey">username</string>
+    <string name="accountTypeKey">accountType</string>
+</resources>
