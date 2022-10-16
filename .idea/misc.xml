@@ -4,15 +4,18 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/layout/activity_general_register.xml" value="0.33" />
+        <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/layout/activity_locate_place.xml" value="0.33" />
         <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/layout/activity_map.xml" value="0.33" />
         <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/layout/activity_menu.xml" value="0.25" />
-        <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/layout/activity_register.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/layout/activity_station_register.xml" value="0.2" />
+        <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/layout/activity_register.xml" value="0.33" />
+        <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/layout/activity_station_register.xml" value="0.33" />
+        <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/layout/activity_view_place.xml" value="0.33" />
         <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/layout/activity_workshop_register.xml" value="0.2" />
         <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/layout/header_layout.xml" value="0.25" />
         <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/layout/nav_header_main.xml" value="0.19010416666666666" />
         <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/layout/navdrawer_layout.xml" value="0.19010416666666666" />
+        <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/layout/placeitem.xml" value="0.5" />
         <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/layout/toolbar_layout.xml" value="0.19010416666666666" />
         <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/menu/nav_menu.xml" value="0.19010416666666666" />
       </map>

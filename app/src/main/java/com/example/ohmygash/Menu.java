@@ -23,7 +23,7 @@ public class Menu extends AppCompatActivity {
     DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Users");
 
     TextView Name,Email;
-    Button Map,Logout;
+    Button Workshops,Stations,Map,Logout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +32,9 @@ public class Menu extends AppCompatActivity {
 
         Name = findViewById(R.id.MenuNameTextView);
         Email = findViewById(R.id.MenuEmailTextView);
+        Workshops = findViewById(R.id.GoToWorkshopsButton);
+        Stations = findViewById(R.id.GoToStationsButton);
+
         Logout = findViewById(R.id.LogoutButton);
         Map = findViewById(R.id.GoToMapButton);
 
@@ -47,7 +50,21 @@ public class Menu extends AppCompatActivity {
 
         Map.setOnClickListener(view->{
             Intent intent = new Intent(Menu.this,Map.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+        });
+
+        Workshops.setOnClickListener(view->{
+            Intent intent = new Intent(Menu.this,LocatePlace.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.putExtra("AccountTypeToLocate","Workshop");
+            startActivity(intent);
+        });
+
+        Stations.setOnClickListener(view->{
+            Intent intent = new Intent(Menu.this,LocatePlace.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.putExtra("AccountTypeToLocate","Station");
             startActivity(intent);
         });
 

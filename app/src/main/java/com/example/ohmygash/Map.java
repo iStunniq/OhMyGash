@@ -70,7 +70,6 @@ public class Map extends FragmentActivity implements OnMapReadyCallback, Routing
 
     //to get location permissions.
     private final static int LOCATION_REQUEST_CODE = 23;
-    boolean locationPermission = false;
 
     //polyline object
     private List<Polyline> polylines = null;
@@ -81,6 +80,7 @@ public class Map extends FragmentActivity implements OnMapReadyCallback, Routing
     private EditText Searchbox;
     private Button Search,Directions,NearestWork,NearestStat,Menu;
     private TextView DistanceToDestination;
+    private String AddressToLocate,NameToLocate;
 
     DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("Users");
 
@@ -88,6 +88,11 @@ public class Map extends FragmentActivity implements OnMapReadyCallback, Routing
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
+
+
+        Intent ThisIntent = getIntent();
+        AddressToLocate = ThisIntent.getStringExtra("AddressToLocate");
+        NameToLocate = ThisIntent.getStringExtra("NameToLocate");
 
         Searchbox = findViewById(R.id.MapAdressSearchBar);
         Search = findViewById(R.id.MapSearchButton);
@@ -103,7 +108,6 @@ public class Map extends FragmentActivity implements OnMapReadyCallback, Routing
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         }
-
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         //request location permission.
 
@@ -117,17 +121,20 @@ public class Map extends FragmentActivity implements OnMapReadyCallback, Routing
             mMap.clear();
             try {
                 addresses = geocoder.getFromLocationName(Searchbox.getText().toString(),1);
-                LatLng LatiLongi = new LatLng(addresses.get(0).getLatitude(),addresses.get(0).getLongitude());
+                if (addresses.size() > 0) {
+                    LatLng LatiLongi = new LatLng(addresses.get(0).getLatitude(), addresses.get(0).getLongitude());
 
-                MarkerOptions endMarker = new MarkerOptions();
-                endMarker.position(LatiLongi);
-                endMarker.title("Search Result");
-                mMap.addMarker(endMarker);
+                    MarkerOptions endMarker = new MarkerOptions();
+                    endMarker.position(LatiLongi);
+                    endMarker.title("Search Result");
+                    mMap.addMarker(endMarker);
 
-                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(
-                        LatiLongi, 16f);
-                mMap.animateCamera(cameraUpdate);
-
+                    CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(
+                            LatiLongi, 16f);
+                    mMap.animateCamera(cameraUpdate);
+                } else {
+                    Toast.makeText(Map.this, "Can't Locate Address", Toast.LENGTH_SHORT).show();
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -138,36 +145,35 @@ public class Map extends FragmentActivity implements OnMapReadyCallback, Routing
             startActivity(intent);
         });
 
-
         Directions.setOnClickListener(view->{
             geocoder = new Geocoder(this,Locale.getDefault());
             mMap.clear();
             if (Directions.getText().toString().matches("Get Directions")) {
-                Directions.setText("Stop Routing");
                 mFusedLocationClient.removeLocationUpdates(mLocationCallback);
                 mFusedLocationClient.removeLocationUpdates(mDirectionsCallback);
                 try {
                     addresses = geocoder.getFromLocationName(Searchbox.getText().toString(),1);
-                    LatLng LatiLongi = new LatLng(addresses.get(0).getLatitude(),addresses.get(0).getLongitude());
-                    end = LatiLongi;
+                    if (addresses.size() > 0) {
+                        Directions.setText("Stop Routing");
+                        LatLng LatiLongi = new LatLng(addresses.get(0).getLatitude(), addresses.get(0).getLongitude());
+                        end = LatiLongi;
 
-                    mLocationRequest = LocationRequest.create()
-                            .setInterval(5000)
-                            .setFastestInterval(5000)
-                            .setPriority(Priority.PRIORITY_HIGH_ACCURACY)
-                            .setMaxWaitTime(100);
+                        mLocationRequest = LocationRequest.create()
+                                .setInterval(5000)
+                                .setFastestInterval(5000)
+                                .setPriority(Priority.PRIORITY_HIGH_ACCURACY)
+                                .setMaxWaitTime(100);
 
-                    if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
-                    {
-                        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, LOCATION_REQUEST_CODE);
-                    }
-                    else if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
-                    {
-                        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_REQUEST_CODE);
-                    }
-                    else {
-                        mFusedLocationClient.requestLocationUpdates(mLocationRequest, mDirectionsCallback, Looper.myLooper());
-                        mMap.setMyLocationEnabled(true);
+                        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, LOCATION_REQUEST_CODE);
+                        } else if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_REQUEST_CODE);
+                        } else {
+                            mFusedLocationClient.requestLocationUpdates(mLocationRequest, mDirectionsCallback, Looper.myLooper());
+                            mMap.setMyLocationEnabled(true);
+                        }
+                    } else {
+                        Toast.makeText(Map.this, "Could not find location. Cannot make a route.", Toast.LENGTH_SHORT).show();
                     }
 
                 } catch (IOException e) {
@@ -195,6 +201,7 @@ public class Map extends FragmentActivity implements OnMapReadyCallback, Routing
                 }
             });
         });
+
         NearestStat.setOnClickListener(view -> {
             mMap.clear();
             requestPermision();
@@ -216,50 +223,63 @@ public class Map extends FragmentActivity implements OnMapReadyCallback, Routing
         DataSnapshot Nearest = null;
         for (DataSnapshot user : users){
             if (user.child("accType").getValue().toString().matches(accType)){
-                if (Nearest == null){
-                    Nearest = user;
-                } else {
-                    geocoder = new Geocoder(Map.this,Locale.getDefault());
-                    try {
-                        List<Address> addresses1 = geocoder.getFromLocationName(user.child("placeAdd").getValue().toString(),1);
-                        List<Address> addresses2 = geocoder.getFromLocationName(Nearest.child("placeAdd").getValue().toString(),1);
-
-                        Location locEnd1 = new Location("");
-                        locEnd1.setLatitude(addresses1.get(0).getLatitude());
-                        locEnd1.setLongitude(addresses1.get(0).getLongitude());
-
-                        Location locEnd2 = new Location("");
-                        locEnd2.setLatitude(addresses2.get(0).getLatitude());
-                        locEnd2.setLongitude(addresses2.get(0).getLongitude());
-
-                        int val1 = (int) myLocation.distanceTo(locEnd1);
-                        int val2 = (int) myLocation.distanceTo(locEnd2);
-
-                        if (val1 < val2) {
-                            Nearest = user;
+                geocoder = new Geocoder(Map.this,Locale.getDefault());
+                try {
+                    List<Address> addresses1 = geocoder.getFromLocationName(user.child("placeAdd").getValue().toString(),1);
+                    if (Nearest == null){
+                        if (addresses1.size()>0){
+                        Nearest = user;
+                        MarkerOptions endMarker = new MarkerOptions();
+                        endMarker.position(new LatLng(addresses1.get(0).getLatitude(),addresses1.get(0).getLongitude()));
+                        endMarker.title(user.child("placeName").getValue().toString());
+                        mMap.addMarker(endMarker);
                         }
+                    } else {
+                        List<Address> addresses2 = geocoder.getFromLocationName(Nearest.child("placeAdd").getValue().toString(), 1);
+                        if (addresses1.size() > 0 && addresses2.size() > 0) {
+                            Location locEnd1 = new Location("");
+                            locEnd1.setLatitude(addresses1.get(0).getLatitude());
+                            locEnd1.setLongitude(addresses1.get(0).getLongitude());
 
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                            Location locEnd2 = new Location("");
+                            locEnd2.setLatitude(addresses2.get(0).getLatitude());
+                            locEnd2.setLongitude(addresses2.get(0).getLongitude());
+
+                            int val1 = (int) myLocation.distanceTo(locEnd1);
+                            int val2 = (int) myLocation.distanceTo(locEnd2);
+
+                            MarkerOptions endMarker = new MarkerOptions();
+                            endMarker.position(new LatLng(addresses1.get(0).getLatitude(),addresses1.get(0).getLongitude()));
+                            endMarker.title(user.child("placeName").getValue().toString());
+                            mMap.addMarker(endMarker);
+
+                            if (val1 < val2) {
+                                Nearest = user;
+                            }
+                        }
                     }
-                };
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
-        geocoder = new Geocoder(Map.this,Locale.getDefault());
         try {
-            Searchbox.setText(Nearest.child("placeAdd").getValue().toString());
-            addresses = geocoder.getFromLocationName(Nearest.child("placeAdd").getValue().toString(),1);
-            LatLng LatiLongi = new LatLng(addresses.get(0).getLatitude(),addresses.get(0).getLongitude());
+            if (Nearest != null) {
+                addresses = geocoder.getFromLocationName(Nearest.child("placeAdd").getValue().toString(),1);
+                if (addresses.size()>0) {
+                    Searchbox.setText(Nearest.child("placeAdd").getValue().toString());
 
-            MarkerOptions endMarker = new MarkerOptions();
-            endMarker.position(LatiLongi);
-            endMarker.title(Nearest.child("placeName").getValue().toString());
-            mMap.addMarker(endMarker);
+                    LatLng LatiLongi = new LatLng(addresses.get(0).getLatitude(), addresses.get(0).getLongitude());
 
-            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(
-                    LatiLongi, 16f);
-            mMap.animateCamera(cameraUpdate);
-
+                    CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(
+                            LatiLongi, 16f);
+                    mMap.animateCamera(cameraUpdate);
+                } else {
+                    Toast.makeText(Map.this, "Could not find the nearest " + accType, Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Toast.makeText(Map.this, "There are no available " + accType, Toast.LENGTH_SHORT).show();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -295,9 +315,34 @@ public class Map extends FragmentActivity implements OnMapReadyCallback, Routing
 
                 LatLng ltlng=new LatLng(myLocation.getLatitude(),myLocation.getLongitude());
 
-                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(
-                        ltlng, 16f);
-                mMap.animateCamera(cameraUpdate);
+                if (AddressToLocate != null) {
+                    Searchbox.setText(AddressToLocate);
+                    geocoder = new Geocoder(Map.this,Locale.getDefault());
+                    mMap.clear();
+                    try {
+                        addresses = geocoder.getFromLocationName(Searchbox.getText().toString(),1);
+                        if (addresses.size() > 0) {
+                            LatLng LatiLongi = new LatLng(addresses.get(0).getLatitude(), addresses.get(0).getLongitude());
+
+                            MarkerOptions endMarker = new MarkerOptions();
+                            endMarker.position(LatiLongi);
+                            endMarker.title(NameToLocate);
+                            mMap.addMarker(endMarker);
+
+                            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(
+                                    LatiLongi, 16f);
+                            mMap.animateCamera(cameraUpdate);
+                        } else {
+                            Toast.makeText(Map.this, "Can't Locate Address", Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(
+                            ltlng, 16f);
+                    mMap.animateCamera(cameraUpdate);
+                }
             }
         }
     };
@@ -419,9 +464,12 @@ public class Map extends FragmentActivity implements OnMapReadyCallback, Routing
     @Override
     public void onRoutingFailure(RouteException e) {
         View parentLayout = findViewById(android.R.id.content);
-        Snackbar snackbar= Snackbar.make(parentLayout, e.toString(), Snackbar.LENGTH_LONG);
+        Snackbar snackbar= Snackbar.make(parentLayout, "Failed to Create a Route", Snackbar.LENGTH_SHORT);
         snackbar.show();
-        Findroutes(start,end);
+        Directions.setText("Get Directions");
+        mFusedLocationClient.removeLocationUpdates(mLocationCallback);
+        mFusedLocationClient.removeLocationUpdates(mDirectionsCallback);
+        DistanceToDestination.setText("");
     }
 
     @Override

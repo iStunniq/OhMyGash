@@ -28,7 +28,7 @@ public class StationRegister extends AppCompatActivity {
 
     private FirebaseAuth FBAuth;
 
-    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,30 +68,14 @@ public class StationRegister extends AppCompatActivity {
             else {
 
                 User user = new User(emailTxt,passwordTxt,nameTxt,stNameTxt,stAddTxt,"Station");
+                createAcc(user);
 
-                databaseReference.child("Users").addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if (snapshot.hasChild(emailTxt)){
-                            Toast.makeText(StationRegister.this,"This Email is Already In Use",Toast.LENGTH_LONG).show();
-                        } else {
-                            createAcc(user);
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-
-                });
-//                Toast.makeText(GeneralRegister.this, "Feedback", Toast.LENGTH_SHORT).show();
             }
 
         });
         Return.setOnClickListener(view -> {
             Intent intent = new Intent(StationRegister.this,Register.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
         });
 
@@ -108,7 +92,6 @@ public class StationRegister extends AppCompatActivity {
                             if (FBuser != null) {
                                 databaseReference.child(FBuser.getUid()).setValue(user);
                             }
-
                             Intent intent = new Intent(StationRegister.this, Map.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent);

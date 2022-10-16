@@ -34,7 +34,7 @@
         android:id="@+id/Title"
         android:layout_width="280dp"
         android:layout_height="100dp"
-        android:text="General Account for Drivers"
+        android:text="Regular Account for Drivers"
         android:textAlignment="center"
         android:textColor="@color/primaryColor"
         android:textSize="35sp"

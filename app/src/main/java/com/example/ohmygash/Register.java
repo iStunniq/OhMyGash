@@ -19,7 +19,7 @@ public class Register extends AppCompatActivity {
 
         Return.setOnClickListener(view -> {
             Intent intent = new Intent(Register.this,Login.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
         });
         General.setOnClickListener(view -> {

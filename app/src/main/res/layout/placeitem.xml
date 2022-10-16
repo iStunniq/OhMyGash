@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/RecViewPhoto"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars"
+        android:src="@drawable/ic_launcher_foreground"/>
+
+    <TextView
+        android:id="@+id/RecViewPlaceName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Place Name"
+        app:layout_constraintBottom_toBottomOf="@+id/RecViewPhoto"
+        app:layout_constraintStart_toEndOf="@+id/RecViewPhoto"
+        app:layout_constraintTop_toTopOf="@+id/RecViewPhoto"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/RecViewPlaceAdd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Place Address"
+        app:layout_constraintStart_toEndOf="@+id/RecViewPhoto"
+        app:layout_constraintTop_toBottomOf="@+id/RecViewPlaceName" />
+
+    <TextView
+        android:id="@+id/RecViewDistance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Distance From User"
+        app:layout_constraintStart_toEndOf="@+id/RecViewPhoto"
+        app:layout_constraintTop_toBottomOf="@+id/RecViewPlaceAdd" />
+</androidx.constraintlayout.widget.ConstraintLayout>
