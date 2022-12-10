@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".Login">
+
+    <TextView
+        android:id="@+id/OldPasswordText"
+        android:layout_width="0dp"
+        android:layout_height="33dp"
+        android:text="Confirmation:"
+        android:textAlignment="viewEnd"
+        android:textColor="@color/primaryColor"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/OldPassword"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/OldPassword"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <EditText
+        android:id="@+id/OldPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        android:autofillHints=""
+        android:backgroundTint="@color/primaryColor"
+        android:ems="10"
+        android:hint="Current Password"
+        android:inputType="textPassword"
+        android:minHeight="40dp"
+        android:textColor="@color/textColor"
+        app:layout_constraintEnd_toEndOf="@+id/ProfilePassword"
+        app:layout_constraintStart_toStartOf="@+id/ProfilePassword"
+        app:layout_constraintTop_toBottomOf="@+id/ProfilePassword" />
+
+    <Button
+        android:id="@+id/ProfileSave"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Save"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.485"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/OldPassword" />
+
+    <Button
+        android:id="@+id/ProfileMenu"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="80dp"
+        android:text="Go Back"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/GoToPlaceProfile"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="My Autoshop"
+        android:textColor="@color/white"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/ProfileMenu"
+        app:layout_constraintEnd_toEndOf="@+id/ProfileMenu"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/ProfileMenu" />
+
+    <Button
+        android:id="@+id/RequestVerification"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="Request Verification"
+        android:textColor="@color/white"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/GoToPlaceProfile"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/MyProfileText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:shadowDx="5"
+        android:shadowDy="5"
+        android:shadowRadius="5"
+        android:text="My Profile"
+        android:textAlignment="center"
+        android:textColor="@color/primaryColor"
+        android:textSize="35sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.13" />
+
+    <TextView
+        android:id="@+id/ProfileNameText"
+        android:layout_width="0dp"
+        android:layout_height="28dp"
+        android:text="Name:"
+        android:textAlignment="viewEnd"
+        android:textColor="@color/primaryColor"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/ProfileName"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ProfileName" />
+
+    <TextView
+        android:id="@+id/ProfileEmailText"
+        android:layout_width="0dp"
+        android:layout_height="33dp"
+        android:text="Email:"
+        android:textAlignment="viewEnd"
+        android:textColor="@color/primaryColor"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/ProfileEmail"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ProfileEmail" />
+
+    <TextView
+        android:id="@+id/ProfilePasswordText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Password:"
+        android:textAlignment="viewEnd"
+        android:textColor="@color/primaryColor"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/ProfilePassword"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ProfilePassword" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="136dp" />
+
+    <EditText
+        android:id="@+id/ProfileName"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="24dp"
+        android:autofillHints=""
+        android:backgroundTint="@color/primaryColor"
+        android:ems="10"
+        android:hint="Display Name"
+        android:inputType="textPersonName"
+        android:minHeight="40dp"
+        android:textColor="@color/textColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/ProfileNameText"
+        app:layout_constraintTop_toBottomOf="@+id/MyProfileText" />
+
+    <EditText
+        android:id="@+id/ProfileEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginTop="12dp"
+        android:autofillHints=""
+        android:backgroundTint="@color/primaryColor"
+        android:clickable="false"
+        android:ems="10"
+        android:enabled="false"
+        android:hint="Login Email"
+        android:inputType="textEmailAddress"
+        android:minHeight="40dp"
+        android:textColor="@color/textColor"
+        app:layout_constraintEnd_toEndOf="@+id/ProfileName"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/ProfileName"
+        app:layout_constraintTop_toBottomOf="@+id/ProfileName" />
+
+    <EditText
+        android:id="@+id/ProfilePassword"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginTop="12dp"
+        android:autofillHints=""
+        android:backgroundTint="@color/primaryColor"
+        android:ems="10"
+        android:hint="New Password"
+        android:inputType="textPassword"
+        android:minHeight="40dp"
+        android:textColor="@color/textColor"
+        app:layout_constraintEnd_toEndOf="@+id/ProfileEmail"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/ProfileEmail"
+        app:layout_constraintTop_toBottomOf="@+id/ProfileEmail" />
+
+    <TextView
+        android:id="@+id/VerificationStatus"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="Status:"
+        android:textSize="18dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/RequestVerification"
+        app:layout_constraintEnd_toStartOf="@+id/RequestVerification"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/RequestVerification" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

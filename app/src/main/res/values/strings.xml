@@ -6,4 +6,16 @@
     <string name="emailKey">email</string>
     <string name="usernameKey">username</string>
     <string name="accountTypeKey">accountType</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="station_array">
+        <item>None</item>
+        <item>Others</item>
+        <item>Caltex</item>
+        <item>Petron</item>
+        <item>SeaOil</item>
+        <item>Shell</item>
+        <item>Total</item>
+        <item>UniOil</item>
+    </string-array>
 </resources>

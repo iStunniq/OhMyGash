@@ -5,20 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/primaryDarkColor"
-    android:backgroundTint="@color/primaryDarkColor"
     tools:context=".Map">
 
     <fragment
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="100dp"
-        android:layout_marginTop="180dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/MapSearchButton"
+        app:layout_constraintVertical_bias="1.0"
         tools:context=".Map"
         tools:layout="@layout/support_simple_spinner_dropdown_item" />
 
@@ -39,25 +39,49 @@
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <Button
-        android:id="@+id/NearestWorkshopButton"
-        android:layout_width="wrap_content"
+        android:id="@+id/NearestAutoShopButton"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="32dp"
-        android:text="Nearest \n Workshop"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_marginTop="8dp"
+        android:visibility="gone"
+        android:text="Find Nearby Autoshops"
+        app:layout_constraintEnd_toEndOf="@+id/NearestStationButton"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/NearestStationButton"
+        app:layout_constraintTop_toBottomOf="@+id/NearestStationButton" />
+
+    <Button
+        android:id="@+id/GoToMarker"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:visibility="gone"
+        android:text="View Homepage of Selected Marker"
+        app:layout_constraintEnd_toEndOf="@+id/NearestAutoShopButton"
+        app:layout_constraintStart_toStartOf="@+id/NearestAutoShopButton"
+        app:layout_constraintTop_toBottomOf="@+id/NearestAutoShopButton" />
 
     <Button
         android:id="@+id/DirectionsButton"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Get Directions"
-        app:layout_constraintEnd_toEndOf="@+id/MapAdressSearchBar"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/RouteTyping"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/MapAdressSearchBar"
-        app:layout_constraintTop_toBottomOf="@+id/MapAdressSearchBar" />
+        app:layout_constraintStart_toStartOf="@+id/RouteTyping"
+        app:layout_constraintTop_toBottomOf="@+id/RouteTyping" />
+
+    <Button
+        android:id="@+id/RouteTyping"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="Routing Type: DRIVING"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/ButtonForButtons"
+        app:layout_constraintTop_toTopOf="@+id/map" />
 
     <Button
         android:id="@+id/MapSearchButton"
@@ -71,14 +95,25 @@
         app:layout_constraintTop_toBottomOf="@+id/MapAdressSearchBar" />
 
     <Button
-        android:id="@+id/NearestStationButton"
-        android:layout_width="wrap_content"
+        android:id="@+id/MapTrackButton"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="32dp"
-        android:text="Nearest \n Station"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:layout_marginTop="8dp"
+        android:visibility="gone"
+        android:text="Follow Current Location"
+        app:layout_constraintEnd_toEndOf="@+id/DirectionsButton"
+        app:layout_constraintStart_toStartOf="@+id/DirectionsButton"
+        app:layout_constraintTop_toBottomOf="@+id/DirectionsButton" />
+
+    <Button
+        android:id="@+id/NearestStationButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Find Nearby Stations"
+        app:layout_constraintEnd_toEndOf="@+id/MapTrackButton"
+        app:layout_constraintStart_toStartOf="@+id/MapTrackButton"
+        app:layout_constraintTop_toBottomOf="@+id/MapTrackButton" />
 
     <TextView
         android:id="@+id/DistanceFromDestination"
@@ -88,6 +123,7 @@
         android:textAlignment="center"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/map" />
 
@@ -99,6 +135,7 @@
         android:text="OH MY GASH"
         android:textAlignment="center"
         android:textSize="34sp"
+        android:textStyle="bold|italic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/NavigationButton"
         app:layout_constraintTop_toTopOf="parent" />
@@ -113,5 +150,14 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/MapAdressSearchBar"
         app:layout_constraintTop_toTopOf="@+id/textView" />
+
+    <Button
+        android:id="@+id/ButtonForButtons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Show Buttons"
+        app:layout_constraintEnd_toEndOf="@+id/MapAdressSearchBar"
+        app:layout_constraintTop_toBottomOf="@+id/MapAdressSearchBar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

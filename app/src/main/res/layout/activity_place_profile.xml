@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".Login">
+
+    <TextView
+        android:id="@+id/PlaceOldPasswordText"
+        android:layout_width="0dp"
+        android:layout_height="33dp"
+        android:text="Confirmation:"
+        android:textAlignment="viewEnd"
+        android:textColor="@color/primaryColor"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/PlaceOldPassword"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/PlaceOldPassword"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <EditText
+        android:id="@+id/PlaceOldPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginBottom="16dp"
+        android:autofillHints=""
+        android:backgroundTint="@color/primaryColor"
+        android:ems="10"
+        android:hint="Current Password"
+        android:inputType="textPassword"
+        android:minHeight="40dp"
+        android:scrollbars="vertical"
+        android:textColor="@color/textColor"
+        android:verticalScrollbarPosition="right"
+        app:layout_constraintBottom_toTopOf="@+id/PlaceProfileSave"
+        app:layout_constraintEnd_toEndOf="@+id/ProfilePlaceAddress"
+        app:layout_constraintStart_toStartOf="@+id/ProfilePlaceAddress" />
+
+    <Button
+        android:id="@+id/PlaceProfileSave"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="Save"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/PlaceProfileMenu"
+        app:layout_constraintEnd_toEndOf="@+id/PlaceProfileMenu"
+        app:layout_constraintStart_toStartOf="@+id/PlaceProfileMenu" />
+
+    <Button
+        android:id="@+id/PlaceProfileUpload"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="Upload Photo"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/PlaceProfilePhoto"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="0.061"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/PlaceProfilePhoto" />
+
+    <Button
+        android:id="@+id/PlaceProfileMenu"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="64dp"
+        android:text="Go Back"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/PlaceProfileText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:shadowDx="5"
+        android:shadowDy="5"
+        android:shadowRadius="5"
+        android:text="My Autoshop"
+        android:textAlignment="center"
+        android:textColor="@color/primaryColor"
+        android:textSize="35sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.01999998" />
+
+    <TextView
+        android:id="@+id/PlaceProfileNameText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Place Name:"
+        android:textAlignment="viewEnd"
+        android:textColor="@color/primaryColor"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/ProfilePlaceName"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ProfilePlaceName" />
+
+    <TextView
+        android:id="@+id/PlaceProfileAddressText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Place Address"
+        android:textAlignment="viewEnd"
+        android:textColor="@color/primaryColor"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/ProfilePlaceAddress"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ProfilePlaceAddress" />
+
+    <TextView
+        android:id="@+id/placeBrand"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Brand:"
+        android:textAlignment="viewEnd"
+        android:textColor="@color/primaryColor"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/BrandForProfile"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/BrandForProfile" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="136dp" />
+
+    <EditText
+        android:id="@+id/ProfilePlaceName"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="24dp"
+        android:autofillHints=""
+        android:backgroundTint="@color/primaryColor"
+        android:ems="10"
+        android:hint="Establishment Name"
+        android:inputType="textPersonName"
+        android:minHeight="40dp"
+        android:textColor="@color/textColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/PlaceProfileNameText"
+        app:layout_constraintTop_toBottomOf="@+id/PlaceProfileText" />
+
+    <EditText
+        android:id="@+id/ProfilePlaceAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginTop="12dp"
+        android:autofillHints=""
+        android:backgroundTint="@color/primaryColor"
+        android:ems="10"
+        android:hint="Establishment Address"
+        android:inputType="textEmailAddress"
+        android:minHeight="40dp"
+        android:textColor="@color/textColor"
+        app:layout_constraintEnd_toEndOf="@+id/ProfilePlaceName"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/ProfilePlaceName"
+        app:layout_constraintTop_toBottomOf="@+id/ProfilePlaceName" />
+
+    <ImageView
+        android:id="@+id/PlaceProfilePhoto"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="16dp"
+        android:elevation="8dp"
+        android:padding="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/ProfilePlaceAddress"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="@+id/ProfilePlaceAddress"
+        app:layout_constraintTop_toBottomOf="@+id/ProfilePlaceAddress"
+        app:srcCompat="@android:drawable/screen_background_dark_transparent" />
+
+    <Spinner
+        android:id="@+id/BrandForProfile"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:backgroundTint="@color/primaryColor"
+        app:layout_constraintBottom_toTopOf="@+id/PlaceOldPassword"
+        app:layout_constraintEnd_toEndOf="@+id/PlaceProfilePhoto"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/PlaceProfilePhoto"
+        app:layout_constraintTop_toBottomOf="@+id/PlaceProfilePhoto"
+        app:layout_constraintVertical_bias="0.47" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,26 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primaryDarkColor"
+    android:background="@drawable/background"
     tools:context=".Login">
 
     <Button
         android:id="@+id/GeneralRegister"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
         android:layout_marginTop="68dp"
-        android:text="Regular"
+        android:layout_marginEnd="50dp"
+        android:text="Regular Account"
         android:textColor="#253D85"
         app:layout_constraintEnd_toEndOf="@+id/Title"
         app:layout_constraintStart_toStartOf="@+id/Title"
         app:layout_constraintTop_toBottomOf="@+id/Title" />
 
     <Button
-        android:id="@+id/WorkshopRegister"
-        android:layout_width="wrap_content"
+        android:id="@+id/AutoShopRegister"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Workshop"
+        android:text="Autoshop Account"
         android:textColor="#253D85"
         app:layout_constraintEnd_toEndOf="@+id/GeneralRegister"
         app:layout_constraintHorizontal_bias="0.529"
@@ -32,15 +34,15 @@
 
     <Button
         android:id="@+id/StationRegister"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
-        android:text="Gas Station"
+        android:text="Gas Station Account"
         android:textColor="#253D85"
-        app:layout_constraintEnd_toEndOf="@+id/WorkshopRegister"
+        app:layout_constraintEnd_toEndOf="@+id/AutoShopRegister"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/WorkshopRegister"
-        app:layout_constraintTop_toBottomOf="@+id/WorkshopRegister" />
+        app:layout_constraintStart_toStartOf="@+id/AutoShopRegister"
+        app:layout_constraintTop_toBottomOf="@+id/AutoShopRegister" />
 
     <Button
         android:id="@+id/StationToRegister"
@@ -57,8 +59,13 @@
 
     <TextView
         android:id="@+id/Title"
-        android:layout_width="276dp"
-        android:layout_height="157dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:shadowDx="5"
+        android:shadowDy="5"
+        android:shadowRadius="5"
         android:text="Select Account Type To Register"
         android:textAlignment="center"
         android:textColor="@color/primaryColor"
@@ -68,6 +75,6 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.095" />
+        app:layout_constraintVertical_bias="0.16000003" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

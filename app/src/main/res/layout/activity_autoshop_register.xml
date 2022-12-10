@@ -4,20 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primaryDarkColor"
+    android:background="@drawable/background"
     tools:context=".Login">
 
     <TextView
         android:id="@+id/text6"
         android:layout_width="120dp"
         android:layout_height="33dp"
-        android:text="Workshop:"
+        android:text="AutoShop:"
         android:textAlignment="viewEnd"
         android:textColor="@color/primaryColor"
         android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="@+id/workshopRegisterWorkshopName"
+        app:layout_constraintBottom_toBottomOf="@+id/autoshopRegisterAutoshopName"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toTopOf="@+id/workshopRegisterWorkshopName" />
+        app:layout_constraintTop_toTopOf="@+id/autoshopRegisterAutoshopName" />
 
     <TextView
         android:id="@+id/text7"
@@ -27,43 +27,43 @@
         android:textAlignment="viewEnd"
         android:textColor="@color/primaryColor"
         android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="@+id/workshopRegisterWorkshopAddress"
+        app:layout_constraintBottom_toBottomOf="@+id/autoshopRegisterAutoshopAddress"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toTopOf="@+id/workshopRegisterWorkshopAddress" />
+        app:layout_constraintTop_toTopOf="@+id/autoshopRegisterAutoshopAddress" />
 
     <EditText
-        android:id="@+id/workshopRegisterWorkshopName"
-        android:layout_width="247dp"
+        android:id="@+id/autoshopRegisterAutoshopName"
+        android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:layout_marginTop="16dp"
         android:autofillHints=""
         android:backgroundTint="@color/primaryColor"
         android:ems="10"
-        android:hint="Workshop Name"
+        android:hint="AutoShop Name"
         android:inputType="textPersonName"
         android:minHeight="40dp"
         android:textColor="@color/textColor"
-        app:layout_constraintEnd_toEndOf="@+id/workshopRegisterPassword"
-        app:layout_constraintStart_toStartOf="@+id/workshopRegisterPassword"
-        app:layout_constraintTop_toBottomOf="@+id/workshopRegisterPassword" />
+        app:layout_constraintEnd_toEndOf="@+id/autoshopRegisterPassword"
+        app:layout_constraintStart_toStartOf="@+id/autoshopRegisterPassword"
+        app:layout_constraintTop_toBottomOf="@+id/autoshopRegisterPassword" />
 
     <EditText
-        android:id="@+id/workshopRegisterWorkshopAddress"
-        android:layout_width="247dp"
+        android:id="@+id/autoshopRegisterAutoshopAddress"
+        android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:layout_marginTop="16dp"
         android:autofillHints=""
         android:backgroundTint="@color/primaryColor"
         android:ems="10"
-        android:hint="Workshop Address"
+        android:hint="AutoShop Address"
         android:inputType="textPostalAddress"
         android:minHeight="40dp"
         android:textColor="@color/textColor"
-        app:layout_constraintEnd_toEndOf="@+id/workshopRegisterWorkshopName"
-        app:layout_constraintTop_toBottomOf="@+id/workshopRegisterWorkshopName" />
+        app:layout_constraintEnd_toEndOf="@+id/autoshopRegisterAutoshopName"
+        app:layout_constraintTop_toBottomOf="@+id/autoshopRegisterAutoshopName" />
 
     <Button
-        android:id="@+id/RegisterNewWorkshop"
+        android:id="@+id/RegisterNewAutoshop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
@@ -72,24 +72,27 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.485"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/workshopRegisterWorkshopAddress" />
+        app:layout_constraintTop_toBottomOf="@+id/autoshopRegisterAutoshopAddress" />
 
     <Button
-        android:id="@+id/WorkshopToRegister"
+        android:id="@+id/AutoshopToRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Go Back"
         android:textColor="#253D85"
-        app:layout_constraintEnd_toEndOf="@+id/RegisterNewWorkshop"
-        app:layout_constraintStart_toStartOf="@+id/RegisterNewWorkshop"
-        app:layout_constraintTop_toBottomOf="@+id/RegisterNewWorkshop" />
+        app:layout_constraintEnd_toEndOf="@+id/RegisterNewAutoshop"
+        app:layout_constraintStart_toStartOf="@+id/RegisterNewAutoshop"
+        app:layout_constraintTop_toBottomOf="@+id/RegisterNewAutoshop" />
 
     <TextView
         android:id="@+id/Title"
         android:layout_width="280dp"
         android:layout_height="100dp"
-        android:text="Workshop Account"
+        android:shadowDx="5"
+        android:shadowDy="5"
+        android:shadowRadius="5"
+        android:text="AutoShop Account"
         android:textAlignment="center"
         android:textColor="@color/primaryColor"
         android:textSize="35sp"
@@ -108,9 +111,9 @@
         android:textAlignment="viewEnd"
         android:textColor="@color/primaryColor"
         android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="@+id/workshopRegisterName"
+        app:layout_constraintBottom_toBottomOf="@+id/autoshopRegisterName"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toTopOf="@+id/workshopRegisterName" />
+        app:layout_constraintTop_toTopOf="@+id/autoshopRegisterName" />
 
     <TextView
         android:id="@+id/text3"
@@ -120,9 +123,9 @@
         android:textAlignment="viewEnd"
         android:textColor="@color/primaryColor"
         android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="@+id/workshopRegisterEmail"
+        app:layout_constraintBottom_toBottomOf="@+id/autoshopRegisterEmail"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toTopOf="@+id/workshopRegisterEmail" />
+        app:layout_constraintTop_toTopOf="@+id/autoshopRegisterEmail" />
 
     <TextView
         android:id="@+id/text4"
@@ -132,9 +135,9 @@
         android:textAlignment="viewEnd"
         android:textColor="@color/primaryColor"
         android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="@+id/workshopRegisterPassword"
+        app:layout_constraintBottom_toBottomOf="@+id/autoshopRegisterPassword"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toTopOf="@+id/workshopRegisterPassword" />
+        app:layout_constraintTop_toTopOf="@+id/autoshopRegisterPassword" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
@@ -144,8 +147,8 @@
         app:layout_constraintGuide_begin="136dp" />
 
     <EditText
-        android:id="@+id/workshopRegisterName"
-        android:layout_width="247dp"
+        android:id="@+id/autoshopRegisterName"
+        android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:layout_marginStart="12dp"
         android:layout_marginTop="24dp"
@@ -162,8 +165,8 @@
         app:layout_constraintTop_toBottomOf="@+id/Title" />
 
     <EditText
-        android:id="@+id/workshopRegisterEmail"
-        android:layout_width="247dp"
+        android:id="@+id/autoshopRegisterEmail"
+        android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:layout_marginTop="12dp"
         android:autofillHints=""
@@ -173,14 +176,14 @@
         android:inputType="textEmailAddress"
         android:minHeight="40dp"
         android:textColor="@color/textColor"
-        app:layout_constraintEnd_toEndOf="@+id/workshopRegisterName"
+        app:layout_constraintEnd_toEndOf="@+id/autoshopRegisterName"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/workshopRegisterName"
-        app:layout_constraintTop_toBottomOf="@+id/workshopRegisterName" />
+        app:layout_constraintStart_toStartOf="@+id/autoshopRegisterName"
+        app:layout_constraintTop_toBottomOf="@+id/autoshopRegisterName" />
 
     <EditText
-        android:id="@+id/workshopRegisterPassword"
-        android:layout_width="247dp"
+        android:id="@+id/autoshopRegisterPassword"
+        android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:layout_marginTop="12dp"
         android:autofillHints=""
@@ -190,9 +193,9 @@
         android:inputType="textPassword"
         android:minHeight="40dp"
         android:textColor="@color/textColor"
-        app:layout_constraintEnd_toEndOf="@+id/workshopRegisterEmail"
+        app:layout_constraintEnd_toEndOf="@+id/autoshopRegisterEmail"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/workshopRegisterEmail"
-        app:layout_constraintTop_toBottomOf="@+id/workshopRegisterEmail" />
+        app:layout_constraintStart_toStartOf="@+id/autoshopRegisterEmail"
+        app:layout_constraintTop_toBottomOf="@+id/autoshopRegisterEmail" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

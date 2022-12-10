@@ -2,7 +2,7 @@ package com.example.ohmygash;
 
 public class User {
 
-    private String email, pass, Name, placeName, placeAdd, accType, keyID;
+    private String email, pass, Name, placeName, placeAdd, brand, status, accType, keyID;
 
     public User() {
     }
@@ -19,13 +19,15 @@ public class User {
         this.accType = accType;
     }
 
-    public User(String email, String pass, String Name, String placeName, String placeAdd,String accType){
+    public User(String email, String pass, String Name, String placeName, String placeAdd, String brand, String status,String accType){
         this.email = email;
         this.pass = pass;
         this.Name = Name;
         this.placeName = placeName;
         this.placeAdd = placeAdd;
         this.accType = accType;
+        this.brand = brand;
+        this.status = status;
     }
 
     public String getEmail() {

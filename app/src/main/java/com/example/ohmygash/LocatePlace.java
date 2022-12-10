@@ -1,5 +1,7 @@
 package com.example.ohmygash;
 
+import static com.google.android.gms.location.Priority.PRIORITY_HIGH_ACCURACY;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -15,6 +17,7 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Looper;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,6 +31,7 @@ import com.google.android.gms.location.Priority;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -37,17 +41,21 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class LocatePlace extends AppCompatActivity {
 
-    private Button Menu;
+    private Button Menu,Filters;
     private TextView textView2,Loading;
+    private FloatingActionButton Refresh;
     RecyclerView recyclerView;
 
     LocationRequest mLocationRequest;
@@ -57,6 +65,11 @@ public class LocatePlace extends AppCompatActivity {
     FirebaseAuth FBAuth;
     FirebaseUser FBUser;
     DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Users");
+    DatabaseReference gasRef = FirebaseDatabase.getInstance().getReference("Gasoline");
+    Map<DataSnapshot,Integer> locMap;
+
+    String FilterName, FilterType, FilterBrand;
+    int FilterRadius;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,10 +78,18 @@ public class LocatePlace extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.PlaceRecyclerView);
         Menu = findViewById(R.id.navigationButton);
+        Refresh = findViewById(R.id.RefreshButton);
         textView2 = findViewById(R.id.textView2);
         Loading = findViewById(R.id.LoadingText);
+        Filters = findViewById(R.id.FiltersButton);
         Intent LocatePlaceIntent = this.getIntent();
         String Acctype = LocatePlaceIntent.getStringExtra("AccountTypeToLocate");
+
+        FilterName = LocatePlaceIntent.getStringExtra("FilterName");
+        FilterType = LocatePlaceIntent.getStringExtra("FilterType");
+        FilterBrand = LocatePlaceIntent.getStringExtra("FilterBrand");
+        FilterRadius = LocatePlaceIntent.getIntExtra("Radius",5000);
+
         textView2.setText("OH MY GASH\n"+Acctype);
         FBAuth = FirebaseAuth.getInstance();
         FBUser = FBAuth.getCurrentUser();
@@ -78,51 +99,180 @@ public class LocatePlace extends AppCompatActivity {
             startActivity(intent);
         }
 
+        if (Acctype.matches("Autoshop")) {
+            Filters.setVisibility(View.GONE);
+        }
+
+        Filters.setOnClickListener(view ->{
+            Intent intent = new Intent(LocatePlace.this,Filter.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.putExtra("AccType",Acctype);
+            startActivity(intent);
+        });
+
         Menu.setOnClickListener(view -> {
             Intent intent = new Intent(LocatePlace.this,Menu.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
         });
 
+        Refresh.setOnClickListener(view -> {
+            finish();
+            startActivity(LocatePlaceIntent);
+        });
+
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         requestPermision();
-        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+
+        userRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 ArrayList<DataSnapshot> Users = new ArrayList<>();
-                Iterable<DataSnapshot> DBUsers = snapshot.getChildren();
-
-                for (DataSnapshot user : DBUsers) {
-                    if (user.child("accType").getValue().toString().matches(Acctype)) {
-                        Users.add(user);
-                    }
-                }
-
-                Collections.sort(Users, new Comparator<DataSnapshot>() {
-                            @Override
-                            public int compare(DataSnapshot t1, DataSnapshot t2) {
-                                int distance1 = 0;
-                                int distance2 = 0;
-                                try {
-                                    distance1 = ConvertToDistanceFromMe(t1.child("placeAdd").getValue().toString());
-                                    distance2 = ConvertToDistanceFromMe(t2.child("placeAdd").getValue().toString());
-                                } catch (IOException e) {
-                                    e.printStackTrace();
+                locMap = new HashMap<DataSnapshot,Integer>();
+                    DatabaseReference favoriteRef = FirebaseDatabase.getInstance().getReference("Favorites").child(FBUser.getUid());
+                    favoriteRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot1) {
+                            if (Acctype.matches("Favorites")){
+                                for (DataSnapshot favorite : snapshot1.getChildren()) {
+                                    try {
+                                        DataSnapshot user = snapshot.child(favorite.getValue().toString());
+                                        if (user.child("brand").getValue() == null){
+                                            user.child("brand").getRef().setValue("Others");
+                                        }
+                                        int dist = ConvertToDistanceFromMe(user);
+                                        if (UserFilters(user, dist)) {
+                                            locMap.put(user, dist);
+                                            Users.add(user);
+                                        }
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
                                 }
-                                return Integer.valueOf(distance1).compareTo(Integer.valueOf(distance2));
+                            } else if ((Acctype.matches("Requests"))) {
+                                for (DataSnapshot user : snapshot.getChildren()) {
+                                    if (user.child("brand").getValue() == null){
+                                        user.child("brand").getRef().setValue("Others");
+                                    }
+                                    if (user.child("status").getValue() != null) {
+                                        try {
+                                            int dist = ConvertToDistanceFromMe(user);
+                                            if (user.child("status").getValue().toString().matches("Requested")) {
+                                                if ((FilterName != null && !user.child("placeName").getValue().toString().toLowerCase(Locale.ROOT).contains(FilterName.toLowerCase(Locale.ROOT)))) {
+                                                    continue;
+                                                }
+                                                if ((FilterBrand != null && !user.child("brand").getValue().toString().matches(FilterBrand))){
+                                                    continue;
+                                                }
+                                                locMap.put(user, dist);
+                                                Users.add(user);
+                                            }
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                }
+                            } else {
+                                    for (DataSnapshot user : snapshot.getChildren()) {
+                                        if (user.child("brand").getValue() == null){
+                                            user.child("brand").getRef().setValue("Others");
+                                        }
+                                        if (user.child("accType").getValue().toString().matches(Acctype)) {
+                                            try {
+                                                int dist = ConvertToDistanceFromMe(user);
+                                                if (UserFilters(user, dist)) {
+                                                    locMap.put(user, dist);
+                                                    Users.add(user);
+                                                }
+                                            } catch (IOException e) {
+                                                e.printStackTrace();
+                                            }
+                                        }
+                                    }
+                                }
+
+                            if (FilterType != null && FilterType.matches("Price")){
+                                gasRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        for (int i=Users.size()-1;i>=0;i--){
+                                            if (snapshot.child(Users.get(i).getKey()).getChildrenCount() == 0){
+                                                Users.remove(i);
+                                            }
+                                        }
+                                        Collections.sort(Users, new Comparator<DataSnapshot>() {
+                                                    @Override
+                                                    public int compare(DataSnapshot t1, DataSnapshot t2) {
+                                                        ArrayList<DataSnapshot> gasses1 = new ArrayList<>();
+                                                        ArrayList<DataSnapshot> gasses2 = new ArrayList<>();
+
+                                                        Iterable<DataSnapshot> SnapGas1 = snapshot.child(t1.getKey()).getChildren();
+                                                        for (DataSnapshot gas:SnapGas1){
+                                                            gasses1.add(gas);
+                                                        }
+                                                        Iterable<DataSnapshot> SnapGas2 = snapshot.child(t2.getKey()).getChildren();
+                                                        for (DataSnapshot gas:SnapGas2){
+                                                            gasses2.add(gas);
+                                                        }
+                                                        Collections.sort(gasses1, new Comparator<DataSnapshot>() {
+                                                            @Override
+                                                            public int compare(DataSnapshot t1, DataSnapshot t2) {
+                                                                return Float.valueOf(t1.child("Price").getValue().toString()).compareTo(Float.valueOf(t2.child("Price").getValue().toString()));
+                                                            }
+                                                        });
+                                                        Collections.sort(gasses2, new Comparator<DataSnapshot>() {
+                                                            @Override
+                                                            public int compare(DataSnapshot t1, DataSnapshot t2) {
+                                                                return Float.valueOf(t1.child("Price").getValue().toString()).compareTo(Float.valueOf(t2.child("Price").getValue().toString()));
+                                                            }
+                                                        });
+                                                        return Float.valueOf(gasses1.get(0).child("Price").getValue().toString()).compareTo(Float.valueOf(gasses2.get(0).child("Price").getValue().toString()));
+                                                    }
+                                                }
+                                        );
+                                        PlaceRecViewAdapter adapter = new PlaceRecViewAdapter();
+                                        adapter.setUser(Users);
+                                        adapter.setLocMap(locMap);
+
+                                        recyclerView.setAdapter(adapter);
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+                                });
                             }
+                            else {
+                                Collections.sort(Users, new Comparator<DataSnapshot>() {
+                                            @Override
+                                            public int compare(DataSnapshot t1, DataSnapshot t2) {
+
+                                                int distance1 = locMap.get(t1);
+                                                int distance2 = locMap.get(t2);
+
+                                                if (distance1 != 0 && distance2 != 0) {
+                                                    return Integer.valueOf(distance1).compareTo(Integer.valueOf(distance2));
+                                                }
+                                                return 0;
+                                            }
+                                        }
+                                );
+                                PlaceRecViewAdapter adapter = new PlaceRecViewAdapter();
+                                adapter.setUser(Users);
+                                adapter.setLocMap(locMap);
+
+                                recyclerView.setAdapter(adapter);
+                            }
+                            recyclerView.setLayoutManager(new LinearLayoutManager(LocatePlace.this));
+                            Loading.setText("");
                         }
-                );
 
-                PlaceRecViewAdapter adapter = new PlaceRecViewAdapter();
-                adapter.setUser(Users);
-                adapter.setMyLocation(myLocation);
-                adapter.setGeocoder(new Geocoder(LocatePlace.this, Locale.getDefault()));
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
 
-                recyclerView.setAdapter(adapter);
-                recyclerView.setLayoutManager(new LinearLayoutManager(LocatePlace.this));
-                Loading.setText("");
-
+                        }
+                    });
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -130,6 +280,24 @@ public class LocatePlace extends AppCompatActivity {
             }
         });
     }
+
+    private boolean UserFilters(DataSnapshot user, int dist){
+
+        if ((FilterName != null && !user.child("placeName").getValue().toString().toLowerCase(Locale.ROOT).contains(FilterName.toLowerCase(Locale.ROOT)))) {
+            return false;
+        }
+        if (dist > FilterRadius) {
+            return false;
+        }
+        if ((FilterBrand != null && !user.child("brand").getValue().toString().matches(FilterBrand))){
+            return false;
+        }
+        if (!user.child("status").getValue().toString().matches("Verified")){
+            return false;
+        }
+        return true;
+    }
+
     LocationCallback mLocationCallback = new LocationCallback() {
         @Override
         public void onLocationResult(LocationResult locationResult) {
@@ -144,24 +312,29 @@ public class LocatePlace extends AppCompatActivity {
         }
     };
 
-    private int ConvertToDistanceFromMe(String address) throws IOException {
-        Geocoder geocoder = new Geocoder(LocatePlace.this, Locale.getDefault());
-        List<Address> address1 = geocoder.getFromLocationName(address,1);
-        if (address1.size()>0){
+    private int ConvertToDistanceFromMe(DataSnapshot user) throws IOException {
+        if (user.child("placeLat").getValue() == null) {
+            Geocoder geocoder = new Geocoder(LocatePlace.this, Locale.getDefault());
+            List<Address> address1 = geocoder.getFromLocationName(user.child("placeAdd").getValue().toString(), 1);
+            if (address1.size() > 0) {
+                Location place1 = new Location("");
+                place1.setLatitude(address1.get(0).getLatitude());
+                place1.setLongitude(address1.get(0).getLongitude());
+                user.getRef().child("placeLat").setValue(address1.get(0).getLatitude());
+                user.getRef().child("placeLng").setValue(address1.get(0).getLongitude());
+                return (int) myLocation.distanceTo(place1);
+            }
+        }else{
             Location place1 = new Location("");
-            place1.setLatitude(address1.get(0).getLatitude());
-            place1.setLongitude(address1.get(0).getLongitude());
+            place1.setLatitude(Double.valueOf(user.child("placeLat").getValue().toString()));
+            place1.setLongitude(Double.valueOf(user.child("placeLng").getValue().toString()));
             return (int) myLocation.distanceTo(place1);
         }
         return 0;
     };
 
     private void requestPermision() {
-        mLocationRequest = LocationRequest.create()
-                .setInterval(500000000)
-                .setFastestInterval(500000000)
-                .setPriority(Priority.PRIORITY_HIGH_ACCURACY)
-                .setMaxWaitTime(100);
+        mLocationRequest = new LocationRequest.Builder(PRIORITY_HIGH_ACCURACY,5000000).build();
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 23);

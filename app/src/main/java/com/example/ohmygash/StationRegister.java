@@ -6,8 +6,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -25,6 +27,7 @@ public class StationRegister extends AppCompatActivity {
 
     private EditText Name, Password, Email, StationName, StationAddress;
     private Button Return, Register;
+    private Spinner Brand;
 
     private FirebaseAuth FBAuth;
 
@@ -43,6 +46,11 @@ public class StationRegister extends AppCompatActivity {
         StationAddress = findViewById(R.id.stationRegisterStationAddress);
         Register = findViewById(R.id.RegisterNewStation);
         Return = findViewById(R.id.StationToRegister);
+        Brand = findViewById(R.id.BrandForRegister);
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.station_array, androidx.constraintlayout.widget.R.layout.support_simple_spinner_dropdown_item);
+        adapter.setDropDownViewResource(androidx.constraintlayout.widget.R.layout.support_simple_spinner_dropdown_item);
+        Brand.setAdapter(adapter);
 
         Return.setOnClickListener(view -> {
             Intent intent = new Intent(StationRegister.this,Register.class);
@@ -50,13 +58,14 @@ public class StationRegister extends AppCompatActivity {
             startActivity(intent);
         });
         Register.setOnClickListener(view -> {
+            Toast.makeText(StationRegister.this, "Checking Credentials", Toast.LENGTH_SHORT).show();
             final String nameTxt = Name.getText().toString().trim();
             final String passwordTxt = Password.getText().toString().trim();
             final String emailTxt = Email.getText().toString().trim();
             final String stNameTxt = StationName.getText().toString().trim();
             final String stAddTxt = StationAddress.getText().toString().trim();
 
-            if (nameTxt.isEmpty() || nameTxt == "" || passwordTxt.isEmpty() || passwordTxt == "" || emailTxt.isEmpty() || emailTxt == "" || stNameTxt.isEmpty() || stNameTxt == "" || stAddTxt.isEmpty() || stAddTxt == "") {
+            if (nameTxt.isEmpty() || nameTxt == "" || passwordTxt.isEmpty() || passwordTxt == "" || emailTxt.isEmpty() || emailTxt == "" || stNameTxt.isEmpty() || stNameTxt == "" || stAddTxt.isEmpty() || stAddTxt == "" || Brand.getSelectedItem().toString().matches("None")) {
                 Toast.makeText(StationRegister.this,"Please Fill in All Entries",Toast.LENGTH_LONG).show();
             }
             else if (passwordTxt.length() < 6 || passwordTxt.contains(" ")){
@@ -67,7 +76,7 @@ public class StationRegister extends AppCompatActivity {
             }
             else {
 
-                User user = new User(emailTxt,passwordTxt,nameTxt,stNameTxt,stAddTxt,"Station");
+                User user = new User(emailTxt,passwordTxt,nameTxt,stNameTxt,stAddTxt, Brand.getSelectedItem().toString(),"Unverified","Station");
                 createAcc(user);
 
             }

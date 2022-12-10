@@ -1,11 +1,8 @@
 package com.example.ohmygash;
 
-import android.app.LocalActivityManager;
 import android.content.Intent;
 import android.location.Address;
-import android.location.Geocoder;
-import android.location.Location;
-import android.net.Uri;
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,20 +12,26 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
-import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
+import java.util.Map;
 
 public class PlaceRecViewAdapter extends RecyclerView.Adapter<PlaceRecViewAdapter.ViewHolder>{
     @NonNull
 
     private ArrayList<DataSnapshot> Users = new ArrayList<>();
-    private Location myLocation;
-    private Geocoder geocoder;
+    private Map<DataSnapshot,Integer> locMap = new HashMap<DataSnapshot,Integer>();
+    DatabaseReference gasRef = FirebaseDatabase.getInstance().getReference("Gasoline");
 
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -40,29 +43,59 @@ public class PlaceRecViewAdapter extends RecyclerView.Adapter<PlaceRecViewAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.PlaceName.setText(Users.get(position).child("placeName").getValue().toString());
-        holder.PlaceAdd.setText(Users.get(position).child("placeAdd").getValue().toString());
-
+        DataSnapshot currentUser = Users.get(position);
+        holder.PlaceName.setText(currentUser.child("placeName").getValue().toString());
+        holder.PlaceAdd.setText(currentUser.child("placeAdd").getValue().toString());
+        holder.PlaceBrand.setText(currentUser.child("brand").getValue().toString());
         List<Address> addresses = null;
-        int Distance = 0;
-        try {
-            addresses = geocoder.getFromLocationName(Users.get(position).child("placeAdd").getValue().toString(),1);
-            if (addresses.size() > 0) {
-
-                Location place = new Location("");
-                place.setLatitude(addresses.get(0).getLatitude());
-                place.setLongitude(addresses.get(0).getLongitude());
-
-                Distance = (int) myLocation.distanceTo(place);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        int Distance = locMap.get(Users.get(position));
+        if (Distance!=0) {
             holder.Distance.setText("This place is " + Distance + " meters away");
+        }else{
+            holder.Distance.setText("Cannot Calculate Distance");
+        }
+        if (currentUser.child("placePhoto").getValue() != null) {
+            String Url = currentUser.child("placePhoto").getValue().toString();
 
-        holder.PlacePhoto.setOnClickListener(view->{
+            Picasso.with(holder.PlacePhoto.getContext()).load(Url).fit().into(holder.PlacePhoto);
+        }
+
+        if (currentUser.child("accType").getValue().toString().matches("Station")){
+            String key = currentUser.getKey();
+            DatabaseReference currentGasRef = gasRef.child(key);
+            currentGasRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    ArrayList<DataSnapshot> gasses = new ArrayList<>();
+                    Iterable<DataSnapshot> SnapGas = snapshot.getChildren();
+                    for (DataSnapshot gas:SnapGas){
+                        gasses.add(gas);
+                    }
+                    if (gasses.size() > 0) {
+                        Collections.sort(gasses, new Comparator<DataSnapshot>() {
+                            @Override
+                            public int compare(DataSnapshot t1, DataSnapshot t2) {
+                                return Float.valueOf(t1.child("Price").getValue().toString()).compareTo(Float.valueOf(t2.child("Price").getValue().toString()));
+                            }
+                        });
+                        holder.PlaceGas.setText("Cheapest Gas: " + gasses.get(0).child("Name").getValue().toString() + "\n for ₱" + gasses.get(0).child("Price").getValue().toString() + "/Liter");
+                    } else {
+                        holder.PlaceGas.setText("No Registered Gas to Display");
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }else{
+            holder.PlaceGas.setVisibility(View.GONE);
+        }
+
+        holder.itemView.setOnClickListener(view -> {
             Intent intent = new Intent(view.getContext(),ViewPlace.class);
-            intent.putExtra("UserId",Users.get(position).getKey().toString());
+            intent.putExtra("UserId",currentUser.getKey().toString());
             view.getContext().startActivity(intent);
         });
     }
@@ -77,17 +110,13 @@ public class PlaceRecViewAdapter extends RecyclerView.Adapter<PlaceRecViewAdapte
         notifyDataSetChanged();
     }
 
-    public void setMyLocation(Location myLocation) {
-        this.myLocation = myLocation;
-    }
-
-    public void setGeocoder(Geocoder geocoder) {
-        this.geocoder = geocoder;
+    public void setLocMap(Map<DataSnapshot, Integer> locMap) {
+        this.locMap = locMap;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        TextView PlaceName,PlaceAdd,Distance;
+        TextView PlaceName,PlaceAdd,Distance,PlaceGas,PlaceBrand;
         ImageView PlacePhoto;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -95,6 +124,8 @@ public class PlaceRecViewAdapter extends RecyclerView.Adapter<PlaceRecViewAdapte
             PlaceAdd = itemView.findViewById(R.id.RecViewPlaceAdd);
             Distance = itemView.findViewById(R.id.RecViewDistance);
             PlacePhoto = itemView.findViewById(R.id.RecViewPhoto);
+            PlaceGas = itemView.findViewById(R.id.RecViewPlaceGas);
+            PlaceBrand = itemView.findViewById(R.id.recViewBrand);
         }
 
     }

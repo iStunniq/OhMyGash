@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primaryDarkColor"
+    android:background="@drawable/background"
     tools:context=".Login">
 
     <Button
@@ -34,6 +34,9 @@
         android:id="@+id/Title"
         android:layout_width="280dp"
         android:layout_height="100dp"
+        android:shadowDx="5"
+        android:shadowDy="5"
+        android:shadowRadius="5"
         android:text="Regular Account for Drivers"
         android:textAlignment="center"
         android:textColor="@color/primaryColor"
@@ -43,7 +46,7 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.071" />
+        app:layout_constraintVertical_bias="0.16000003" />
 
     <TextView
         android:id="@+id/text1"
@@ -90,8 +93,8 @@
 
     <EditText
         android:id="@+id/generalRegisterName"
-        android:layout_width="247dp"
-        android:layout_height="48dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_marginTop="24dp"
         android:autofillHints=""
@@ -108,8 +111,8 @@
 
     <EditText
         android:id="@+id/generalRegisterEmail"
-        android:layout_width="247dp"
-        android:layout_height="48dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:autofillHints=""
         android:backgroundTint="@color/primaryColor"
@@ -125,8 +128,8 @@
 
     <EditText
         android:id="@+id/generalRegisterPassword"
-        android:layout_width="247dp"
-        android:layout_height="48dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:autofillHints=""
         android:backgroundTint="@color/primaryColor"

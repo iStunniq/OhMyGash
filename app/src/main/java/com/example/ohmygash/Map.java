@@ -1,5 +1,7 @@
 package com.example.ohmygash;
 
+import static com.google.android.gms.location.Priority.PRIORITY_HIGH_ACCURACY;
+
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -8,6 +10,7 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Looper;
+import android.os.SystemClock;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -36,6 +39,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
@@ -47,9 +51,14 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.android.gms.maps.model.Marker;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -78,9 +87,12 @@ public class Map extends FragmentActivity implements OnMapReadyCallback, Routing
     List<Address> addresses;
 
     private EditText Searchbox;
-    private Button Search,Directions,NearestWork,NearestStat,Menu;
+    private Button Search, Directions, NearestAuto, NearestStat, Menu, MarkerButton, RouteType, Track, Buttons;
     private TextView DistanceToDestination;
-    private String AddressToLocate,NameToLocate;
+    private String UserKeyToLocate, MarkerUserId;
+    private AbstractRouting.TravelMode RouteTyping;
+    private java.util.Map<Marker, DataSnapshot> markerMap;
+    private java.util.Map<DataSnapshot, LatLng> locMap;
 
     DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("Users");
 
@@ -91,20 +103,25 @@ public class Map extends FragmentActivity implements OnMapReadyCallback, Routing
 
 
         Intent ThisIntent = getIntent();
-        AddressToLocate = ThisIntent.getStringExtra("AddressToLocate");
-        NameToLocate = ThisIntent.getStringExtra("NameToLocate");
+        UserKeyToLocate = ThisIntent.getStringExtra("UserKeyToLocate");
 
         Searchbox = findViewById(R.id.MapAdressSearchBar);
         Search = findViewById(R.id.MapSearchButton);
         Directions = findViewById(R.id.DirectionsButton);
         DistanceToDestination = findViewById(R.id.DistanceFromDestination);
-        NearestWork = findViewById(R.id.NearestWorkshopButton);
+        NearestAuto = findViewById(R.id.NearestAutoShopButton);
         NearestStat = findViewById(R.id.NearestStationButton);
         Menu = findViewById(R.id.NavigationButton);
+        Track = findViewById(R.id.MapTrackButton);
+        MarkerButton = findViewById(R.id.GoToMarker);
+        RouteType = findViewById(R.id.RouteTyping);
+        Buttons = findViewById(R.id.ButtonForButtons);
+
         FBAuth = FirebaseAuth.getInstance();
+        RouteTyping = AbstractRouting.TravelMode.DRIVING;
         FirebaseUser user = FBAuth.getCurrentUser();
         if (user == null) {
-            Intent intent = new Intent(Map.this,Login.class);
+            Intent intent = new Intent(Map.this, Login.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         }
@@ -116,11 +133,27 @@ public class Map extends FragmentActivity implements OnMapReadyCallback, Routing
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        Search.setOnClickListener(view->{
-            geocoder = new Geocoder(this,Locale.getDefault());
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot user : snapshot.getChildren()){
+                    if ((user.child("accType").getValue().toString().matches("Station")||user.child("accType").getValue().toString().matches("Autoshop")) && user.child("status").getValue() == null) {
+                        user.getRef().child("status").setValue("Unverified");
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        Search.setOnClickListener(view -> {
+            geocoder = new Geocoder(this, Locale.getDefault());
             mMap.clear();
             try {
-                addresses = geocoder.getFromLocationName(Searchbox.getText().toString(),1);
+                addresses = geocoder.getFromLocationName(Searchbox.getText().toString(), 1);
                 if (addresses.size() > 0) {
                     LatLng LatiLongi = new LatLng(addresses.get(0).getLatitude(), addresses.get(0).getLongitude());
 
@@ -141,11 +174,59 @@ public class Map extends FragmentActivity implements OnMapReadyCallback, Routing
         });
 
         Menu.setOnClickListener(view -> {
-            Intent intent = new Intent(Map.this,Menu.class);
+            Intent intent = new Intent(Map.this, Menu.class);
             startActivity(intent);
         });
 
+        RouteType.setOnClickListener(view -> {
+            if (RouteType.getText().toString().matches("Routing Type: DRIVING")) {
+                RouteType.setText("Routing Type: WALKING");
+                RouteTyping = AbstractRouting.TravelMode.WALKING;
+            } else {
+                RouteType.setText("Routing Type: DRIVING");
+                RouteTyping = AbstractRouting.TravelMode.DRIVING;
+            }
+        });
+
+        Buttons.setOnClickListener(view -> {
+            if (Buttons.getText().toString().matches("Hide Buttons")) {
+                Buttons.setText("Show Buttons");
+                RouteType.setVisibility(View.GONE);
+                Directions.setVisibility(View.GONE);
+                Track.setVisibility(View.GONE);
+                NearestAuto.setVisibility(View.GONE);
+                NearestStat.setVisibility(View.GONE);
+                MarkerButton.setVisibility(View.GONE);
+            } else {
+                Buttons.setText("Hide Buttons");
+                RouteType.setVisibility(View.VISIBLE);
+                Directions.setVisibility(View.VISIBLE);
+                Track.setVisibility(View.VISIBLE);
+                NearestAuto.setVisibility(View.VISIBLE);
+                NearestStat.setVisibility(View.VISIBLE);
+                MarkerButton.setVisibility(View.VISIBLE);
+            }
+        });
+
+        Track.setOnClickListener(view -> {
+            if (Track.getText().toString().matches("Follow Current Location")) {
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_REQUEST_CODE);
+                    return;
+                }
+
+                LocationRequest mTrackRequest = new LocationRequest.Builder(PRIORITY_HIGH_ACCURACY,2000).build();
+
+                mFusedLocationClient.requestLocationUpdates(mTrackRequest, mTrackCallback, Looper.myLooper());
+                Track.setText("Stop Following Current Location");
+            } else {
+                mFusedLocationClient.removeLocationUpdates(mTrackCallback);
+                Track.setText("Follow Current Location");
+            }
+        });
+
         Directions.setOnClickListener(view->{
+            requestPermision();
             geocoder = new Geocoder(this,Locale.getDefault());
             mMap.clear();
             if (Directions.getText().toString().matches("Get Directions")) {
@@ -158,11 +239,7 @@ public class Map extends FragmentActivity implements OnMapReadyCallback, Routing
                         LatLng LatiLongi = new LatLng(addresses.get(0).getLatitude(), addresses.get(0).getLongitude());
                         end = LatiLongi;
 
-                        mLocationRequest = LocationRequest.create()
-                                .setInterval(5000)
-                                .setFastestInterval(5000)
-                                .setPriority(Priority.PRIORITY_HIGH_ACCURACY)
-                                .setMaxWaitTime(100);
+                        mLocationRequest = new LocationRequest.Builder(PRIORITY_HIGH_ACCURACY,5000).build();
 
                         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, LOCATION_REQUEST_CODE);
@@ -187,13 +264,14 @@ public class Map extends FragmentActivity implements OnMapReadyCallback, Routing
             }
         });
 
-        NearestWork.setOnClickListener(view -> {
+        NearestAuto.setOnClickListener(view -> {
             mMap.clear();
             requestPermision();
             userRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    FindNearest(snapshot,"Workshop");
+                    Toast.makeText(Map.this, "Searching for Nearest Autoshop", Toast.LENGTH_SHORT).show();
+                    FindNearest(snapshot,"Autoshop");
                 }
 
                 @Override
@@ -208,6 +286,7 @@ public class Map extends FragmentActivity implements OnMapReadyCallback, Routing
             userRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    Toast.makeText(Map.this, "Searching for Nearest Gas Station", Toast.LENGTH_SHORT).show();
                     FindNearest(snapshot,"Station");
                 }
 
@@ -216,81 +295,99 @@ public class Map extends FragmentActivity implements OnMapReadyCallback, Routing
                 }
             });
         });
+
+        MarkerButton.setOnClickListener(view->{
+            if (MarkerUserId!=null) {
+                Intent intent = new Intent(view.getContext(), ViewPlace.class);
+                intent.putExtra("UserId", MarkerUserId);
+                view.getContext().startActivity(intent);
+            }else{
+                Toast.makeText(Map.this, "No Marker Selected", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
+    private LatLng ConvertToDistanceFromMe(DataSnapshot user) throws IOException {
+        if (user.child("placeLat").getValue() == null) {
+            Geocoder geocoder = new Geocoder(Map.this, Locale.getDefault());
+            List<Address> address1 = geocoder.getFromLocationName(user.child("placeAdd").getValue().toString(), 1);
+            if (address1.size() > 0) {
+                user.getRef().child("placeLat").setValue(address1.get(0).getLatitude());
+                user.getRef().child("placeLng").setValue(address1.get(0).getLongitude());
+                return new LatLng(address1.get(0).getLatitude(), address1.get(0).getLongitude());
+            }
+        } else {
+            return new LatLng(Double.valueOf(user.child("placeLat").getValue().toString()), Double.valueOf(user.child("placeLng").getValue().toString()));
+        }
+
+        return new LatLng(0,0);
+    };
+
     private void FindNearest(DataSnapshot snapshot, String accType){
-        Iterable<DataSnapshot> users = snapshot.getChildren();
-        DataSnapshot Nearest = null;
-        for (DataSnapshot user : users){
-            if (user.child("accType").getValue().toString().matches(accType)){
-                geocoder = new Geocoder(Map.this,Locale.getDefault());
-                try {
-                    List<Address> addresses1 = geocoder.getFromLocationName(user.child("placeAdd").getValue().toString(),1);
-                    if (Nearest == null){
-                        if (addresses1.size()>0){
-                        Nearest = user;
-                        MarkerOptions endMarker = new MarkerOptions();
-                        endMarker.position(new LatLng(addresses1.get(0).getLatitude(),addresses1.get(0).getLongitude()));
-                        endMarker.title(user.child("placeName").getValue().toString());
-                        mMap.addMarker(endMarker);
-                        }
-                    } else {
-                        List<Address> addresses2 = geocoder.getFromLocationName(Nearest.child("placeAdd").getValue().toString(), 1);
-                        if (addresses1.size() > 0 && addresses2.size() > 0) {
-                            Location locEnd1 = new Location("");
-                            locEnd1.setLatitude(addresses1.get(0).getLatitude());
-                            locEnd1.setLongitude(addresses1.get(0).getLongitude());
-
-                            Location locEnd2 = new Location("");
-                            locEnd2.setLatitude(addresses2.get(0).getLatitude());
-                            locEnd2.setLongitude(addresses2.get(0).getLongitude());
-
-                            int val1 = (int) myLocation.distanceTo(locEnd1);
-                            int val2 = (int) myLocation.distanceTo(locEnd2);
-
-                            MarkerOptions endMarker = new MarkerOptions();
-                            endMarker.position(new LatLng(addresses1.get(0).getLatitude(),addresses1.get(0).getLongitude()));
-                            endMarker.title(user.child("placeName").getValue().toString());
-                            mMap.addMarker(endMarker);
-
-                            if (val1 < val2) {
-                                Nearest = user;
-                            }
-                        }
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
+        ArrayList<DataSnapshot> Users = new ArrayList<>();
+        Iterable<DataSnapshot> snapshots = snapshot.getChildren();
+        markerMap = new HashMap<Marker,DataSnapshot>();
+        locMap = new HashMap<DataSnapshot,LatLng>();
+        for (DataSnapshot user:snapshots){
+            try {
+                if (user.child("accType").getValue().toString().matches(accType)) {
+                    String Address = user.child("placeAdd").getValue().toString();
+                    locMap.put(user, ConvertToDistanceFromMe(user));
+                    Users.add(user);
                 }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
-        try {
-            if (Nearest != null) {
-                addresses = geocoder.getFromLocationName(Nearest.child("placeAdd").getValue().toString(),1);
-                if (addresses.size()>0) {
-                    Searchbox.setText(Nearest.child("placeAdd").getValue().toString());
 
-                    LatLng LatiLongi = new LatLng(addresses.get(0).getLatitude(), addresses.get(0).getLongitude());
-
-                    CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(
-                            LatiLongi, 16f);
-                    mMap.animateCamera(cameraUpdate);
-                } else {
-                    Toast.makeText(Map.this, "Could not find the nearest " + accType, Toast.LENGTH_SHORT).show();
+        Collections.sort(Users, new Comparator<DataSnapshot>() {
+            @Override
+            public int compare(DataSnapshot t1, DataSnapshot t2) {
+                LatLng pos1 = locMap.get(t1);
+                LatLng pos2 = locMap.get(t2);
+                int distance1 = 0;
+                int distance2 = 0;
+                if (pos1 != null && pos2 != null) {
+                    Location place1 = new Location("");
+                    place1.setLatitude(pos1.latitude);
+                    place1.setLongitude(pos1.longitude);
+                    distance1 = (int) myLocation.distanceTo(place1);
+                    Location place2 = new Location("");
+                    place2.setLatitude(pos2.latitude);
+                    place2.setLongitude(pos2.longitude);
+                    distance2 = (int) myLocation.distanceTo(place2);
+                    return Integer.valueOf(distance1).compareTo(Integer.valueOf(distance2));
                 }
-            } else {
-                Toast.makeText(Map.this, "There are no available " + accType, Toast.LENGTH_SHORT).show();
+                return 0;
+                }
+        });
+
+        for (DataSnapshot user:Users){
+            MarkerOptions endMarker = new MarkerOptions();
+            LatLng pos = locMap.get(user);
+            if (pos!=null){
+            endMarker.position(pos);
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+            endMarker.title(user.child("placeName").getValue().toString());
+            Marker marker = mMap.addMarker(endMarker);
+            markerMap.put(marker,user);
+        }
+        if (Users.size()>0) {
+            DataSnapshot Nearest = Users.get(0);
+            Searchbox.setText(Nearest.child("placeAdd").getValue().toString());
+
+            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(
+                    locMap.get(Users.get(0)), 16f);
+            mMap.animateCamera(cameraUpdate);
+
+            MarkerUserId = Nearest.getKey().toString();
+        } else {
+            Toast.makeText(this, "No Registered " + accType, Toast.LENGTH_SHORT).show();
         }
     }
 
     private void requestPermision() {
-        mLocationRequest = LocationRequest.create()
-                .setInterval(500000000)
-                .setFastestInterval(500000000)
-                .setPriority(Priority.PRIORITY_HIGH_ACCURACY)
-                .setMaxWaitTime(100);
+        mLocationRequest = new LocationRequest.Builder(PRIORITY_HIGH_ACCURACY,500000).build();
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, LOCATION_REQUEST_CODE);
@@ -315,29 +412,41 @@ public class Map extends FragmentActivity implements OnMapReadyCallback, Routing
 
                 LatLng ltlng=new LatLng(myLocation.getLatitude(),myLocation.getLongitude());
 
-                if (AddressToLocate != null) {
-                    Searchbox.setText(AddressToLocate);
-                    geocoder = new Geocoder(Map.this,Locale.getDefault());
-                    mMap.clear();
-                    try {
-                        addresses = geocoder.getFromLocationName(Searchbox.getText().toString(),1);
-                        if (addresses.size() > 0) {
-                            LatLng LatiLongi = new LatLng(addresses.get(0).getLatitude(), addresses.get(0).getLongitude());
+                if (UserKeyToLocate != null) {
+                    userRef.child(UserKeyToLocate).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            Searchbox.setText(snapshot.child("placeAdd").getValue().toString());
+                            geocoder = new Geocoder(Map.this,Locale.getDefault());
+                            mMap.clear();
+                            try {
+                                addresses = geocoder.getFromLocationName(Searchbox.getText().toString(),1);
+                                if (addresses.size() > 0) {
+                                    LatLng LatiLongi = new LatLng(addresses.get(0).getLatitude(), addresses.get(0).getLongitude());
 
-                            MarkerOptions endMarker = new MarkerOptions();
-                            endMarker.position(LatiLongi);
-                            endMarker.title(NameToLocate);
-                            mMap.addMarker(endMarker);
-
-                            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(
-                                    LatiLongi, 16f);
-                            mMap.animateCamera(cameraUpdate);
-                        } else {
-                            Toast.makeText(Map.this, "Can't Locate Address", Toast.LENGTH_SHORT).show();
+                                    MarkerOptions endMarker = new MarkerOptions();
+                                    endMarker.position(LatiLongi);
+                                    endMarker.title(snapshot.child("placeName").getValue().toString());
+                                    Marker marker = mMap.addMarker(endMarker);
+                                    markerMap = new HashMap<Marker, DataSnapshot>();
+                                    markerMap.put(marker,snapshot);
+                                    MarkerUserId = snapshot.getKey();
+                                    CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(
+                                            LatiLongi, 16f);
+                                    mMap.animateCamera(cameraUpdate);
+                                } else {
+                                    Toast.makeText(Map.this, "Can't Locate Address", Toast.LENGTH_SHORT).show();
+                                }
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
                         }
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
                 } else {
                     CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(
                             ltlng, 16f);
@@ -359,10 +468,6 @@ public class Map extends FragmentActivity implements OnMapReadyCallback, Routing
                 Location location = locationList.get(locationList.size() - 1);
                 myLocation = location;
                 LatLng ltlngStart=new LatLng(myLocation.getLatitude(),myLocation.getLongitude());
-                start = ltlngStart;
-                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(
-                        start, 18f);
-                mMap.animateCamera(cameraUpdate);
                 try {
                     addresses = geocoder.getFromLocationName(Searchbox.getText().toString(),1);
                     LatLng ltlngEnd = new LatLng(addresses.get(0).getLatitude(),addresses.get(0).getLongitude());
@@ -371,6 +476,21 @@ public class Map extends FragmentActivity implements OnMapReadyCallback, Routing
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+            }
+        }
+    };
+
+    LocationCallback mTrackCallback = new LocationCallback() {
+        @Override
+        public void onLocationResult(LocationResult locationResult) {
+            List<Location> locationList = locationResult.getLocations();
+            if (locationList.size() > 0) {
+                Location location = locationList.get(locationList.size() - 1);
+                myLocation = location;
+                LatLng ltlngStart=new LatLng(myLocation.getLatitude(),myLocation.getLongitude());
+                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(
+                        ltlngStart, 16f);
+                mMap.animateCamera(cameraUpdate);
             }
         }
     };
@@ -412,31 +532,45 @@ public class Map extends FragmentActivity implements OnMapReadyCallback, Routing
         requestPermision();
 
         mMap.setOnMapClickListener(latLng -> {
+            if (!Directions.getText().toString().matches("Stop Routing"))
+            {
+                end = latLng;
+                mMap.clear();
+                geocoder = new Geocoder(this, Locale.getDefault());
+                String address = null;
+                try {
+                    addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
+                    address = addresses.get(0).getAddressLine(0);
 
-            end=latLng;
+                    Searchbox.setText(address);
 
-            mMap.clear();
+                    MarkerOptions endMarker = new MarkerOptions();
+                    endMarker.position(latLng);
+                    endMarker.title(address);
+                    mMap.addMarker(endMarker);
 
-            geocoder = new Geocoder(this,Locale.getDefault());
-
-            String address = null;
-
-            try {
-                addresses = geocoder.getFromLocation(latLng.latitude,latLng.longitude,1);
-                address = addresses.get(0).getAddressLine(0);
-
-                Searchbox.setText(address);
-
-                MarkerOptions endMarker = new MarkerOptions();
-                endMarker.position(latLng);
-                endMarker.title(address);
-                mMap.addMarker(endMarker);
-
-            } catch (IOException e) {
-                e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
-
-
+        });
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(@NonNull Marker marker) {
+                marker.showInfoWindow();
+                DataSnapshot user = null;
+                if (markerMap != null) {
+                    user = markerMap.get(marker);
+                }
+                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(
+                        marker.getPosition(), 16.5f);
+                mMap.animateCamera(cameraUpdate);
+                if(user != null) {
+                    MarkerUserId = user.getKey().toString();
+                    Searchbox.setText(user.child("placeAdd").getValue().toString());
+                }
+                return true;
+            }
         });
     }
 
@@ -450,11 +584,11 @@ public class Map extends FragmentActivity implements OnMapReadyCallback, Routing
         else
         {
             Routing routing = new Routing.Builder()
-                    .travelMode(AbstractRouting.TravelMode.DRIVING)
+                    .travelMode(RouteTyping)
                     .withListener(this)
                     .alternativeRoutes(true)
                     .waypoints(Start, End)
-                    .key("AIzaSyCOzLIlwzHVPIQQ-OBioZuQfTkuMRx8ALY")  //also define your api key here.
+                    .key("AIzaSyCOzLIlwzHVPIQQ-OBioZuQfTkuMRx8ALY")
                     .build();
             routing.execute();
         }
@@ -481,8 +615,6 @@ public class Map extends FragmentActivity implements OnMapReadyCallback, Routing
     @Override
     public void onRoutingSuccess(ArrayList<Route> route, int shortestRouteIndex) {
 
-        CameraUpdate center = CameraUpdateFactory.newLatLng(start);
-        CameraUpdate zoom = CameraUpdateFactory.zoomTo(16);
         if(polylines!=null) {
             polylines.clear();
         }
@@ -523,7 +655,6 @@ public class Map extends FragmentActivity implements OnMapReadyCallback, Routing
                 DistanceToDestination.setText("Distance: "+distance+" meters");
             }
             else {
-
             }
 
         }

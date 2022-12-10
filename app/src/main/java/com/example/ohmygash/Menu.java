@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -23,7 +24,7 @@ public class Menu extends AppCompatActivity {
     DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Users");
 
     TextView Name,Email;
-    Button Workshops,Stations,Map,Logout;
+    Button Autoshops,Stations,Map,Logout,Inventory,Profile,Favorites;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +33,11 @@ public class Menu extends AppCompatActivity {
 
         Name = findViewById(R.id.MenuNameTextView);
         Email = findViewById(R.id.MenuEmailTextView);
-        Workshops = findViewById(R.id.GoToWorkshopsButton);
+        Autoshops = findViewById(R.id.GoToAutoShopsButton);
         Stations = findViewById(R.id.GoToStationsButton);
-
+        Favorites = findViewById(R.id.GoToFavoritesButton);
+        Profile = findViewById(R.id.GoToProfile);
+        Inventory = findViewById(R.id.GoToInventory);
         Logout = findViewById(R.id.LogoutButton);
         Map = findViewById(R.id.GoToMapButton);
 
@@ -54,10 +57,16 @@ public class Menu extends AppCompatActivity {
             startActivity(intent);
         });
 
-        Workshops.setOnClickListener(view->{
+        Profile.setOnClickListener(view->{
+            Intent intent = new Intent(Menu.this,MyProfile.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+        });
+
+        Autoshops.setOnClickListener(view->{
             Intent intent = new Intent(Menu.this,LocatePlace.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.putExtra("AccountTypeToLocate","Workshop");
+            intent.putExtra("AccountTypeToLocate","Autoshop");
             startActivity(intent);
         });
 
@@ -68,13 +77,19 @@ public class Menu extends AppCompatActivity {
             startActivity(intent);
         });
 
+        Favorites.setOnClickListener(view->{
+            Intent intent = new Intent(Menu.this,LocatePlace.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.putExtra("AccountTypeToLocate","Favorites");
+            startActivity(intent);
+        });
+
         Logout.setOnClickListener(view->{
             FBAuth.signOut();
             Intent intent = new Intent(Menu.this,Login.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         });
-
     }
 
     public void UpdateUI(FirebaseUser currentuser){
@@ -84,6 +99,26 @@ public class Menu extends AppCompatActivity {
                    DataSnapshot user = snapshot.child(currentuser.getUid());
                    Name.setText(user.child("name").getValue().toString());
                    Email.setText(currentuser.getEmail());
+                   String accType = user.child("accType").getValue().toString();
+                   if (!accType.matches("General")){
+                       Inventory.setVisibility(View.VISIBLE);
+                       if (accType.matches("Admin")){
+                           Inventory.setText("Manage Verification Requests");
+                           Inventory.setOnClickListener(view->{
+                               Intent intent = new Intent(Menu.this,LocatePlace.class);
+                               intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                               intent.putExtra("AccountTypeToLocate","Requests");
+                               startActivity(intent);
+                           });
+                       }else{
+                           Inventory.setOnClickListener(view->{
+                               Intent intent = new Intent(Menu.this,ManageInventory.class);
+                               intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                               startActivity(intent);
+                           });
+                       }
+
+                   }
                }
 
                @Override

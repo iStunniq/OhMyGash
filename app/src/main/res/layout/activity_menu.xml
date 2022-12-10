@@ -4,14 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primaryDarkColor"
-    tools:context=".Menu">
+    android:background="@drawable/background"
+    android:scrollbars="vertical"
+    tools:context=".Menu"
+    >
 
     <TextView
         android:id="@+id/MenuNameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="80dp"
+        android:shadowDx="5"
+        android:shadowDy="5"
+        android:shadowRadius="5"
+        android:text="Loading..."
         android:textAlignment="center"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,6 +28,10 @@
         android:id="@+id/MenuEmailTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:shadowDx="5"
+        android:shadowDy="5"
+        android:shadowRadius="5"
+        android:text="Please wait."
         android:textAlignment="center"
         android:textSize="17.5sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -41,12 +51,12 @@
         app:layout_constraintTop_toBottomOf="@+id/MenuEmailTextView" />
 
     <Button
-        android:id="@+id/GoToWorkshopsButton"
+        android:id="@+id/GoToAutoShopsButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="100dp"
         android:layout_marginTop="16dp"
-        android:text="Workshops"
+        android:text="AutoShops"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/GoToMapButton" />
@@ -60,13 +70,47 @@
         android:text="Gasoline Stations"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/GoToWorkshopsButton" />
+        app:layout_constraintTop_toBottomOf="@+id/GoToAutoShopsButton" />
+
+    <Button
+        android:id="@+id/GoToFavoritesButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="100dp"
+        android:layout_marginTop="16dp"
+        android:text="Favorite Locations"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/GoToStationsButton" />
+
+    <Button
+        android:id="@+id/GoToInventory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="100dp"
+        android:layout_marginBottom="16dp"
+        android:text="Manage Inventory"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/GoToProfile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/GoToProfile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="100dp"
+        android:layout_marginBottom="16dp"
+        android:text="My Account"
+        app:layout_constraintBottom_toTopOf="@+id/LogoutButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/LogoutButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="80dp"
         android:text="Logout"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
