@@ -23,7 +23,13 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".Tutorial1"
+            android:exported="false" />
+        <activity
             android:name=".RequestPage"
+            android:exported="false" />
+        <activity
+            android:name=".ViewReport"
             android:exported="false" />
         <activity
             android:name=".Filter"
@@ -80,6 +86,9 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

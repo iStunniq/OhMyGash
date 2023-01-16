@@ -55,32 +55,10 @@ public class Login extends AppCompatActivity {
                             startActivity(intent);
                         }
                         else{
-                            Toast.makeText(Login.this, "Login Failed: "+task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Login.this, "Login Failed: "+task.getException().getMessage(), Toast.LENGTH_LONG).show();
                         }
                     }
                 });
-//                dbref.child("Users").addListenerForSingleValueEvent(new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                        if (snapshot.hasChild(emailTxt)) {
-//
-//                            String getpass = snapshot.child(emailTxt).child("pass").getValue(String.class);
-//
-//                            if (getpass.equals(passwordTxt)){
-//                                Toast.makeText(Login.this, "Logged In Successfully", Toast.LENGTH_SHORT).show();
-//                            } else {
-//                                Toast.makeText(Login.this, "Password is Incorrect", Toast.LENGTH_SHORT).show();
-//                            }
-//                        } else {
-//                            Toast.makeText(Login.this, "This Username Does Not Exist", Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onCancelled(@NonNull DatabaseError error) {
-//
-//                    }
-//                });
             }
 
         });

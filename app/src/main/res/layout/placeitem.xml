@@ -4,36 +4,59 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/blue"
     android:padding="8dp">
 
     <ImageView
         android:id="@+id/RecViewPhoto"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:src="@drawable/ic_launcher_foreground"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
+
+    <ImageView
+        android:id="@+id/imageView30"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/RecViewPhoto"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/orange" />
 
     <TextView
         android:id="@+id/RecViewPlaceName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:maxLines="1"
+        android:paddingTop="1dp"
+        android:paddingBottom="1dp"
         android:text="Place Name"
-        app:layout_constraintBottom_toBottomOf="@+id/RecViewPhoto"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toStartOf="@+id/recViewBrand"
         app:layout_constraintStart_toEndOf="@+id/RecViewPhoto"
-        app:layout_constraintTop_toTopOf="@+id/RecViewPhoto"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="@+id/imageView30" />
 
     <TextView
         android:id="@+id/recViewBrand"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="16dp"
+        android:paddingTop="1dp"
+        android:paddingBottom="1dp"
         android:text="Brand"
         android:textAlignment="textEnd"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="@+id/RecViewPlaceName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/RecViewPlaceName"
@@ -43,8 +66,13 @@
         android:id="@+id/RecViewPlaceGas"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:paddingTop="1dp"
+        android:paddingBottom="1dp"
         android:text="PlaceGas"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/RecViewPhoto"
         app:layout_constraintTop_toBottomOf="@+id/RecViewDistance" />
 
@@ -52,8 +80,14 @@
         android:id="@+id/RecViewPlaceAdd"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:maxLines="2"
+        android:paddingTop="1dp"
+        android:paddingBottom="1dp"
         android:text="Place Address"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/RecViewPhoto"
         app:layout_constraintTop_toBottomOf="@+id/RecViewPlaceName" />
 
@@ -61,8 +95,14 @@
         android:id="@+id/RecViewDistance"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:paddingTop="1dp"
+        android:paddingBottom="1dp"
         android:text="Distance From User"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/RecViewPhoto"
         app:layout_constraintTop_toBottomOf="@+id/RecViewPlaceAdd" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

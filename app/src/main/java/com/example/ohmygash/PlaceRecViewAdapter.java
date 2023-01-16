@@ -2,7 +2,6 @@ package com.example.ohmygash;
 
 import android.content.Intent;
 import android.location.Address;
-import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +31,7 @@ public class PlaceRecViewAdapter extends RecyclerView.Adapter<PlaceRecViewAdapte
     private ArrayList<DataSnapshot> Users = new ArrayList<>();
     private Map<DataSnapshot,Integer> locMap = new HashMap<DataSnapshot,Integer>();
     DatabaseReference gasRef = FirebaseDatabase.getInstance().getReference("Gasoline");
+    private Intent placeIntent = new Intent();
 
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -46,13 +46,13 @@ public class PlaceRecViewAdapter extends RecyclerView.Adapter<PlaceRecViewAdapte
         DataSnapshot currentUser = Users.get(position);
         holder.PlaceName.setText(currentUser.child("placeName").getValue().toString());
         holder.PlaceAdd.setText(currentUser.child("placeAdd").getValue().toString());
-        holder.PlaceBrand.setText(currentUser.child("brand").getValue().toString());
+
         List<Address> addresses = null;
         int Distance = locMap.get(Users.get(position));
         if (Distance!=0) {
             holder.Distance.setText("This place is " + Distance + " meters away");
         }else{
-            holder.Distance.setText("Cannot Calculate Distance");
+            holder.Distance.setText("Cannot Calculate Distance, Check Location Permissions");
         }
         if (currentUser.child("placePhoto").getValue() != null) {
             String Url = currentUser.child("placePhoto").getValue().toString();
@@ -61,6 +61,7 @@ public class PlaceRecViewAdapter extends RecyclerView.Adapter<PlaceRecViewAdapte
         }
 
         if (currentUser.child("accType").getValue().toString().matches("Station")){
+            holder.PlaceBrand.setText(currentUser.child("brand").getValue().toString());
             String key = currentUser.getKey();
             DatabaseReference currentGasRef = gasRef.child(key);
             currentGasRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -82,6 +83,11 @@ public class PlaceRecViewAdapter extends RecyclerView.Adapter<PlaceRecViewAdapte
                     } else {
                         holder.PlaceGas.setText("No Registered Gas to Display");
                     }
+                    if (placeIntent.getStringExtra("AccountTypeToLocate").matches("Requests") || placeIntent.getStringExtra("AccountTypeToLocate").matches("AllAccounts"))
+                    {
+                        holder.PlaceGas.setVisibility(View.VISIBLE);
+                        holder.PlaceGas.setText("Verification Status: " + currentUser.child("status").getValue().toString());
+                    }
                 }
 
                 @Override
@@ -90,13 +96,30 @@ public class PlaceRecViewAdapter extends RecyclerView.Adapter<PlaceRecViewAdapte
                 }
             });
         }else{
-            holder.PlaceGas.setVisibility(View.GONE);
+            if (placeIntent.getStringExtra("AccountTypeToLocate").matches("Requests") || placeIntent.getStringExtra("AccountTypeToLocate").matches("AllAccounts"))
+            {
+                holder.PlaceGas.setVisibility(View.VISIBLE);
+                holder.PlaceGas.setText("Verification Status: " + currentUser.child("status").getValue().toString());
+            }else {
+                holder.PlaceGas.setVisibility(View.GONE);
+                holder.PlaceBrand.setVisibility(View.GONE);
+            }
         }
-
         holder.itemView.setOnClickListener(view -> {
-            Intent intent = new Intent(view.getContext(),ViewPlace.class);
-            intent.putExtra("UserId",currentUser.getKey().toString());
-            view.getContext().startActivity(intent);
+            if (placeIntent.getStringExtra("AccountTypeToLocate").matches("Requests")){
+                Intent intent = new Intent(view.getContext(), RequestPage.class);
+                intent.putExtra("UserId", currentUser.getKey().toString());
+                view.getContext().startActivity(intent);
+            }else if (placeIntent.getStringExtra("AccountTypeToLocate").matches("AllAccounts")){
+                Intent intent = new Intent(view.getContext(), RequestPage.class);
+                intent.putExtra("UserId", currentUser.getKey().toString());
+                intent.putExtra("AllAccounts", true);
+                view.getContext().startActivity(intent);
+            }else  {
+                Intent intent = new Intent(view.getContext(), ViewPlace.class);
+                intent.putExtra("UserId", currentUser.getKey().toString());
+                view.getContext().startActivity(intent);
+            }
         });
     }
 
@@ -108,6 +131,10 @@ public class PlaceRecViewAdapter extends RecyclerView.Adapter<PlaceRecViewAdapte
     public void setUser(@NonNull ArrayList<DataSnapshot> user) {
         this.Users = user;
         notifyDataSetChanged();
+    }
+
+    public void setPlaceIntent(Intent placeIntent) {
+        this.placeIntent = placeIntent;
     }
 
     public void setLocMap(Map<DataSnapshot, Integer> locMap) {

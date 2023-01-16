@@ -7,21 +7,74 @@
     android:background="@drawable/background"
     tools:context=".Filter">
 
+    <ImageView
+        android:id="@+id/imageView31"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="-24dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="-16dp"
+        android:background="@drawable/blue"
+        app:layout_constraintBottom_toBottomOf="@+id/FilterTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView32"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="-16dp"
+        android:background="@drawable/blue"
+        app:layout_constraintBottom_toBottomOf="@+id/ReturnToFind"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView31"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <EditText
+        android:id="@+id/FilterDistanceAmount"
+        android:layout_width="347dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="@color/primaryColor"
+        android:clickable="false"
+        android:ems="10"
+        android:enabled="false"
+        android:hint="Search Radius in Meters(default: 5000)"
+        android:inputType="number"
+        android:textColor="@color/primaryColor"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/FilterName" />
+
     <TextView
         android:id="@+id/FilterTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/orange"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
         android:shadowDx="5"
         android:shadowDy="5"
         android:shadowRadius="5"
         android:text="Filters"
         android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
         android:textSize="32dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.110000014" />
+        app:layout_constraintEnd_toEndOf="@+id/imageView31"
+        app:layout_constraintStart_toStartOf="@+id/imageView31"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/FilterName"
@@ -30,36 +83,33 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
-        android:backgroundTint="@color/primaryColor"
+        android:background="@drawable/orange"
         android:ems="10"
         android:hint="Name Filter"
         android:inputType="textPersonName"
-        android:textColor="@color/primaryColor"
+        android:paddingStart="10dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="4dp"
+        android:paddingEnd="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="4dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+        app:layout_constraintTop_toBottomOf="@+id/FilterBrandText" />
 
-    <EditText
-        android:id="@+id/FilterDistanceAmount"
-        android:layout_width="347dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:backgroundTint="@color/primaryColor"
-        android:ems="10"
-        android:hint="Search Radius in Meters(default: 5000)"
-        android:inputType="number"
-        android:textColor="@color/primaryColor"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/FilterName" />
 
     <Button
         android:id="@+id/FilterDistance"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Sort by Distance (Default)"
+        android:background="@drawable/orange"
+        android:text="Apply Filters"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="@+id/FilterDistanceAmount"
         app:layout_constraintStart_toStartOf="@+id/FilterDistanceAmount"
         app:layout_constraintTop_toBottomOf="@+id/FilterDistanceAmount" />
@@ -69,7 +119,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
+        android:background="@drawable/orange"
         android:text="Sort By Cheapest Gas Price"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="@+id/FilterDistance"
         app:layout_constraintStart_toStartOf="@+id/FilterDistance"
         app:layout_constraintTop_toBottomOf="@+id/FilterDistance" />
@@ -78,35 +130,75 @@
         android:id="@+id/ReturnToFind"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="100dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/orange"
         android:text="Back"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/FilterCheapest" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/FilterBrandText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="Brand Filter:"
-        android:textSize="18dp"
+        android:textColor="@color/primaryColor"
+        android:textSize="25dp"
         app:layout_constraintStart_toStartOf="@+id/FilterName"
-        app:layout_constraintTop_toBottomOf="@+id/FilterTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView31" />
+
+    <TextView
+        android:id="@+id/StatusText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Status Filter:"
+        android:textColor="@color/primaryColor"
+        android:textColorLink="@color/primaryColor"
+        android:textSize="23dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/FilterDistanceAmount"
+        app:layout_constraintEnd_toEndOf="@+id/FilterBrandText"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/FilterBrandText"
+        app:layout_constraintTop_toTopOf="@+id/FilterDistanceAmount" />
+
+    <Spinner
+        android:id="@+id/StatusSpinner"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/orange"
+        android:outlineProvider="none"
+        android:paddingStart="10dp"
+        android:paddingTop="4dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="4dp"
+        android:scrollbars="vertical"
+        android:verticalScrollbarPosition="right"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/StatusText"
+        app:layout_constraintEnd_toEndOf="@+id/BrandSpinner"
+        app:layout_constraintStart_toStartOf="@+id/BrandSpinner"
+        app:layout_constraintTop_toTopOf="@+id/StatusText" />
 
     <Spinner
         android:id="@+id/BrandSpinner"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:backgroundTint="@color/primaryColor"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/orange"
         android:outlineProvider="none"
+        android:paddingStart="10dp"
+        android:paddingTop="4dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="4dp"
         android:scrollbars="vertical"
         android:verticalScrollbarPosition="right"
-        app:layout_constraintBottom_toBottomOf="@+id/textView6"
+        app:layout_constraintBottom_toBottomOf="@+id/FilterBrandText"
         app:layout_constraintEnd_toEndOf="@+id/FilterName"
-        app:layout_constraintStart_toEndOf="@+id/textView6"
-        app:layout_constraintTop_toTopOf="@+id/textView6" />
+        app:layout_constraintStart_toEndOf="@+id/FilterBrandText"
+        app:layout_constraintTop_toTopOf="@+id/FilterBrandText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

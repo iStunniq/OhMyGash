@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".RequestPage"
+    >
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="-8dp"
+        android:layout_marginTop="-16dp"
+        android:layout_marginEnd="-8dp"
+        android:layout_marginBottom="-32dp"
+        android:background="@drawable/blue"
+        app:layout_constraintBottom_toBottomOf="@+id/RequestAccTypeText"
+        app:layout_constraintEnd_toEndOf="@+id/textView12"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textView12"
+        app:layout_constraintTop_toTopOf="@+id/textView12"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/BackRequest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/orange"
+        android:text="Back"
+        app:layout_constraintEnd_toEndOf="@+id/DenyRequest"
+        app:layout_constraintStart_toStartOf="@+id/DenyRequest"
+        app:layout_constraintTop_toBottomOf="@+id/DenyRequest" />
+
+    <TextView
+        android:id="@+id/RequestNameText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/orange"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:text="Name"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/RequestVerificationStatus" />
+
+    <TextView
+        android:id="@+id/RequestVerificationStatus"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/orange"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:text="Status"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/orange"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:shadowDx="5"
+        android:shadowDy="5"
+        android:shadowRadius="5"
+        android:text="Verification Request"
+        android:textAlignment="center"
+        android:textSize="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/RequestEmailText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/orange"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:text="Email"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/RequestNameText"
+        app:layout_constraintStart_toStartOf="@+id/RequestNameText"
+        app:layout_constraintTop_toBottomOf="@+id/RequestNameText" />
+
+    <TextView
+        android:id="@+id/RequestPlaceNameText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/orange"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:text="Place Name"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/RequestEmailText"
+        app:layout_constraintStart_toStartOf="@+id/RequestEmailText"
+        app:layout_constraintTop_toBottomOf="@+id/RequestEmailText" />
+
+    <TextView
+        android:id="@+id/RequestPlaceAddText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/orange"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:text="Place Address"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/RequestPlaceNameText"
+        app:layout_constraintStart_toStartOf="@+id/RequestPlaceNameText"
+        app:layout_constraintTop_toBottomOf="@+id/RequestPlaceNameText" />
+
+    <TextView
+        android:id="@+id/RequestAccTypeText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/orange"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:text="Account Type"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/RequestPlaceBrandText"
+        app:layout_constraintStart_toStartOf="@+id/RequestPlaceBrandText"
+        app:layout_constraintTop_toBottomOf="@+id/RequestPlaceBrandText" />
+
+    <TextView
+        android:id="@+id/RequestPlaceBrandText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/orange"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:text="Place Brand"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/RequestPlaceAddText"
+        app:layout_constraintHorizontal_bias="0.59"
+        app:layout_constraintStart_toStartOf="@+id/RequestPlaceAddText"
+        app:layout_constraintTop_toBottomOf="@+id/RequestPlaceAddText" />
+
+    <Button
+        android:id="@+id/ApproveRequest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/orange"
+        android:text="Approve Request"
+        app:layout_constraintEnd_toEndOf="@+id/RequestAccTypeText"
+        app:layout_constraintHorizontal_bias="0.521"
+        app:layout_constraintStart_toStartOf="@+id/RequestAccTypeText"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <Button
+        android:id="@+id/DenyRequest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/orange"
+        android:text="Deny Request"
+        app:layout_constraintEnd_toEndOf="@+id/ApproveRequest"
+        app:layout_constraintStart_toStartOf="@+id/ApproveRequest"
+        app:layout_constraintTop_toBottomOf="@+id/ApproveRequest" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -133,6 +133,7 @@ public class AddNewItem extends AppCompatActivity {
                     if (snapshot.child(FBUser.getUid()).child("accType").getValue().toString().matches("Autoshop")) {
                         itemType.check(R.id.ProductRadioButton);
                         findViewById(R.id.GasolineRadioButton).setClickable(false);
+                        findViewById(R.id.GasolineRadioButton).setVisibility(View.GONE);
                     }
                 }
 

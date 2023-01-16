@@ -52,18 +52,15 @@ public class ManageItemViewAdapter extends RecyclerView.Adapter<ManageItemViewAd
             holder.ItemPrice.setText("₱"+Items.get(position).child("Price").getValue().toString()+"/Liter");
         }else{
             if (Items.get(position).child("Price").getValue().toString().matches("0")){
-                holder.ItemPrice.setText("Unset");
+                holder.ItemPrice.setText("May Vary");
             }
             else {
                 holder.ItemPrice.setText("₱" + Items.get(position).child("Price").getValue().toString());
             }
         };
 
-        if (Viewing){
-            holder.EditItem.setVisibility(View.GONE);
-        }
-        else {
-            holder.EditItem.setOnClickListener(view -> {
+        if (!Viewing){
+            holder.itemView.setOnClickListener(view -> {
                 Intent intent = new Intent(view.getContext(), AddNewItem.class);
                 intent.putExtra("ItemId", Items.get(position).getKey().toString());
                 intent.putExtra("ItemUser", Items.get(position).getRef().getParent().getKey().toString());
@@ -91,14 +88,12 @@ public class ManageItemViewAdapter extends RecyclerView.Adapter<ManageItemViewAd
 
         TextView ItemName,ItemDesc,ItemPrice;
         ImageView PlacePhoto;
-        Button EditItem;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             ItemName = itemView.findViewById(R.id.ManageItemName);
             ItemDesc = itemView.findViewById(R.id.ManageItemDesc);
             ItemPrice = itemView.findViewById(R.id.ManageItemCost);
             PlacePhoto = itemView.findViewById(R.id.ManageItemImage);
-            EditItem = itemView.findViewById(R.id.ManageItemEdit);
         }
     }
 }

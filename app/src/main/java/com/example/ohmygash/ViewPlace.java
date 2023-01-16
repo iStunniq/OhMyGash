@@ -7,6 +7,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -111,7 +112,7 @@ public class ViewPlace extends AppCompatActivity {
             }
         });
 
-        userRef.addValueEventListener(new ValueEventListener() {
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 DataSnapshot user = snapshot.child(UserId);
@@ -130,6 +131,7 @@ public class ViewPlace extends AppCompatActivity {
                     ManageTabs.getTabAt(0).view.setClickable(false);
                     ManageTabs.selectTab(ManageTabs.getTabAt(1));
                     ManagePager.setCurrentItem(1);
+                    ManageTabs.getTabAt(0).view.setVisibility(View.GONE);
                 } else {
                     ManageTabs.selectTab(ManageTabs.getTabAt(0));
                     ManagePager.setCurrentItem(0);

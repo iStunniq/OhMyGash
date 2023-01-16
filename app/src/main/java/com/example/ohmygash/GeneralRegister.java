@@ -61,24 +61,6 @@ public class GeneralRegister extends AppCompatActivity {
 
                 User user = new User(emailTxt,passwordTxt,nameTxt,"General");
                 createAcc(user);
-
-//                databaseReference.child("Users").addListenerForSingleValueEvent(new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                        if (snapshot.hasChild(emailTxt)){
-//                            Toast.makeText(GeneralRegister.this,"This Email is Already In Use",Toast.LENGTH_LONG).show();
-//                        } else {
-//                            createAcc(user);
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onCancelled(@NonNull DatabaseError error) {
-//
-//                    }
-//
-//                });
-//                Toast.makeText(GeneralRegister.this, "Feedback", Toast.LENGTH_SHORT).show();
             }
 
         });

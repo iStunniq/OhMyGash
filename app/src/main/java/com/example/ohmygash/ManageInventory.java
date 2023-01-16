@@ -26,7 +26,7 @@ import com.google.firebase.database.ValueEventListener;
 public class ManageInventory extends AppCompatActivity {
 
     private Button Menu,NewItem;
-    private TextView Title,Name,Address;
+    private TextView Name,Address;
     private TabLayout ManageTabs;
     private ViewPager2 ManagePager;
     private ManageVPAdapter VPAdapter;
@@ -41,7 +41,6 @@ public class ManageInventory extends AppCompatActivity {
 
         Menu = findViewById(R.id.ManageInventoryNavButton);
         NewItem = findViewById(R.id.AddNewItemButton);
-        Title = findViewById(R.id.ManageTextViewTitle);
         Name = findViewById(R.id.ManageTextViewName);
         Address = findViewById(R.id.ManageTextViewAddress);
         ManageTabs = findViewById(R.id.ManageInventoryTabs);
@@ -66,6 +65,7 @@ public class ManageInventory extends AppCompatActivity {
                     ManageTabs.getTabAt(0).view.setClickable(false);
                     ManageTabs.selectTab(ManageTabs.getTabAt(1));
                     ManagePager.setCurrentItem(1);
+                    ManageTabs.getTabAt(0).view.setVisibility(View.GONE);
                 }
             }
 
@@ -107,6 +107,8 @@ public class ManageInventory extends AppCompatActivity {
         Menu.setOnClickListener(view -> {
             finish();
         });
+
+        Toast.makeText(this, "Tap Any Item to Edit", Toast.LENGTH_LONG).show();
 
         NewItem.setOnClickListener(view -> {
             Intent intent = new Intent(ManageInventory.this,AddNewItem.class);

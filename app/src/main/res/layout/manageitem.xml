@@ -4,23 +4,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/blue"
     android:padding="8dp">
+
+    <ImageView
+        android:id="@+id/imageView35"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ManageItemImage"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/orange" />
 
     <TextView
         android:id="@+id/ManageItemCost"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:text="Cost"
-        android:textSize="20dp"
+        android:textColor="@color/white"
+        android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/ManageItemImage"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/services" />
@@ -30,12 +49,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
         android:text="Name"
-        app:layout_constraintEnd_toStartOf="@+id/ManageItemCost"
-        app:layout_constraintStart_toEndOf="@+id/ManageItemImage"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/ManageItemCost"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintStart_toStartOf="@+id/imageView35"
+        app:layout_constraintTop_toTopOf="@+id/ManageItemCost" />
 
     <TextView
         android:id="@+id/ManageItemDesc"
@@ -43,19 +62,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintStart_toEndOf="@+id/ManageItemImage"
-        app:layout_constraintTop_toBottomOf="@+id/ManageItemName" />
-
-    <Button
-        android:id="@+id/ManageItemEdit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:text="Edit"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="8dp"
+        android:paddingTop="0dp"
+        android:paddingBottom="10dp"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="@+id/imageView35"
+        app:layout_constraintStart_toStartOf="@+id/imageView35"
         app:layout_constraintTop_toBottomOf="@+id/ManageItemCost" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -63,6 +75,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_end="110dp" />
+        app:layout_constraintGuide_end="104dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

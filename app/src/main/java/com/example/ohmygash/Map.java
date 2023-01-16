@@ -14,6 +14,7 @@ import android.os.SystemClock;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,6 +44,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -52,12 +54,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.android.gms.maps.model.Marker;
+import com.google.type.DateTime;
 
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -88,6 +93,8 @@ public class Map extends FragmentActivity implements OnMapReadyCallback, Routing
 
     private EditText Searchbox;
     private Button Search, Directions, NearestAuto, NearestStat, Menu, MarkerButton, RouteType, Track, Buttons;
+    private FloatingActionButton Tutorial;
+    private ImageView ButtonsBackground;
     private TextView DistanceToDestination;
     private String UserKeyToLocate, MarkerUserId;
     private AbstractRouting.TravelMode RouteTyping;
@@ -116,14 +123,17 @@ public class Map extends FragmentActivity implements OnMapReadyCallback, Routing
         MarkerButton = findViewById(R.id.GoToMarker);
         RouteType = findViewById(R.id.RouteTyping);
         Buttons = findViewById(R.id.ButtonForButtons);
+        ButtonsBackground = findViewById(R.id.ButtonsBackground);
+        Tutorial = findViewById(R.id.MapTutorialButton);
 
         FBAuth = FirebaseAuth.getInstance();
-        RouteTyping = AbstractRouting.TravelMode.DRIVING;
         FirebaseUser user = FBAuth.getCurrentUser();
+        RouteTyping = AbstractRouting.TravelMode.DRIVING;
         if (user == null) {
             Intent intent = new Intent(Map.this, Login.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
+            return;
         }
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         //request location permission.
@@ -141,12 +151,23 @@ public class Map extends FragmentActivity implements OnMapReadyCallback, Routing
                         user.getRef().child("status").setValue("Unverified");
                     }
                 }
+                if (snapshot.child(user.getUid()).child("Tutorial1").getValue() == null){
+                    Intent intent = new Intent(Map.this, Tutorial1.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
+        });
+
+        Tutorial.setOnClickListener(view -> {
+            Intent intent = new Intent(Map.this, Tutorial1.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
         });
 
         Search.setOnClickListener(view -> {
@@ -189,26 +210,15 @@ public class Map extends FragmentActivity implements OnMapReadyCallback, Routing
         });
 
         Buttons.setOnClickListener(view -> {
-            if (Buttons.getText().toString().matches("Hide Buttons")) {
-                Buttons.setText("Show Buttons");
-                RouteType.setVisibility(View.GONE);
-                Directions.setVisibility(View.GONE);
-                Track.setVisibility(View.GONE);
-                NearestAuto.setVisibility(View.GONE);
-                NearestStat.setVisibility(View.GONE);
-                MarkerButton.setVisibility(View.GONE);
+            if (Buttons.getText().toString().matches("Hide Options")) {
+                closebuttons();
             } else {
-                Buttons.setText("Hide Buttons");
-                RouteType.setVisibility(View.VISIBLE);
-                Directions.setVisibility(View.VISIBLE);
-                Track.setVisibility(View.VISIBLE);
-                NearestAuto.setVisibility(View.VISIBLE);
-                NearestStat.setVisibility(View.VISIBLE);
-                MarkerButton.setVisibility(View.VISIBLE);
+                openbuttons();
             }
         });
 
         Track.setOnClickListener(view -> {
+            closebuttons();
             if (Track.getText().toString().matches("Follow Current Location")) {
                 if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_REQUEST_CODE);
@@ -229,6 +239,7 @@ public class Map extends FragmentActivity implements OnMapReadyCallback, Routing
             requestPermision();
             geocoder = new Geocoder(this,Locale.getDefault());
             mMap.clear();
+            closebuttons();
             if (Directions.getText().toString().matches("Get Directions")) {
                 mFusedLocationClient.removeLocationUpdates(mLocationCallback);
                 mFusedLocationClient.removeLocationUpdates(mDirectionsCallback);
@@ -267,6 +278,7 @@ public class Map extends FragmentActivity implements OnMapReadyCallback, Routing
         NearestAuto.setOnClickListener(view -> {
             mMap.clear();
             requestPermision();
+            closebuttons();
             userRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -283,6 +295,7 @@ public class Map extends FragmentActivity implements OnMapReadyCallback, Routing
         NearestStat.setOnClickListener(view -> {
             mMap.clear();
             requestPermision();
+            closebuttons();
             userRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -330,7 +343,7 @@ public class Map extends FragmentActivity implements OnMapReadyCallback, Routing
         locMap = new HashMap<DataSnapshot,LatLng>();
         for (DataSnapshot user:snapshots){
             try {
-                if (user.child("accType").getValue().toString().matches(accType)) {
+                if (user.child("accType").getValue().toString().matches(accType) && user.child("status").getValue().toString().matches("Verified")) {
                     String Address = user.child("placeAdd").getValue().toString();
                     locMap.put(user, ConvertToDistanceFromMe(user));
                     Users.add(user);
@@ -513,9 +526,6 @@ public class Map extends FragmentActivity implements OnMapReadyCallback, Routing
         }
     }
 
-
-
-
     @Override
     public void onPause() {
         super.onPause();
@@ -573,7 +583,6 @@ public class Map extends FragmentActivity implements OnMapReadyCallback, Routing
             }
         });
     }
-
 
     // function to find Routes.
     public void Findroutes(LatLng Start, LatLng End)
@@ -675,6 +684,27 @@ public class Map extends FragmentActivity implements OnMapReadyCallback, Routing
     @Override
     public void onRoutingCancelled() {
         Findroutes(start,end);
+    }
+
+    private void closebuttons(){
+        Buttons.setText("More Options");
+        RouteType.setVisibility(View.GONE);
+        Directions.setVisibility(View.GONE);
+        Track.setVisibility(View.GONE);
+        NearestAuto.setVisibility(View.GONE);
+        NearestStat.setVisibility(View.GONE);
+        MarkerButton.setVisibility(View.GONE);
+        ButtonsBackground.setVisibility(View.GONE);
+    }
+    private void openbuttons(){
+        Buttons.setText("Hide Options");
+        RouteType.setVisibility(View.VISIBLE);
+        Directions.setVisibility(View.VISIBLE);
+        Track.setVisibility(View.VISIBLE);
+        NearestAuto.setVisibility(View.VISIBLE);
+        NearestStat.setVisibility(View.VISIBLE);
+        MarkerButton.setVisibility(View.VISIBLE);
+        ButtonsBackground.setVisibility(View.VISIBLE);
     }
 
 }

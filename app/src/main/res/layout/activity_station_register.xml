@@ -7,226 +7,275 @@
     android:background="@drawable/background"
     tools:context=".Login">
 
-  <EditText
-      android:id="@+id/stationRegisterStationName"
-      android:layout_width="wrap_content"
-      android:layout_height="48dp"
+  <ImageView
+      android:id="@+id/imageView10"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:layout_marginStart="-16dp"
+      android:layout_marginTop="-24dp"
+      android:layout_marginEnd="-16dp"
+      android:layout_marginBottom="-16dp"
+      android:background="@drawable/blue"
+      app:layout_constraintBottom_toBottomOf="@+id/Title"
+      app:layout_constraintEnd_toEndOf="@+id/Title"
+      app:layout_constraintStart_toStartOf="@+id/Title"
+      app:layout_constraintTop_toTopOf="parent" />
+
+  <ImageView
+      android:id="@+id/imageView11"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:layout_marginStart="-16dp"
       android:layout_marginTop="16dp"
-      android:autofillHints=""
-      android:backgroundTint="@color/primaryColor"
-      android:ems="10"
-      android:hint="Station Name"
-      android:inputType="textPersonName"
-      android:minHeight="40dp"
-      android:textColor="@color/textColor"
-      app:layout_constraintEnd_toEndOf="@+id/stationRegisterPassword"
-      app:layout_constraintStart_toStartOf="@+id/stationRegisterPassword"
-      app:layout_constraintTop_toBottomOf="@+id/stationRegisterPassword" />
-
-  <TextView
-      android:id="@+id/text8"
-      android:layout_width="0dp"
-      android:layout_height="33dp"
-      android:text="Station:"
-      android:textAlignment="viewEnd"
-      android:textColor="@color/primaryColor"
-      android:textSize="20dp"
-      app:layout_constraintBottom_toBottomOf="@+id/stationRegisterStationName"
-      app:layout_constraintEnd_toStartOf="@+id/guideline2"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="@+id/stationRegisterStationName" />
-
-  <TextView
-      android:id="@+id/text5"
-      android:layout_width="0dp"
-      android:layout_height="33dp"
-      android:text="Address:"
-      android:textAlignment="viewEnd"
-      android:textColor="@color/primaryColor"
-      android:textSize="20dp"
-      app:layout_constraintBottom_toBottomOf="@+id/stationRegisterStationAddress"
-      app:layout_constraintEnd_toStartOf="@+id/guideline2"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="@+id/stationRegisterStationAddress" />
-
-  <TextView
-      android:id="@+id/text9"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:text="Brand"
-      android:textAlignment="viewEnd"
-      android:textColor="@color/primaryColor"
-      android:textSize="20dp"
-      app:layout_constraintBottom_toBottomOf="@+id/BrandForRegister"
-      app:layout_constraintEnd_toStartOf="@+id/guideline2"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="@+id/BrandForRegister" />
-
-  <EditText
-      android:id="@+id/stationRegisterStationAddress"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="16dp"
-      android:autofillHints=""
-      android:backgroundTint="@color/primaryColor"
-      android:ems="10"
-      android:hint="Station Address"
-      android:inputType="textPostalAddress"
-      android:minHeight="40dp"
-      android:textColor="@color/textColor"
-      app:layout_constraintEnd_toEndOf="@+id/stationRegisterStationName"
-      app:layout_constraintHorizontal_bias="1.0"
-      app:layout_constraintStart_toStartOf="@+id/stationRegisterStationName"
-      app:layout_constraintTop_toBottomOf="@+id/stationRegisterStationName" />
+      android:layout_marginEnd="-16dp"
+      android:layout_marginBottom="-16dp"
+      android:background="@drawable/blue"
+      app:layout_constraintBottom_toBottomOf="@+id/RegisterNewStation"
+      app:layout_constraintEnd_toEndOf="@+id/Title"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintStart_toStartOf="@+id/Title"
+      app:layout_constraintTop_toBottomOf="@+id/imageView10"
+      app:layout_constraintVertical_bias="0.0" />
 
   <Button
       android:id="@+id/StationToRegister"
-      android:layout_width="wrap_content"
+      android:layout_width="0dp"
       android:layout_height="wrap_content"
-      android:layout_marginTop="20dp"
-      android:text="Go Back"
-      android:textColor="#253D85"
-      app:layout_constraintEnd_toEndOf="@+id/RegisterNewStation"
-      app:layout_constraintHorizontal_bias="0.428"
-      app:layout_constraintStart_toStartOf="@+id/RegisterNewStation"
-      app:layout_constraintTop_toBottomOf="@+id/RegisterNewStation" />
+      android:layout_marginStart="8dp"
+      android:layout_marginEnd="8dp"
+      android:background="@drawable/orange"
+      android:text="Return"
+      android:textColor="@color/white"
+      app:layout_constraintBottom_toBottomOf="@+id/RegisterNewStation"
+      app:layout_constraintEnd_toEndOf="@+id/imageView11"
+      app:layout_constraintHorizontal_bias="1.0"
+      app:layout_constraintStart_toStartOf="@+id/guideline4"
+      app:layout_constraintTop_toTopOf="@+id/RegisterNewStation" />
 
   <Button
       android:id="@+id/RegisterNewStation"
-      android:layout_width="wrap_content"
+      android:layout_width="0dp"
       android:layout_height="wrap_content"
-      android:layout_marginTop="92dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="32dp"
+      android:layout_marginEnd="8dp"
+      android:background="@drawable/orange"
       android:text="Register"
-      android:textColor="#253D85"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="0.501"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/stationRegisterStationAddress" />
+      android:textColor="@color/white"
+      app:layout_constraintEnd_toStartOf="@+id/guideline4"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintStart_toStartOf="@+id/imageView11"
+      app:layout_constraintTop_toBottomOf="@+id/BrandForRegister" />
 
   <TextView
       android:id="@+id/Title"
-      android:layout_width="280dp"
-      android:layout_height="100dp"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="32dp"
+      android:layout_marginTop="32dp"
+      android:layout_marginEnd="32dp"
+      android:background="@drawable/orange"
       android:shadowDx="5"
       android:shadowDy="5"
       android:text="Gasoline Station Account"
       android:textAlignment="center"
-      android:textColor="@color/primaryColor"
+      android:textColor="@color/white"
       android:textSize="35sp"
-      app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintHorizontal_bias="0.496"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      app:layout_constraintVertical_bias="0.071" />
-
-  <TextView
-      android:id="@+id/text1"
-      android:layout_width="0dp"
-      android:layout_height="28dp"
-      android:text="Name:"
-      android:textAlignment="viewEnd"
-      android:textColor="@color/primaryColor"
-      android:textSize="20dp"
-      app:layout_constraintBottom_toBottomOf="@+id/stationRegisterName"
-      app:layout_constraintEnd_toStartOf="@+id/guideline2"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="@+id/stationRegisterName" />
-
-  <TextView
-      android:id="@+id/text3"
-      android:layout_width="0dp"
-      android:layout_height="33dp"
-      android:text="Email:"
-      android:textAlignment="viewEnd"
-      android:textColor="@color/primaryColor"
-      android:textSize="20dp"
-      app:layout_constraintBottom_toBottomOf="@+id/stationRegisterEmail"
-      app:layout_constraintEnd_toStartOf="@+id/guideline2"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="@+id/stationRegisterEmail" />
-
-  <TextView
-      android:id="@+id/text4"
-      android:layout_width="0dp"
-      android:layout_height="33dp"
-      android:text="Password:"
-      android:textAlignment="viewEnd"
-      android:textColor="@color/primaryColor"
-      android:textSize="20dp"
-      app:layout_constraintBottom_toBottomOf="@+id/stationRegisterPassword"
-      app:layout_constraintEnd_toStartOf="@+id/guideline2"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="@+id/stationRegisterPassword" />
-
-  <androidx.constraintlayout.widget.Guideline
-      android:id="@+id/guideline2"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:orientation="vertical"
-      app:layout_constraintGuide_begin="136dp" />
-
-  <EditText
-      android:id="@+id/stationRegisterName"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginStart="12dp"
-      android:layout_marginTop="24dp"
-      android:autofillHints=""
-      android:backgroundTint="@color/primaryColor"
-      android:ems="10"
-      android:hint="Display Name"
-      android:inputType="textPersonName"
-      android:minHeight="40dp"
-      android:textColor="@color/textColor"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="0.0"
-      app:layout_constraintStart_toEndOf="@+id/text1"
-      app:layout_constraintTop_toBottomOf="@+id/Title" />
-
-  <EditText
-      android:id="@+id/stationRegisterEmail"
-      android:layout_width="wrap_content"
-      android:layout_height="48dp"
-      android:layout_marginTop="16dp"
-      android:autofillHints=""
-      android:backgroundTint="@color/primaryColor"
-      android:ems="10"
-      android:hint="Login Email"
-      android:inputType="textEmailAddress"
-      android:minHeight="40dp"
-      android:textColor="@color/textColor"
-      app:layout_constraintEnd_toEndOf="@+id/stationRegisterName"
-      app:layout_constraintHorizontal_bias="0.0"
-      app:layout_constraintStart_toStartOf="@+id/stationRegisterName"
-      app:layout_constraintTop_toBottomOf="@+id/stationRegisterName" />
-
-  <EditText
-      android:id="@+id/stationRegisterPassword"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="12dp"
-      android:autofillHints=""
-      android:backgroundTint="@color/primaryColor"
-      android:ems="10"
-      android:hint="Login Password"
-      android:inputType="textPassword"
-      android:minHeight="40dp"
-      android:textColor="@color/textColor"
-      app:layout_constraintEnd_toEndOf="@+id/stationRegisterEmail"
-      app:layout_constraintHorizontal_bias="1.0"
-      app:layout_constraintStart_toStartOf="@+id/stationRegisterEmail"
-      app:layout_constraintTop_toBottomOf="@+id/stationRegisterEmail" />
+      app:layout_constraintTop_toTopOf="parent" />
 
   <Spinner
       android:id="@+id/BrandForRegister"
       android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:layout_marginStart="16dp"
+      android:background="@drawable/orange"
+      android:paddingStart="10dp"
+      android:paddingEnd="10dp"
+      android:verticalScrollbarPosition="right"
+      app:layout_constraintBottom_toBottomOf="@+id/text9"
+      app:layout_constraintEnd_toEndOf="@+id/stationRegisterStationAddress"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintStart_toEndOf="@+id/text9"
+      app:layout_constraintTop_toTopOf="@+id/text9"
+      app:layout_constraintVertical_bias="0.0" />
+
+  <EditText
+      android:id="@+id/stationRegisterName"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="16dp"
+      android:autofillHints=""
+      android:background="@drawable/orange"
+      android:ems="10"
+      android:hint="Display Name"
+      android:inputType="textPersonName"
+      android:minHeight="40dp"
+      android:paddingStart="10dp"
+      android:paddingEnd="10dp"
+      android:textColor="@color/white"
+      android:textColorLink="@color/white"
+      app:layout_constraintEnd_toEndOf="@+id/imageView11"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintStart_toStartOf="@+id/text1"
+      app:layout_constraintTop_toBottomOf="@+id/text1" />
+
+  <EditText
+      android:id="@+id/stationRegisterEmail"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:autofillHints=""
+      android:background="@drawable/orange"
+      android:ems="10"
+      android:hint="Login Email"
+      android:inputType="textEmailAddress"
+      android:minHeight="40dp"
+      android:paddingStart="10dp"
+      android:paddingEnd="10dp"
+      android:textColor="@color/white"
+      android:textColorLink="@color/white"
+      app:layout_constraintEnd_toEndOf="@+id/stationRegisterName"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintStart_toStartOf="@+id/stationRegisterName"
+      app:layout_constraintTop_toBottomOf="@+id/text3" />
+
+  <EditText
+      android:id="@+id/stationRegisterPassword"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:autofillHints=""
+      android:background="@drawable/orange"
+      android:ems="10"
+      android:hint="Login Password"
+      android:inputType="textPassword"
+      android:minHeight="40dp"
+      android:paddingStart="10dp"
+      android:paddingEnd="10dp"
+      android:textColor="@color/white"
+      android:textColorLink="@color/white"
+      app:layout_constraintEnd_toEndOf="@+id/stationRegisterEmail"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintStart_toStartOf="@+id/stationRegisterEmail"
+      app:layout_constraintTop_toBottomOf="@+id/text4" />
+
+  <EditText
+      android:id="@+id/stationRegisterStationName"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:autofillHints=""
+      android:background="@drawable/orange"
+      android:ems="10"
+      android:hint="Station Name"
+      android:inputType="textPersonName"
+      android:minHeight="40dp"
+      android:paddingStart="10dp"
+      android:paddingEnd="10dp"
+      android:textColor="@color/white"
+      android:textColorLink="@color/white"
+      app:layout_constraintEnd_toEndOf="@+id/stationRegisterPassword"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintStart_toStartOf="@+id/stationRegisterPassword"
+      app:layout_constraintTop_toBottomOf="@+id/text8" />
+
+  <EditText
+      android:id="@+id/stationRegisterStationAddress"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:autofillHints=""
+      android:background="@drawable/orange"
+      android:ems="10"
+      android:hint="Station Address"
+      android:inputType="textPostalAddress"
+      android:minHeight="40dp"
+      android:paddingStart="10dp"
+      android:paddingEnd="10dp"
+      android:textColor="@color/white"
+      android:textColorLink="@color/white"
+      app:layout_constraintEnd_toEndOf="@+id/stationRegisterStationName"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintStart_toStartOf="@+id/stationRegisterStationName"
+      app:layout_constraintTop_toBottomOf="@+id/text5" />
+
+  <TextView
+      android:id="@+id/text1"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="16dp"
+      android:layout_marginTop="32dp"
+      android:text="Display Name:"
+      android:textAlignment="viewEnd"
+      android:textColor="@color/primaryColor"
+      android:textSize="20dp"
+      app:layout_constraintStart_toStartOf="@+id/imageView11"
+      app:layout_constraintTop_toBottomOf="@+id/imageView10" />
+
+  <TextView
+      android:id="@+id/text3"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:text="Email:"
+      android:textAlignment="viewEnd"
+      android:textColor="@color/primaryColor"
+      android:textSize="20dp"
+      app:layout_constraintStart_toStartOf="@+id/text1"
+      app:layout_constraintTop_toBottomOf="@+id/stationRegisterName" />
+
+  <TextView
+      android:id="@+id/text4"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:text="Password:"
+      android:textAlignment="viewEnd"
+      android:textColor="@color/primaryColor"
+      android:textSize="20dp"
+      app:layout_constraintStart_toStartOf="@+id/text3"
+      app:layout_constraintTop_toBottomOf="@+id/stationRegisterEmail" />
+
+  <TextView
+      android:id="@+id/text8"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:text="Gas Station Name:"
+      android:textAlignment="viewEnd"
+      android:textColor="@color/primaryColor"
+      android:textSize="20dp"
+      app:layout_constraintStart_toStartOf="@+id/text4"
+      app:layout_constraintTop_toBottomOf="@+id/stationRegisterPassword" />
+
+  <TextView
+      android:id="@+id/text5"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:text="Gas Station Address:"
+      android:textAlignment="viewEnd"
+      android:textColor="@color/primaryColor"
+      android:textSize="20dp"
+      app:layout_constraintStart_toStartOf="@+id/text8"
+      app:layout_constraintTop_toBottomOf="@+id/stationRegisterStationName" />
+
+  <TextView
+      android:id="@+id/text9"
+      android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginTop="16dp"
-      android:backgroundTint="@color/primaryColor"
-      android:verticalScrollbarPosition="right"
-      app:layout_constraintEnd_toEndOf="@+id/stationRegisterStationAddress"
-      app:layout_constraintStart_toStartOf="@+id/stationRegisterStationAddress"
+      android:text="Brand:"
+      android:textAlignment="viewEnd"
+      android:textColor="@color/primaryColor"
+      android:textSize="20dp"
+      app:layout_constraintStart_toStartOf="@+id/text5"
       app:layout_constraintTop_toBottomOf="@+id/stationRegisterStationAddress" />
+
+  <androidx.constraintlayout.widget.Guideline
+      android:id="@+id/guideline4"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      app:layout_constraintGuide_percent=".5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

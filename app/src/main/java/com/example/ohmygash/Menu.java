@@ -7,8 +7,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -24,7 +26,9 @@ public class Menu extends AppCompatActivity {
     DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Users");
 
     TextView Name,Email;
-    Button Autoshops,Stations,Map,Logout,Inventory,Profile,Favorites;
+    Button Autoshops,Stations,Map,Logout,Inventory,Profile,Favorites,Reports;
+    ImageView InventoryBG, ReportsBG, InventoryPhoto, ReportsPhoto;
+    FloatingActionButton Tutorial;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +42,14 @@ public class Menu extends AppCompatActivity {
         Favorites = findViewById(R.id.GoToFavoritesButton);
         Profile = findViewById(R.id.GoToProfile);
         Inventory = findViewById(R.id.GoToInventory);
+        InventoryBG = findViewById(R.id.InventoryBG);
+        InventoryPhoto = findViewById(R.id.InventoryPhoto);
         Logout = findViewById(R.id.LogoutButton);
         Map = findViewById(R.id.GoToMapButton);
+        Tutorial = findViewById(R.id.MenuTutorialButton);
+        Reports = findViewById(R.id.GoToReports);
+        ReportsBG = findViewById(R.id.ReportsBG);
+        ReportsPhoto = findViewById(R.id.ReportsPhoto);
 
         FBAuth = FirebaseAuth.getInstance();
         FBUser = FBAuth.getCurrentUser();
@@ -90,6 +100,13 @@ public class Menu extends AppCompatActivity {
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         });
+
+        Tutorial.setOnClickListener(view->{
+            Intent intent = new Intent(Menu.this, Tutorial1.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.putExtra("Tutorial",2);
+            startActivity(intent);
+        });
     }
 
     public void UpdateUI(FirebaseUser currentuser){
@@ -97,17 +114,37 @@ public class Menu extends AppCompatActivity {
                @Override
                public void onDataChange(@NonNull DataSnapshot snapshot) {
                    DataSnapshot user = snapshot.child(currentuser.getUid());
+                   if (user.child("Tutorial2").getValue() == null){
+                       Intent intent = new Intent(Menu.this, Tutorial1.class);
+                       intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                       intent.putExtra("Tutorial",2);
+                       startActivity(intent);
+                   }
                    Name.setText(user.child("name").getValue().toString());
                    Email.setText(currentuser.getEmail());
                    String accType = user.child("accType").getValue().toString();
                    if (!accType.matches("General")){
                        Inventory.setVisibility(View.VISIBLE);
+                       InventoryBG.setVisibility(View.VISIBLE);
+                       InventoryPhoto.setVisibility(View.VISIBLE);
+                       Inventory.setEnabled(true);
                        if (accType.matches("Admin")){
-                           Inventory.setText("Manage Verification Requests");
+                           Inventory.setText("Accounts and Verification");
+                           InventoryPhoto.setImageDrawable(getDrawable(R.drawable.reports));
                            Inventory.setOnClickListener(view->{
                                Intent intent = new Intent(Menu.this,LocatePlace.class);
                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                intent.putExtra("AccountTypeToLocate","Requests");
+                               startActivity(intent);
+                           });
+                           Reports.setVisibility(View.VISIBLE);
+                           ReportsBG.setVisibility(View.VISIBLE);
+                           ReportsPhoto.setVisibility(View.VISIBLE);
+                           Reports.setEnabled(true);
+                           Reports.setOnClickListener(view->{
+                               Intent intent = new Intent(Menu.this,LocatePlace.class);
+                               intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                               intent.putExtra("AccountTypeToLocate","Account Reports");
                                startActivity(intent);
                            });
                        }else{

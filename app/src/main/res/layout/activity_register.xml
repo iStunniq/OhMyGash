@@ -7,26 +7,58 @@
     android:background="@drawable/background"
     tools:context=".Login">
 
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="-16dp"
+        android:layout_marginTop="-24dp"
+        android:layout_marginEnd="-16dp"
+        android:layout_marginBottom="-16dp"
+        android:background="@drawable/blue"
+        app:layout_constraintBottom_toBottomOf="@+id/Title"
+        app:layout_constraintEnd_toEndOf="@+id/Title"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/Title"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="-32dp"
+        app:layout_constraintBottom_toBottomOf="@+id/StationToRegister"
+        app:layout_constraintEnd_toEndOf="@+id/imageView6"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/imageView6"
+        app:layout_constraintTop_toBottomOf="@+id/imageView6"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/blue" />
+
     <Button
         android:id="@+id/GeneralRegister"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="68dp"
-        android:layout_marginEnd="50dp"
-        android:text="Regular Account"
-        android:textColor="#253D85"
-        app:layout_constraintEnd_toEndOf="@+id/Title"
-        app:layout_constraintStart_toStartOf="@+id/Title"
-        app:layout_constraintTop_toBottomOf="@+id/Title" />
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/orange"
+        android:text="Regular Account:\nAccounts for General Use"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="@+id/imageView7"
+        app:layout_constraintStart_toEndOf="@+id/GeneralFloating"
+        app:layout_constraintTop_toBottomOf="@+id/imageView6" />
 
     <Button
         android:id="@+id/AutoShopRegister"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Autoshop Account"
-        android:textColor="#253D85"
+        android:background="@drawable/orange"
+        android:text="Autoshop Account:\nFor Autoshops looking to showcase their products and services"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="@+id/GeneralRegister"
         app:layout_constraintHorizontal_bias="0.529"
         app:layout_constraintStart_toStartOf="@+id/GeneralRegister"
@@ -36,9 +68,10 @@
         android:id="@+id/StationRegister"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:text="Gas Station Account"
-        android:textColor="#253D85"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/orange"
+        android:text="Gas Station Account:\nfor Gas Stations looking to provide gas prices, products and services"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="@+id/AutoShopRegister"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/AutoShopRegister"
@@ -48,33 +81,74 @@
         android:id="@+id/StationToRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/orange"
         android:text="Go Back"
-        android:textColor="#253D85"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/StationRegister"
-        app:layout_constraintHorizontal_bias="0.514"
-        app:layout_constraintStart_toStartOf="@+id/StationRegister"
-        app:layout_constraintTop_toBottomOf="@+id/StationRegister"
-        app:layout_constraintVertical_bias="0.46" />
+        app:layout_constraintEnd_toEndOf="@+id/imageView7"
+        app:layout_constraintStart_toStartOf="@+id/imageView7"
+        app:layout_constraintTop_toBottomOf="@+id/StationRegister" />
 
     <TextView
         android:id="@+id/Title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
+        android:background="@drawable/orange"
         android:shadowDx="5"
         android:shadowDy="5"
         android:shadowRadius="5"
         android:text="Select Account Type To Register"
         android:textAlignment="center"
-        android:textColor="@color/primaryColor"
+        android:textColor="@color/white"
         android:textSize="40sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.16000003" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/GeneralFloating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:clickable="true"
+        android:scaleX="1.5"
+        android:scaleY="1.5"
+        app:layout_constraintBottom_toBottomOf="@+id/GeneralRegister"
+        app:layout_constraintStart_toStartOf="@+id/imageView7"
+        app:layout_constraintTop_toTopOf="@+id/GeneralRegister"
+        app:srcCompat="@drawable/person"
+        tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/AutoshopFloating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:scaleX="1.5"
+        android:scaleY="1.5"
+        app:layout_constraintBottom_toBottomOf="@+id/AutoShopRegister"
+        app:layout_constraintEnd_toEndOf="@+id/GeneralFloating"
+        app:layout_constraintStart_toStartOf="@+id/GeneralFloating"
+        app:layout_constraintTop_toTopOf="@+id/AutoShopRegister"
+        app:srcCompat="@drawable/services"
+        tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/StationFloating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:scaleX="1.5"
+        android:scaleY="1.5"
+        app:layout_constraintBottom_toBottomOf="@+id/StationRegister"
+        app:layout_constraintEnd_toEndOf="@+id/AutoshopFloating"
+        app:layout_constraintStart_toStartOf="@+id/AutoshopFloating"
+        app:layout_constraintTop_toTopOf="@+id/StationRegister"
+        app:srcCompat="@drawable/gasicon"
+        tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
