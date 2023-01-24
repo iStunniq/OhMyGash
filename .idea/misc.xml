@@ -7,25 +7,27 @@
         <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/drawable-v24/orange.xml" value="0.1325" />
         <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/drawable-v24/orange_bordered.xml" value="0.2115" />
         <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/drawable/blue.xml" value="0.2115" />
+        <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/drawable/white.xml" value="0.2115" />
         <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/drawable/white_banner_background.xml" value="0.2115" />
-        <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/layout/activity_add_new_item.xml" value="0.33" />
-        <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/layout/activity_autoshop_register.xml" value="0.33" />
-        <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/layout/activity_filter.xml" value="0.33" />
-        <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/layout/activity_general_register.xml" value="0.25" />
-        <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/layout/activity_locate_place.xml" value="0.33" />
-        <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/layout/activity_main.xml" value="0.33" />
-        <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/layout/activity_manage_inventory.xml" value="0.33" />
-        <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/layout/activity_map.xml" value="0.33" />
-        <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/layout/activity_menu.xml" value="0.5" />
-        <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/layout/activity_my_profile.xml" value="0.30173775671406006" />
-        <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/layout/activity_place_profile.xml" value="0.33" />
+        <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/layout/activity_add_new_item.xml" value="0.22" />
+        <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/layout/activity_autoshop_register.xml" value="0.25" />
+        <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/layout/activity_filter.xml" value="0.21025901472828848" />
+        <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/layout/activity_general_register.xml" value="0.22" />
+        <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/layout/activity_locate_place.xml" value="0.21025901472828848" />
+        <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/layout/activity_main.xml" value="0.1592920353982301" />
+        <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/layout/activity_manage_inventory.xml" value="0.2" />
+        <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/layout/activity_map.xml" value="0.3368592351505289" />
+        <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/layout/activity_menu.xml" value="0.33" />
+        <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/layout/activity_my_profile.xml" value="0.21025901472828848" />
+        <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/layout/activity_place_profile.xml" value="0.1592920353982301" />
         <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/layout/activity_register.xml" value="0.33" />
-        <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/layout/activity_request_page.xml" value="0.33" />
+        <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/layout/activity_request_page.xml" value="0.1592920353982301" />
         <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/layout/activity_station_register.xml" value="0.33" />
         <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/layout/activity_tutorial1.xml" value="0.25" />
-        <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/layout/activity_view_place.xml" value="0.33" />
-        <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/layout/activity_view_report.xml" value="0.33" />
+        <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/layout/activity_view_place.xml" value="0.21025901472828848" />
+        <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/layout/activity_view_report.xml" value="0.25" />
         <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/layout/activity_workshop_register.xml" value="0.33" />
+        <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/layout/asddd.xml" value="0.5" />
         <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/layout/fragment_blank.xml" value="0.142578125" />
         <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/layout/fragment_manage_gasoline.xml" value="0.25" />
         <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/layout/fragment_manage_products.xml" value="0.20416666666666666" />

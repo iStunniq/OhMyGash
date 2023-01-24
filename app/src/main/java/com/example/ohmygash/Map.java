@@ -14,7 +14,9 @@ import android.os.SystemClock;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -92,9 +94,9 @@ public class Map extends FragmentActivity implements OnMapReadyCallback, Routing
     List<Address> addresses;
 
     private EditText Searchbox;
-    private Button Search, Directions, NearestAuto, NearestStat, Menu, MarkerButton, RouteType, Track, Buttons;
-    private FloatingActionButton Tutorial;
-    private ImageView ButtonsBackground;
+    private Button Directions, NearestAuto, NearestStat, MarkerButton, RouteType, Track;
+    private FloatingActionButton Tutorial, Search, Menu, Buttons;
+    private HorizontalScrollView ButtonsScrollView;
     private TextView DistanceToDestination;
     private String UserKeyToLocate, MarkerUserId;
     private AbstractRouting.TravelMode RouteTyping;
@@ -123,7 +125,7 @@ public class Map extends FragmentActivity implements OnMapReadyCallback, Routing
         MarkerButton = findViewById(R.id.GoToMarker);
         RouteType = findViewById(R.id.RouteTyping);
         Buttons = findViewById(R.id.ButtonForButtons);
-        ButtonsBackground = findViewById(R.id.ButtonsBackground);
+        ButtonsScrollView = findViewById(R.id.ButtonsScrollView);
         Tutorial = findViewById(R.id.MapTutorialButton);
 
         FBAuth = FirebaseAuth.getInstance();
@@ -200,26 +202,26 @@ public class Map extends FragmentActivity implements OnMapReadyCallback, Routing
         });
 
         RouteType.setOnClickListener(view -> {
-            if (RouteType.getText().toString().matches("Routing Type: DRIVING")) {
-                RouteType.setText("Routing Type: WALKING");
+            if (RouteType.getText().toString().matches("Type: DRIVING")) {
+                RouteType.setText("Type: WALKING");
                 RouteTyping = AbstractRouting.TravelMode.WALKING;
             } else {
-                RouteType.setText("Routing Type: DRIVING");
+                RouteType.setText("Type: DRIVING");
                 RouteTyping = AbstractRouting.TravelMode.DRIVING;
             }
         });
 
         Buttons.setOnClickListener(view -> {
-            if (Buttons.getText().toString().matches("Hide Options")) {
-                closebuttons();
-            } else {
+            if (Buttons.getRotation() == 180) {
                 openbuttons();
+            } else {
+                closebuttons();
             }
         });
 
         Track.setOnClickListener(view -> {
-            closebuttons();
-            if (Track.getText().toString().matches("Follow Current Location")) {
+
+            if (Track.getText().toString().matches("Track Self")) {
                 if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_REQUEST_CODE);
                     return;
@@ -228,10 +230,10 @@ public class Map extends FragmentActivity implements OnMapReadyCallback, Routing
                 LocationRequest mTrackRequest = new LocationRequest.Builder(PRIORITY_HIGH_ACCURACY,2000).build();
 
                 mFusedLocationClient.requestLocationUpdates(mTrackRequest, mTrackCallback, Looper.myLooper());
-                Track.setText("Stop Following Current Location");
+                Track.setText("Stop Tracking");
             } else {
                 mFusedLocationClient.removeLocationUpdates(mTrackCallback);
-                Track.setText("Follow Current Location");
+                Track.setText("Track Self");
             }
         });
 
@@ -239,8 +241,8 @@ public class Map extends FragmentActivity implements OnMapReadyCallback, Routing
             requestPermision();
             geocoder = new Geocoder(this,Locale.getDefault());
             mMap.clear();
-            closebuttons();
-            if (Directions.getText().toString().matches("Get Directions")) {
+
+            if (Directions.getText().toString().matches("Directions")) {
                 mFusedLocationClient.removeLocationUpdates(mLocationCallback);
                 mFusedLocationClient.removeLocationUpdates(mDirectionsCallback);
                 try {
@@ -268,17 +270,18 @@ public class Map extends FragmentActivity implements OnMapReadyCallback, Routing
                     e.printStackTrace();
                 }
             } else {
-                Directions.setText("Get Directions");
+                Directions.setText("Directions");
                 mFusedLocationClient.removeLocationUpdates(mLocationCallback);
                 mFusedLocationClient.removeLocationUpdates(mDirectionsCallback);
                 DistanceToDestination.setText("");
+                DistanceToDestination.setVisibility(View.INVISIBLE);
             }
         });
 
         NearestAuto.setOnClickListener(view -> {
             mMap.clear();
             requestPermision();
-            closebuttons();
+
             userRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -295,7 +298,7 @@ public class Map extends FragmentActivity implements OnMapReadyCallback, Routing
         NearestStat.setOnClickListener(view -> {
             mMap.clear();
             requestPermision();
-            closebuttons();
+
             userRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -662,6 +665,7 @@ public class Map extends FragmentActivity implements OnMapReadyCallback, Routing
                     distance += locStart.distanceTo(locEnd);
                 }
                 DistanceToDestination.setText("Distance: "+distance+" meters");
+                DistanceToDestination.setVisibility(View.VISIBLE);
             }
             else {
             }
@@ -687,24 +691,12 @@ public class Map extends FragmentActivity implements OnMapReadyCallback, Routing
     }
 
     private void closebuttons(){
-        Buttons.setText("More Options");
-        RouteType.setVisibility(View.GONE);
-        Directions.setVisibility(View.GONE);
-        Track.setVisibility(View.GONE);
-        NearestAuto.setVisibility(View.GONE);
-        NearestStat.setVisibility(View.GONE);
-        MarkerButton.setVisibility(View.GONE);
-        ButtonsBackground.setVisibility(View.GONE);
+        Buttons.setRotation(180);
+        ButtonsScrollView.setVisibility(View.GONE);
     }
     private void openbuttons(){
-        Buttons.setText("Hide Options");
-        RouteType.setVisibility(View.VISIBLE);
-        Directions.setVisibility(View.VISIBLE);
-        Track.setVisibility(View.VISIBLE);
-        NearestAuto.setVisibility(View.VISIBLE);
-        NearestStat.setVisibility(View.VISIBLE);
-        MarkerButton.setVisibility(View.VISIBLE);
-        ButtonsBackground.setVisibility(View.VISIBLE);
+        Buttons.setRotation(0);
+        ButtonsScrollView.setVisibility(View.VISIBLE);
     }
 
 }

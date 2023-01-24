@@ -1,499 +1,338 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
-    android:scrollbars="vertical"
-    tools:context=".Menu">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
+    android:background="@drawable/ic_launcher_background"
+    android:backgroundTint="#0E85BA">
+
+    <ImageView
+        android:id="@+id/imageView43"
+        android:layout_width="3000dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.45"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline12"
+        app:srcCompat="@drawable/gasimage" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline12"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent">
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".3" />
 
-        <ImageView
-            android:id="@+id/imageView14"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="-25dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="-16dp"
-            android:background="@drawable/orange"
-            app:layout_constraintBottom_toBottomOf="@+id/MenuEmailTextView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
+    <ScrollView
+        android:id="@+id/scrollView5"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        tools:context=".Menu">
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/MenuTutorialButton"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:clickable="true"
-            android:scaleX=".75
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imageView14"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="-25dp"
+                android:layout_marginBottom="-16dp"
+                android:background="@drawable/blue"
+                app:layout_constraintBottom_toBottomOf="@+id/MenuEmailTextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <ImageView
+                android:id="@+id/imageView15"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="-16dp"
+                android:background="@drawable/orange_bordered"
+                app:layout_constraintBottom_toBottomOf="@+id/LogoutText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView14" />
+
+            <ImageView
+                android:id="@+id/imageView16"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="-8dp"
+                android:layout_marginTop="-8dp"
+                android:layout_marginEnd="-8dp"
+                android:layout_marginBottom="-8dp"
+                android:background="@drawable/white"
+                app:layout_constraintBottom_toBottomOf="@+id/MenuEmailTextView"
+                app:layout_constraintEnd_toEndOf="@+id/MenuNameTextView"
+                app:layout_constraintStart_toStartOf="@+id/MenuNameTextView"
+                app:layout_constraintTop_toTopOf="@+id/MenuNameTextView" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/MenuTutorialButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:clickable="true"
+                android:scaleX=".75
 "
-            android:scaleY=".75"
-            android:src="@android:drawable/ic_menu_help"
-            app:backgroundTint="@color/primaryDarkColor"
-            app:layout_constraintEnd_toEndOf="@+id/imageView14"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="SpeakableTextPresentCheck" />
+                android:scaleY=".75"
+                android:src="@android:drawable/ic_menu_help"
+                app:backgroundTint="@color/primaryDarkColor"
+                app:layout_constraintEnd_toEndOf="@+id/imageView14"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="SpeakableTextPresentCheck" />
 
-        <ImageView
-            android:id="@+id/imageView15"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="-8dp"
-            android:layout_marginTop="-8dp"
-            android:layout_marginEnd="-8dp"
-            android:layout_marginBottom="-8dp"
-            android:background="@drawable/blue"
-            app:layout_constraintBottom_toBottomOf="@+id/GoToMapButton"
-            app:layout_constraintEnd_toEndOf="@+id/imageView16"
-            app:layout_constraintStart_toStartOf="@+id/imageView16"
-            app:layout_constraintTop_toTopOf="@+id/imageView16" />
+            <TextView
+                android:id="@+id/MenuNameTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:text="Loading..."
+                android:textAlignment="textStart"
+                android:textColor="@color/black"
+                android:textColorHint="@color/white"
+                android:textSize="30sp"
+                app:layout_constraintEnd_toEndOf="@+id/imageView14"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/imageView14"
+                app:layout_constraintTop_toBottomOf="@+id/MenuTutorialButton" />
 
-        <ImageView
-            android:id="@+id/imageView18"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="-8dp"
-            android:layout_marginTop="-8dp"
-            android:layout_marginEnd="-8dp"
-            android:layout_marginBottom="-8dp"
-            android:background="@drawable/blue"
-            app:layout_constraintBottom_toBottomOf="@+id/GoToAutoShopsButton"
-            app:layout_constraintEnd_toEndOf="@+id/imageView17"
-            app:layout_constraintStart_toStartOf="@+id/imageView17"
-            app:layout_constraintTop_toTopOf="@+id/imageView17" />
+            <TextView
+                android:id="@+id/MenuEmailTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Please wait."
+                android:textAlignment="textStart"
+                android:textColor="@color/black"
+                android:textColorHint="@color/white"
+                android:textSize="17.5sp"
+                app:layout_constraintEnd_toEndOf="@+id/MenuNameTextView"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/MenuNameTextView"
+                app:layout_constraintTop_toBottomOf="@+id/MenuNameTextView" />
 
-        <ImageView
-            android:id="@+id/imageView20"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="-8dp"
-            android:layout_marginTop="-8dp"
-            android:layout_marginEnd="-8dp"
-            android:layout_marginBottom="-8dp"
-            android:background="@drawable/blue"
-            app:layout_constraintBottom_toBottomOf="@+id/GoToStationsButton"
-            app:layout_constraintEnd_toEndOf="@+id/imageView19"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/imageView19"
-            app:layout_constraintTop_toTopOf="@+id/imageView19"
-            app:layout_constraintVertical_bias="1.0" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
 
-        <ImageView
-            android:id="@+id/imageView23"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="-8dp"
-            android:layout_marginTop="-8dp"
-            android:layout_marginEnd="-8dp"
-            android:layout_marginBottom="-8dp"
-            android:background="@drawable/blue"
-            app:layout_constraintBottom_toBottomOf="@+id/GoToStationsButton"
-            app:layout_constraintEnd_toEndOf="@+id/imageView19"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/imageView19"
-            app:layout_constraintTop_toTopOf="@+id/imageView19"
-            app:layout_constraintVertical_bias="1.0" />
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/GoToMapButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="48dp"
+                android:layout_marginEnd="20dp"
+                android:clickable="true"
+                app:backgroundTint="@color/white"
+                app:fabCustomSize="60dp"
+                app:layout_constraintEnd_toEndOf="@+id/imageView15"
+                app:layout_constraintHorizontal_bias="0.1"
+                app:layout_constraintStart_toStartOf="@+id/imageView15"
+                app:layout_constraintTop_toBottomOf="@+id/imageView14"
+                app:maxImageSize="35dp"
+                app:srcCompat="@drawable/mapicon" />
 
-        <ImageView
-            android:id="@+id/imageView22"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="-8dp"
-            android:layout_marginTop="-8dp"
-            android:layout_marginEnd="-8dp"
-            android:layout_marginBottom="-8dp"
-            android:background="@drawable/blue"
-            app:layout_constraintBottom_toBottomOf="@+id/GoToFavoritesButton"
-            app:layout_constraintEnd_toEndOf="@+id/imageView21"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/imageView21"
-            app:layout_constraintTop_toTopOf="@+id/imageView21"
-            app:layout_constraintVertical_bias="1.0" />
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/GoToAutoShopsButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                app:backgroundTint="@color/white"
+                app:fabCustomSize="60dp"
+                app:layout_constraintEnd_toEndOf="@+id/imageView15"
+                app:layout_constraintHorizontal_bias="0.37"
+                app:layout_constraintStart_toStartOf="@+id/imageView15"
+                app:layout_constraintTop_toTopOf="@+id/GoToMapButton"
+                app:maxImageSize="35dp"
+                app:srcCompat="@drawable/services" />
 
-        <ImageView
-            android:id="@+id/imageView25"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="-8dp"
-            android:layout_marginTop="-8dp"
-            android:layout_marginEnd="-8dp"
-            android:layout_marginBottom="-8dp"
-            android:background="@drawable/blue"
-            app:layout_constraintBottom_toBottomOf="@+id/GoToProfile"
-            app:layout_constraintEnd_toEndOf="@+id/imageView24"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/imageView24"
-            app:layout_constraintTop_toTopOf="@+id/imageView24"
-            app:layout_constraintVertical_bias="1.0" />
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/GoToStationsButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:clickable="true"
+                app:backgroundTint="@color/white"
+                app:fabCustomSize="60dp"
+                app:layout_constraintEnd_toEndOf="@+id/imageView15"
+                app:layout_constraintHorizontal_bias="0.63"
+                app:layout_constraintStart_toStartOf="@+id/imageView15"
+                app:layout_constraintTop_toTopOf="@+id/GoToAutoShopsButton"
+                app:maxImageSize="35dp"
+                app:srcCompat="@drawable/gasicon" />
 
-        <ImageView
-            android:id="@+id/InventoryBG"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="-8dp"
-            android:layout_marginTop="-8dp"
-            android:layout_marginEnd="-8dp"
-            android:layout_marginBottom="-8dp"
-            android:background="@drawable/blue"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="@+id/GoToInventory"
-            app:layout_constraintEnd_toEndOf="@+id/imageView24"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/imageView24"
-            app:layout_constraintTop_toTopOf="@+id/InventoryPhoto"
-            app:layout_constraintVertical_bias="1.0" />
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/GoToFavoritesButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:clickable="true"
+                app:backgroundTint="@color/white"
+                app:fabCustomSize="60dp"
+                app:layout_constraintEnd_toEndOf="@+id/imageView15"
+                app:layout_constraintHorizontal_bias="0.9"
+                app:layout_constraintStart_toStartOf="@+id/imageView15"
+                app:layout_constraintTop_toTopOf="@+id/GoToStationsButton"
+                app:maxImageSize="35dp"
+                app:srcCompat="@drawable/star" />
 
-        <ImageView
-            android:id="@+id/imageView27"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="-8dp"
-            android:layout_marginTop="-8dp"
-            android:layout_marginEnd="-8dp"
-            android:layout_marginBottom="-8dp"
-            android:background="@drawable/blue"
-            app:layout_constraintBottom_toBottomOf="@+id/LogoutButton"
-            app:layout_constraintEnd_toEndOf="@+id/imageView26"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/imageView26"
-            app:layout_constraintTop_toTopOf="@+id/imageView26"
-            app:layout_constraintVertical_bias="1.0" />
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/GoToProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:clickable="true"
+                app:backgroundTint="@color/white"
+                app:fabCustomSize="60dp"
+                app:layout_constraintEnd_toEndOf="@+id/GoToMapButton"
+                app:layout_constraintStart_toStartOf="@+id/GoToMapButton"
+                app:layout_constraintTop_toBottomOf="@+id/GoToMapButton"
+                app:maxImageSize="35dp"
+                app:srcCompat="@drawable/person" />
 
-        <ImageView
-            android:id="@+id/ReportsBG"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="-8dp"
-            android:layout_marginTop="-8dp"
-            android:layout_marginEnd="-8dp"
-            android:layout_marginBottom="-8dp"
-            android:background="@drawable/blue"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="@+id/GoToReports"
-            app:layout_constraintEnd_toEndOf="@+id/ReportsPhoto"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/ReportsPhoto"
-            app:layout_constraintTop_toTopOf="@+id/ReportsPhoto"
-            app:layout_constraintVertical_bias="0.0" />
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/LogoutButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:clickable="true"
+                app:backgroundTint="@color/white"
+                app:fabCustomSize="60dp"
+                app:layout_constraintEnd_toEndOf="@+id/GoToFavoritesButton"
+                app:layout_constraintStart_toStartOf="@+id/GoToFavoritesButton"
+                app:layout_constraintTop_toBottomOf="@+id/GoToFavoritesButton"
+                app:maxImageSize="35dp"
+                app:srcCompat="@drawable/logout" />
 
-        <TextView
-            android:id="@+id/MenuNameTextView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="8dp"
-            android:shadowDx="5"
-            android:shadowDy="5"
-            android:shadowRadius="5"
-            android:text="Loading..."
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            android:textSize="30sp"
-            app:layout_constraintEnd_toEndOf="@+id/imageView14"
-            app:layout_constraintStart_toStartOf="@+id/imageView14"
-            app:layout_constraintTop_toTopOf="parent" />
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/GoToInventory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:clickable="true"
+                android:visibility="gone"
+                app:backgroundTint="@color/white"
+                app:fabCustomSize="60dp"
+                app:layout_constraintEnd_toEndOf="@+id/GoToAutoShopsButton"
+                app:layout_constraintStart_toStartOf="@+id/GoToAutoShopsButton"
+                app:layout_constraintTop_toBottomOf="@+id/GoToAutoShopsButton"
+                app:maxImageSize="45dp"
+                app:srcCompat="@drawable/inventoryicon" />
 
-        <TextView
-            android:id="@+id/MenuEmailTextView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:shadowDx="5"
-            android:shadowDy="5"
-            android:shadowRadius="5"
-            android:text="Please wait."
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            android:textSize="17.5sp"
-            app:layout_constraintEnd_toEndOf="@+id/MenuNameTextView"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="@+id/MenuNameTextView"
-            app:layout_constraintTop_toBottomOf="@+id/MenuNameTextView" />
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/GoToReports"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:clickable="true"
+                android:visibility="gone"
+                app:backgroundTint="@color/white"
+                app:fabCustomSize="60dp"
+                app:layout_constraintEnd_toEndOf="@+id/GoToStationsButton"
+                app:layout_constraintStart_toStartOf="@+id/GoToStationsButton"
+                app:layout_constraintTop_toBottomOf="@+id/GoToStationsButton"
+                app:maxImageSize="35dp"
+                app:srcCompat="@drawable/reports" />
 
-        <Button
-            android:id="@+id/GoToMapButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:background="@drawable/orange_bordered"
-            android:insetTop="0dp"
-            android:insetBottom="0dp"
-            android:paddingStart="10dp"
-            android:paddingLeft="0dp"
-            android:paddingTop="0dp"
-            android:paddingEnd="10dp"
-            android:paddingRight="0dp"
-            android:paddingBottom="0dp"
-            android:text="Map"
-            android:textColor="@color/white"
-            app:layout_constraintEnd_toEndOf="@+id/imageView16"
-            app:layout_constraintStart_toStartOf="@+id/imageView16"
-            app:layout_constraintTop_toBottomOf="@+id/imageView16" />
+            <TextView
+                android:id="@+id/MapText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Map"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="@+id/GoToMapButton"
+                app:layout_constraintStart_toStartOf="@+id/GoToMapButton"
+                app:layout_constraintTop_toBottomOf="@+id/GoToMapButton" />
 
-        <Button
-            android:id="@+id/GoToAutoShopsButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            <TextView
+                android:id="@+id/AutoshopText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Autoshops"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="@+id/GoToAutoShopsButton"
+                app:layout_constraintStart_toStartOf="@+id/GoToAutoShopsButton"
+                app:layout_constraintTop_toBottomOf="@+id/GoToAutoShopsButton" />
 
-            android:layout_marginTop="4dp"
-            android:background="@drawable/orange"
-            android:paddingStart="10dp"
-            android:paddingLeft="0dp"
-            android:paddingTop="0dp"
-            android:paddingEnd="10dp"
-            android:paddingRight="0dp"
-            android:paddingBottom="0dp"
-            android:text="AutoShops"
-            app:layout_constraintEnd_toEndOf="@+id/imageView17"
-            app:layout_constraintHorizontal_bias="0.571"
-            app:layout_constraintStart_toStartOf="@+id/imageView17"
-            app:layout_constraintTop_toBottomOf="@+id/imageView17" />
+            <TextView
+                android:id="@+id/LogoutText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Logout"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="@+id/LogoutButton"
+                app:layout_constraintStart_toStartOf="@+id/LogoutButton"
+                app:layout_constraintTop_toBottomOf="@+id/LogoutButton" />
 
-        <Button
-            android:id="@+id/GoToStationsButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            <TextView
+                android:id="@+id/ReportsText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Reports"
+                android:textColor="@color/white"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@+id/GoToReports"
+                app:layout_constraintStart_toStartOf="@+id/GoToReports"
+                app:layout_constraintTop_toBottomOf="@+id/GoToReports" />
 
-            android:background="@drawable/orange"
-            android:paddingStart="10dp"
-            android:paddingLeft="0dp"
-            android:paddingTop="0dp"
-            android:paddingEnd="10dp"
-            android:paddingRight="0dp"
-            android:paddingBottom="0dp"
-            android:text="Gasoline\nStations"
-            app:layout_constraintEnd_toEndOf="@+id/imageView19"
-            app:layout_constraintHorizontal_bias="0.148"
-            app:layout_constraintStart_toStartOf="@+id/imageView19"
-            app:layout_constraintTop_toBottomOf="@+id/imageView19" />
+            <TextView
+                android:id="@+id/InventoryText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Inventory"
+                android:textColor="@color/white"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@+id/GoToInventory"
+                app:layout_constraintStart_toStartOf="@+id/GoToInventory"
+                app:layout_constraintTop_toBottomOf="@+id/GoToInventory" />
 
-        <Button
-            android:id="@+id/GoToFavoritesButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            <TextView
+                android:id="@+id/AccountText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Account"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="@+id/GoToProfile"
+                app:layout_constraintStart_toStartOf="@+id/GoToProfile"
+                app:layout_constraintTop_toBottomOf="@+id/GoToProfile" />
 
-            android:background="@drawable/orange"
-            android:paddingStart="10dp"
-            android:paddingLeft="0dp"
-            android:paddingTop="0dp"
-            android:paddingEnd="10dp"
-            android:paddingRight="0dp"
-            android:paddingBottom="0dp"
-            android:text="Favorite\nLocations"
-            app:layout_constraintEnd_toEndOf="@+id/imageView21"
-            app:layout_constraintStart_toStartOf="@+id/imageView21"
-            app:layout_constraintTop_toBottomOf="@+id/imageView21" />
+            <TextView
+                android:id="@+id/FavoriteText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Favorites"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="@+id/GoToFavoritesButton"
+                app:layout_constraintStart_toStartOf="@+id/GoToFavoritesButton"
+                app:layout_constraintTop_toBottomOf="@+id/GoToFavoritesButton" />
 
-        <Button
-            android:id="@+id/GoToInventory"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            <TextView
+                android:id="@+id/StationText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Stations"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="@+id/GoToStationsButton"
+                app:layout_constraintStart_toStartOf="@+id/GoToStationsButton"
+                app:layout_constraintTop_toBottomOf="@+id/GoToStationsButton" />
 
-            android:layout_marginTop="4dp"
-            android:background="@drawable/orange"
-            android:enabled="false"
-            android:paddingStart="10dp"
-            android:paddingLeft="0dp"
-            android:paddingTop="0dp"
-            android:paddingEnd="10dp"
-            android:paddingRight="0dp"
-            android:paddingBottom="0dp"
-            android:text="Manage Inventory"
-            android:visibility="invisible"
-            app:layout_constraintEnd_toEndOf="@+id/GoToProfile"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/GoToProfile"
-            app:layout_constraintTop_toBottomOf="@+id/InventoryPhoto" />
-
-        <Button
-            android:id="@+id/LogoutButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:background="@drawable/orange"
-            android:paddingStart="10dp"
-            android:paddingLeft="0dp"
-            android:paddingTop="0dp"
-            android:paddingEnd="10dp"
-            android:paddingRight="0dp"
-            android:paddingBottom="0dp"
-            android:text="Logout"
-            app:layout_constraintEnd_toEndOf="@+id/imageView26"
-            app:layout_constraintStart_toStartOf="@+id/imageView26"
-            app:layout_constraintTop_toBottomOf="@+id/imageView26" />
-
-        <Button
-            android:id="@+id/GoToProfile"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-
-            android:layout_marginTop="4dp"
-            android:background="@drawable/orange"
-            android:paddingStart="10dp"
-            android:paddingLeft="0dp"
-            android:paddingTop="0dp"
-            android:paddingEnd="10dp"
-            android:paddingRight="0dp"
-            android:paddingBottom="0dp"
-            android:text="My Account"
-            app:layout_constraintEnd_toEndOf="@+id/imageView24"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/imageView24"
-            app:layout_constraintTop_toBottomOf="@+id/imageView24" />
-
-        <Button
-            android:id="@+id/GoToReports"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-
-            android:layout_marginTop="4dp"
-            android:background="@drawable/orange"
-            android:enabled="false"
-            android:paddingStart="10dp"
-            android:paddingLeft="0dp"
-            android:paddingTop="0dp"
-            android:paddingEnd="10dp"
-            android:paddingRight="0dp"
-            android:paddingBottom="0dp"
-            android:text="Account Reports"
-            android:visibility="invisible"
-            app:layout_constraintEnd_toEndOf="@+id/ReportsPhoto"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/ReportsPhoto"
-            app:layout_constraintTop_toBottomOf="@+id/ReportsPhoto" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent=".5" />
-
-        <ImageView
-            android:id="@+id/imageView16"
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toStartOf="@+id/guideline7"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView14"
-            app:srcCompat="@drawable/mapicon" />
-
-        <ImageView
-            android:id="@+id/imageView17"
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/guideline7"
-            app:layout_constraintTop_toBottomOf="@+id/imageView14"
-            app:srcCompat="@drawable/services" />
-
-        <ImageView
-            android:id="@+id/imageView19"
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="@+id/guideline7"
-            app:layout_constraintTop_toBottomOf="@+id/imageView18"
-            app:srcCompat="@drawable/gasicon" />
-
-        <ImageView
-            android:id="@+id/imageView21"
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toStartOf="@+id/guideline7"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView15"
-            app:srcCompat="@drawable/star" />
-
-        <ImageView
-            android:id="@+id/imageView24"
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toStartOf="@+id/guideline7"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView22"
-            app:srcCompat="@drawable/person" />
-
-        <ImageView
-            android:id="@+id/imageView26"
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/guideline7"
-            app:layout_constraintTop_toBottomOf="@+id/imageView20"
-            app:srcCompat="@drawable/logout" />
-
-        <ImageView
-            android:id="@+id/InventoryPhoto"
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="16dp"
-            android:visibility="invisible"
-            app:layout_constraintEnd_toStartOf="@+id/guideline7"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView25"
-            app:srcCompat="@drawable/inventoryicon" />
-
-        <ImageView
-            android:id="@+id/ReportsPhoto"
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="16dp"
-            android:visibility="invisible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/guideline7"
-            app:layout_constraintTop_toBottomOf="@+id/imageView27"
-            app:srcCompat="@drawable/reports" />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="32dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/InventoryBG" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

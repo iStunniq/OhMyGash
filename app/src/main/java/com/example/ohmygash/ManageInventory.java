@@ -61,6 +61,7 @@ public class ManageInventory extends AppCompatActivity {
                     finish();
                     startActivity(intent);
                 }
+                ManagePager.setUserInputEnabled(false);
                 if (user.child("accType").getValue().toString().matches("Autoshop")){
                     ManageTabs.getTabAt(0).view.setClickable(false);
                     ManageTabs.selectTab(ManageTabs.getTabAt(1));

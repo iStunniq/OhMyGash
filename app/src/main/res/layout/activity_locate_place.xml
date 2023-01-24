@@ -5,7 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
+    android:backgroundTint="@color/primaryColor2"
     tools:context=".LocatePlace">
+
+    <ImageView
+        android:id="@+id/imageView18"
+        android:layout_width="3000dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline2"
+        app:srcCompat="@drawable/gasimage2" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".5" />
 
     <ImageView
         android:id="@+id/imageView33"
@@ -24,52 +42,23 @@
     <TextView
         android:id="@+id/textView2"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/orange"
+        android:layout_height="0dp"
+        android:background="@drawable/white"
         android:paddingLeft="10dp"
-        android:paddingTop="6dp"
+        android:paddingTop="0dp"
         android:paddingRight="10dp"
-        android:paddingBottom="6dp"
-        android:shadowDx="5"
-        android:shadowDy="5"
-        android:shadowRadius="5"
+        android:paddingBottom="0dp"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="0"
         android:text="AutoShops"
         android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="35sp"
-        app:layout_constraintEnd_toEndOf="@+id/imageView33"
-        app:layout_constraintStart_toStartOf="@+id/imageView33"
-        app:layout_constraintTop_toBottomOf="@+id/FiltersButton" />
-
-    <Button
-        android:id="@+id/navigationButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/orange"
-        android:text="Menu"
-        app:layout_constraintBottom_toBottomOf="@+id/FiltersButton"
-        app:layout_constraintEnd_toStartOf="@+id/guideline8"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/imageView33"
-        app:layout_constraintTop_toTopOf="@+id/FiltersButton" />
-
-    <Button
-        android:id="@+id/FiltersButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/orange"
-        android:text="Filters"
-        app:layout_constraintEnd_toEndOf="@+id/imageView33"
-        app:layout_constraintStart_toStartOf="@+id/guideline8"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textColor="@color/black"
+        android:textSize="30dp"
+        app:layout_constraintBottom_toBottomOf="@+id/navigationButton"
+        app:layout_constraintEnd_toStartOf="@+id/FiltersButton"
+        app:layout_constraintStart_toEndOf="@+id/navigationButton"
+        app:layout_constraintTop_toTopOf="@+id/navigationButton" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/PlaceRecyclerView"
@@ -92,7 +81,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
         android:text="Loading Locations..."
-        android:textColor="@color/primaryColor"
+        android:textColor="@color/primaryDarkColor"
         android:textColorLink="@color/primaryColor"
         android:textSize="30dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -117,5 +106,31 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent=".5" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/navigationButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:clickable="true"
+        app:backgroundTint="@color/white"
+        app:fabSize="mini"
+        app:layout_constraintStart_toStartOf="@+id/imageView33"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/hambur" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/FiltersButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:clickable="true"
+        app:backgroundTint="@color/white"
+        app:fabSize="mini"
+        app:layout_constraintBottom_toBottomOf="@+id/textView2"
+        app:layout_constraintEnd_toEndOf="@+id/imageView33"
+        app:layout_constraintTop_toTopOf="@+id/textView2"
+        app:srcCompat="@drawable/filter" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

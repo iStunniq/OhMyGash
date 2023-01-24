@@ -4,8 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@drawable/ic_launcher_background"
+    android:backgroundTint="#0E85BA"
     tools:context=".Login">
+
+    <ImageView
+        android:id="@+id/imageView43"
+        android:layout_width="3000dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline13"
+        app:srcCompat="@drawable/gasimage" />
 
     <ImageView
         android:id="@+id/imageView6"
@@ -15,7 +26,7 @@
         android:layout_marginTop="-24dp"
         android:layout_marginEnd="-16dp"
         android:layout_marginBottom="-16dp"
-        android:background="@drawable/blue"
+        android:background="@drawable/white"
         app:layout_constraintBottom_toBottomOf="@+id/Title"
         app:layout_constraintEnd_toEndOf="@+id/Title"
         app:layout_constraintHorizontal_bias="0.0"
@@ -35,72 +46,33 @@
         app:layout_constraintStart_toStartOf="@+id/imageView6"
         app:layout_constraintTop_toBottomOf="@+id/imageView6"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/blue" />
-
-    <Button
-        android:id="@+id/GeneralRegister"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="64dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/orange"
-        android:text="Regular Account:\nAccounts for General Use"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="@+id/imageView7"
-        app:layout_constraintStart_toEndOf="@+id/GeneralFloating"
-        app:layout_constraintTop_toBottomOf="@+id/imageView6" />
-
-    <Button
-        android:id="@+id/AutoShopRegister"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:background="@drawable/orange"
-        android:text="Autoshop Account:\nFor Autoshops looking to showcase their products and services"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="@+id/GeneralRegister"
-        app:layout_constraintHorizontal_bias="0.529"
-        app:layout_constraintStart_toStartOf="@+id/GeneralRegister"
-        app:layout_constraintTop_toBottomOf="@+id/GeneralRegister" />
-
-    <Button
-        android:id="@+id/StationRegister"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:background="@drawable/orange"
-        android:text="Gas Station Account:\nfor Gas Stations looking to provide gas prices, products and services"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="@+id/AutoShopRegister"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/AutoShopRegister"
-        app:layout_constraintTop_toBottomOf="@+id/AutoShopRegister" />
+        app:srcCompat="@drawable/white" />
 
     <Button
         android:id="@+id/StationToRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/orange"
-        android:text="Go Back"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/blue"
+        android:text="Return"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:icon="@android:drawable/ic_menu_revert"
         app:layout_constraintEnd_toEndOf="@+id/imageView7"
         app:layout_constraintStart_toStartOf="@+id/imageView7"
-        app:layout_constraintTop_toBottomOf="@+id/StationRegister" />
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
     <TextView
         android:id="@+id/Title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="32dp"
-        android:background="@drawable/orange"
+        android:background="@drawable/blue"
         android:shadowDx="5"
         android:shadowDy="5"
         android:shadowRadius="5"
-        android:text="Select Account Type To Register"
+        android:text="Account Type"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="40sp"
@@ -113,13 +85,14 @@
         android:id="@+id/GeneralFloating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
+        android:layout_marginTop="64dp"
         android:clickable="true"
-        android:scaleX="1.5"
-        android:scaleY="1.5"
-        app:layout_constraintBottom_toBottomOf="@+id/GeneralRegister"
+        android:scaleY="1"
+        app:fabCustomSize="70dp"
+        app:layout_constraintEnd_toStartOf="@+id/AutoshopFloating"
         app:layout_constraintStart_toStartOf="@+id/imageView7"
-        app:layout_constraintTop_toTopOf="@+id/GeneralRegister"
+        app:layout_constraintTop_toBottomOf="@+id/imageView6"
+        app:maxImageSize="30dp"
         app:srcCompat="@drawable/person"
         tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
 
@@ -128,12 +101,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
-        android:scaleX="1.5"
-        android:scaleY="1.5"
-        app:layout_constraintBottom_toBottomOf="@+id/AutoShopRegister"
-        app:layout_constraintEnd_toEndOf="@+id/GeneralFloating"
-        app:layout_constraintStart_toStartOf="@+id/GeneralFloating"
-        app:layout_constraintTop_toTopOf="@+id/AutoShopRegister"
+        android:scaleX="1"
+        android:scaleY="1"
+        app:fabCustomSize="70dp"
+        app:layout_constraintEnd_toEndOf="@+id/imageView7"
+        app:layout_constraintStart_toStartOf="@+id/imageView7"
+        app:layout_constraintTop_toTopOf="@+id/GeneralFloating"
+        app:maxImageSize="30dp"
         app:srcCompat="@drawable/services"
         tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
 
@@ -142,13 +116,54 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
-        android:scaleX="1.5"
-        android:scaleY="1.5"
-        app:layout_constraintBottom_toBottomOf="@+id/StationRegister"
-        app:layout_constraintEnd_toEndOf="@+id/AutoshopFloating"
-        app:layout_constraintStart_toStartOf="@+id/AutoshopFloating"
-        app:layout_constraintTop_toTopOf="@+id/StationRegister"
+        android:scaleX="1"
+        android:scaleY="1"
+        app:fabCustomSize="70dp"
+        app:layout_constraintEnd_toEndOf="@+id/imageView7"
+        app:layout_constraintStart_toEndOf="@+id/AutoshopFloating"
+        app:layout_constraintTop_toTopOf="@+id/AutoshopFloating"
+        app:maxImageSize="30dp"
         app:srcCompat="@drawable/gasicon"
         tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".5" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Regular"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/GeneralFloating"
+        app:layout_constraintStart_toStartOf="@+id/GeneralFloating"
+        app:layout_constraintTop_toBottomOf="@+id/GeneralFloating" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Autoshop"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/AutoshopFloating"
+        app:layout_constraintStart_toStartOf="@+id/AutoshopFloating"
+        app:layout_constraintTop_toBottomOf="@+id/AutoshopFloating" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Gas Station"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/StationFloating"
+        app:layout_constraintStart_toStartOf="@+id/StationFloating"
+        app:layout_constraintTop_toBottomOf="@+id/StationFloating" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

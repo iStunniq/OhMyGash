@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.ohmygash.manageinventoryfragments.ManageVPAdapter;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -23,11 +24,12 @@ import com.google.firebase.database.ValueEventListener;
 
 public class ViewPlace extends AppCompatActivity {
 
-    private Button Back,Locate,Favorite;
+    private FloatingActionButton Back,Locate,Favorite;
     private TextView Name,Add;
     private TabLayout ManageTabs;
     private ViewPager2 ManagePager;
     private ManageVPAdapter VPAdapter;
+    private Boolean Favorited = false;
 
     DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Users");
     DatabaseReference favRef = FirebaseDatabase.getInstance().getReference("Favorites");
@@ -88,11 +90,13 @@ public class ViewPlace extends AppCompatActivity {
 //                    startActivity(intent);
             finish();
         });
+
         favRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.child(FBUser.getUid()).child(UserId).getValue() != null){
-                    Favorite.setText("Remove Favorite");
+                    Favorite.setImageDrawable(getDrawable(R.drawable.star_filled));
+                    Favorited = true;
                 }
             }
 
@@ -103,12 +107,14 @@ public class ViewPlace extends AppCompatActivity {
         });
 
         Favorite.setOnClickListener(view->{
-            if (Favorite.getText().toString().matches("Add to Favorites")){
-                Favorite.setText("Remove Favorite");
+            if (!Favorited){
+                Favorite.setImageDrawable(getDrawable(R.drawable.star_filled));
                 favRef.child(FBUser.getUid()).child(UserId).setValue(UserId);
+                Favorited=true;
             } else {
-                Favorite.setText("Add to Favorites");
+                Favorite.setImageDrawable(getDrawable(R.drawable.star));
                 favRef.child(FBUser.getUid()).child(UserId).removeValue();
+                Favorited=false;
             }
         });
 
@@ -126,7 +132,7 @@ public class ViewPlace extends AppCompatActivity {
                     intent.putExtra("UserKeyToLocate",user.getKey());
                     startActivity(intent);
                 });
-
+                ManagePager.setUserInputEnabled(false);
                 if (accType.matches("Autoshop")){
                     ManageTabs.getTabAt(0).view.setClickable(false);
                     ManageTabs.selectTab(ManageTabs.getTabAt(1));

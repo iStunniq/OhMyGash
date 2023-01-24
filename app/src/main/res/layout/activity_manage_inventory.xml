@@ -5,7 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
+    android:backgroundTint="@color/primaryColor2"
     tools:context=".ViewPlace">
+
+    <ImageView
+        android:id="@+id/imageView20"
+        android:layout_width="3000dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline22"
+        app:srcCompat="@drawable/gasimage2" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline22"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".5" />
 
     <ImageView
         android:id="@+id/imageView34"
@@ -28,14 +46,15 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
-        android:background="@drawable/orange"
+        android:background="@drawable/white"
+        android:maxLines="2"
         android:paddingStart="10dp"
         android:paddingTop="4dp"
         android:paddingEnd="10dp"
         android:paddingBottom="4dp"
         android:text="Place Name"
         android:textAlignment="center"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="25dp"
         app:layout_constraintEnd_toEndOf="@+id/imageView34"
         app:layout_constraintStart_toStartOf="@+id/imageView34"
@@ -48,14 +67,16 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:background="@drawable/orange"
+        android:background="@drawable/white"
+        android:maxLines="2"
         android:paddingStart="10dp"
         android:paddingTop="4dp"
         android:paddingEnd="10dp"
         android:paddingBottom="4dp"
+
         android:text="Place Address"
         android:textAlignment="center"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="@+id/imageView34"
         app:layout_constraintStart_toStartOf="@+id/imageView34"
@@ -68,21 +89,30 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="32dp"
+        android:background="@drawable/blue"
         android:text="Menu"
+        app:icon="@drawable/hambur"
+        app:iconSize="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline11"
         app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/ManageInventoryTabs"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:background="@color/primaryDarkColor"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/blue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView34"
-        app:tabSelectedTextColor="@color/primaryColor"
+        app:tabIndicator="@drawable/white"
+        app:tabIndicatorColor="@color/primaryDarkColor"
+        app:tabIndicatorGravity="center"
+        app:tabIndicatorHeight="30dp"
+        app:tabSelectedTextColor="@color/black"
         app:tabTextColor="@color/white">
 
         <com.google.android.material.tabs.TabItem
@@ -106,6 +136,7 @@
         android:id="@+id/ManageInventoryPager"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/AddNewItemButton"
         app:layout_constraintEnd_toEndOf="parent"
@@ -119,7 +150,10 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="32dp"
-        android:text="Add New Item"
+        android:background="@drawable/blue"
+        android:text="New Item"
+        app:icon="@drawable/add_new"
+        app:iconSize="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline11" />

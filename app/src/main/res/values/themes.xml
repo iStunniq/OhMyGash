@@ -11,9 +11,6 @@
         <item name="colorSecondaryVariant">@color/primaryColor</item>
         <item name="colorOnSecondary">@color/black</item>
         <item name="android:shadowColor">#AA101010</item>
-        <item name="android:shadowDx">2</item>
-        <item name="android:shadowDy">2</item>
-        <item name="android:shadowRadius">2</item>
 
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>

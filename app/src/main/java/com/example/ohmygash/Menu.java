@@ -25,9 +25,8 @@ public class Menu extends AppCompatActivity {
     FirebaseUser FBUser;
     DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Users");
 
-    TextView Name,Email;
-    Button Autoshops,Stations,Map,Logout,Inventory,Profile,Favorites,Reports;
-    ImageView InventoryBG, ReportsBG, InventoryPhoto, ReportsPhoto;
+    TextView Name,Email, InventoryText, ReportsText;
+    FloatingActionButton Autoshops,Stations,Map,Logout,Inventory,Profile,Favorites,Reports;
     FloatingActionButton Tutorial;
 
     @Override
@@ -42,14 +41,12 @@ public class Menu extends AppCompatActivity {
         Favorites = findViewById(R.id.GoToFavoritesButton);
         Profile = findViewById(R.id.GoToProfile);
         Inventory = findViewById(R.id.GoToInventory);
-        InventoryBG = findViewById(R.id.InventoryBG);
-        InventoryPhoto = findViewById(R.id.InventoryPhoto);
+        InventoryText = findViewById(R.id.InventoryText);
         Logout = findViewById(R.id.LogoutButton);
         Map = findViewById(R.id.GoToMapButton);
         Tutorial = findViewById(R.id.MenuTutorialButton);
         Reports = findViewById(R.id.GoToReports);
-        ReportsBG = findViewById(R.id.ReportsBG);
-        ReportsPhoto = findViewById(R.id.ReportsPhoto);
+        ReportsText = findViewById(R.id.ReportsText);
 
         FBAuth = FirebaseAuth.getInstance();
         FBUser = FBAuth.getCurrentUser();
@@ -120,17 +117,15 @@ public class Menu extends AppCompatActivity {
                        intent.putExtra("Tutorial",2);
                        startActivity(intent);
                    }
-                   Name.setText(user.child("name").getValue().toString());
+                   Name.setText("Welcome back "+user.child("name").getValue().toString()+"!");
                    Email.setText(currentuser.getEmail());
                    String accType = user.child("accType").getValue().toString();
                    if (!accType.matches("General")){
                        Inventory.setVisibility(View.VISIBLE);
-                       InventoryBG.setVisibility(View.VISIBLE);
-                       InventoryPhoto.setVisibility(View.VISIBLE);
-                       Inventory.setEnabled(true);
+                       InventoryText.setVisibility(View.VISIBLE);
                        if (accType.matches("Admin")){
-                           Inventory.setText("Accounts and Verification");
-                           InventoryPhoto.setImageDrawable(getDrawable(R.drawable.reports));
+                           InventoryText.setText("Verifications");
+                           Inventory.setImageDrawable(getDrawable(R.drawable.checkmark));
                            Inventory.setOnClickListener(view->{
                                Intent intent = new Intent(Menu.this,LocatePlace.class);
                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -138,8 +133,7 @@ public class Menu extends AppCompatActivity {
                                startActivity(intent);
                            });
                            Reports.setVisibility(View.VISIBLE);
-                           ReportsBG.setVisibility(View.VISIBLE);
-                           ReportsPhoto.setVisibility(View.VISIBLE);
+                           ReportsText.setVisibility(View.VISIBLE);
                            Reports.setEnabled(true);
                            Reports.setOnClickListener(view->{
                                Intent intent = new Intent(Menu.this,LocatePlace.class);

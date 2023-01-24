@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -49,7 +50,8 @@ public class AddNewItem extends AppCompatActivity {
     private ActivityResultLauncher<String> GetPhoto;
     private Uri imageUri, oldImageUri;
 
-    private Button Return, Add, Delete, Upload;
+    private Button Add, Delete, Upload;
+    private FloatingActionButton Return;
     private TextView Title;
     private EditText Name, Description, Price;
     private RadioGroup itemType;
@@ -119,9 +121,9 @@ public class AddNewItem extends AppCompatActivity {
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 SelectedItem = findViewById(i);
                 if (SelectedItem.getText().toString().matches("Gasoline")) {
-                    Price.setHint("Item Price in Pesos per Liter");
+                    Price.setHint("Price in Pesos per Liter");
                 } else {
-                    Price.setHint("Item Price in Pesos (0 = 'Unset')");
+                    Price.setHint("Price in Pesos (0 = 'Unset')");
                 }
             }
         });

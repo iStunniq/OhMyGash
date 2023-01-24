@@ -5,7 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
+    android:backgroundTint="@color/primaryColor2"
     tools:context=".ViewPlace">
+
+    <ImageView
+        android:id="@+id/imageView22"
+        android:layout_width="3000dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline24"
+        app:srcCompat="@drawable/gasimage2" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".5" />
 
     <ImageView
         android:id="@+id/imageView40"
@@ -15,12 +33,11 @@
         android:layout_marginTop="-24dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="-16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/LocateAddress"
+        app:layout_constraintBottom_toBottomOf="@+id/textView5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/blue" />
 
     <TextView
@@ -29,7 +46,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:background="@drawable/orange"
+        android:background="@drawable/white"
+        android:maxLines="2"
         android:paddingStart="10dp"
         android:paddingTop="4dp"
         android:paddingEnd="10dp"
@@ -37,80 +55,49 @@
         android:shadowDx="5"
         android:shadowDy="5"
         android:textAlignment="center"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textColorHint="@color/white"
         android:textSize="25dp"
         app:layout_constraintEnd_toEndOf="@+id/imageView40"
         app:layout_constraintStart_toStartOf="@+id/imageView40"
-        app:layout_constraintTop_toBottomOf="@+id/AddToFavorite" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <TextView
         android:id="@+id/textView5"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:background="@drawable/orange"
+        android:background="@drawable/white"
+        android:maxLines="2"
         android:paddingStart="10dp"
         android:paddingTop="4dp"
         android:paddingEnd="10dp"
         android:paddingBottom="4dp"
-        android:shadowDx="5"
-        android:shadowDy="5"
-        android:shadowRadius="5"
         android:textAlignment="center"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textColorHint="@color/white"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/textView4"
         app:layout_constraintStart_toStartOf="@+id/textView4"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-    <Button
-        android:id="@+id/navigationButton2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:text="Back"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintStart_toStartOf="@+id/imageView40"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/LocateAddress"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="-100dp"
-        android:layout_marginEnd="-100dp"
-        android:text="Locate"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
-
-    <Button
-        android:id="@+id/AddToFavorite"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:text="Add to Favorites"
-        app:layout_constraintBottom_toBottomOf="@+id/navigationButton2"
-        app:layout_constraintEnd_toEndOf="@+id/imageView40"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toTopOf="@+id/navigationButton2" />
-
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/ViewPlaceTabs"
-        android:layout_width="409dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:background="@color/primaryDarkColor"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/blue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView40"
-        app:tabSelectedTextColor="@color/textColor"
-        app:tabTextColor="@color/white">
+        app:tabIndicator="@drawable/blue"
+        app:tabIndicatorColor="@color/primaryDarkColor"
+        app:tabIndicatorGravity="center"
+        app:tabIndicatorHeight="30dp"
+        app:tabSelectedTextColor="@color/black"
+        app:tabTextColor="@color/black">
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
@@ -132,16 +119,56 @@
         android:id="@+id/ViewPlacePager"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ViewPlaceTabs" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/navigationButton2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent=".5" />
+        android:clickable="true"
+        app:backgroundTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/LocateAddress"
+        app:layout_constraintEnd_toStartOf="@+id/LocateAddress"
+        app:layout_constraintStart_toStartOf="@+id/imageView40"
+        app:layout_constraintTop_toTopOf="@+id/LocateAddress"
+        app:srcCompat="@android:drawable/ic_menu_revert" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/AddToFavorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        app:backgroundTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/LocateAddress"
+        app:layout_constraintEnd_toEndOf="@+id/imageView40"
+        app:layout_constraintStart_toEndOf="@+id/LocateAddress"
+        app:layout_constraintTop_toTopOf="@+id/LocateAddress"
+        app:srcCompat="@drawable/star" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/LocateAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:clickable="true"
+        app:backgroundTint="@color/white"
+        app:layout_constraintEnd_toEndOf="@+id/imageView40"
+        app:layout_constraintStart_toStartOf="@+id/imageView40"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/pin" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Locate"
+        android:textColor="@color/primaryDarkColor"
+        app:layout_constraintEnd_toEndOf="@+id/LocateAddress"
+        app:layout_constraintStart_toStartOf="@+id/LocateAddress"
+        app:layout_constraintTop_toBottomOf="@+id/LocateAddress" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

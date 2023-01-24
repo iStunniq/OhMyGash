@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primaryDarkColor"
-    tools:context=".Map">
+    android:background="@color/primaryColor"
+    tools:context=".Map"
+    tools:layout="@layout/support_simple_spinner_dropdown_item">
 
     <fragment
         android:id="@+id/map"
@@ -16,8 +17,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/MapSearchButton"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintTop_toBottomOf="@+id/MapAdressSearchBar"
         tools:context=".Map"
         tools:layout="@layout/support_simple_spinner_dropdown_item" />
 
@@ -33,213 +33,43 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <ImageView
-        android:id="@+id/ButtonsBackground"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="-16dp"
-        android:layout_marginTop="-16dp"
-        android:layout_marginEnd="-16dp"
-        android:layout_marginBottom="-16dp"
-        android:background="@drawable/blue"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/GoToMarker"
-        app:layout_constraintEnd_toEndOf="@+id/RouteTyping"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/RouteTyping"
-        app:layout_constraintTop_toTopOf="@+id/RouteTyping"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <EditText
         android:id="@+id/MapAdressSearchBar"
-        android:layout_width="373dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/orange"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/white"
         android:ems="10"
-        android:hint="Address Bar"
+        android:hint="Search here"
         android:inputType="textPersonName"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        android:textColorLink="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/NavigationButton" />
-
-    <Button
-        android:id="@+id/NearestAutoShopButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/orange"
-        android:text="Find Nearby Autoshops"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        android:textColorLink="@color/white"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@+id/NearestStationButton"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/NearestStationButton"
-        app:layout_constraintTop_toBottomOf="@+id/NearestStationButton" />
-
-    <Button
-        android:id="@+id/GoToMarker"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/orange"
-        android:text="View Homepage of Selected Marker"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        android:textColorLink="@color/white"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@+id/NearestAutoShopButton"
-        app:layout_constraintStart_toStartOf="@+id/NearestAutoShopButton"
-        app:layout_constraintTop_toBottomOf="@+id/NearestAutoShopButton" />
-
-    <Button
-        android:id="@+id/DirectionsButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/orange"
-        android:text="Get Directions"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        android:textColorLink="@color/white"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@+id/RouteTyping"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/RouteTyping"
-        app:layout_constraintTop_toBottomOf="@+id/RouteTyping" />
-
-    <Button
-        android:id="@+id/RouteTyping"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="48dp"
-        android:background="@drawable/orange"
-        android:text="Routing Type: DRIVING"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        android:textColorLink="@color/white"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
-
-    <Button
-        android:id="@+id/MapSearchButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/orange"
-        android:paddingStart="10dp"
-        android:paddingLeft="0dp"
-        android:paddingTop="4dp"
-        android:paddingEnd="10dp"
-        android:paddingRight="0dp"
-        android:paddingBottom="4dp"
-        android:text="Search"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        android:textColorLink="@color/white"
-        app:layout_constraintEnd_toStartOf="@+id/guideline9"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textColorLink="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/MapSearchButton"
+        app:layout_constraintEnd_toStartOf="@+id/NavigationButton"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/MapAdressSearchBar"
-        app:layout_constraintTop_toBottomOf="@+id/MapAdressSearchBar" />
-
-    <Button
-        android:id="@+id/MapTrackButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/orange"
-        android:text="Follow Current Location"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        android:textColorLink="@color/white"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@+id/DirectionsButton"
-        app:layout_constraintStart_toStartOf="@+id/DirectionsButton"
-        app:layout_constraintTop_toBottomOf="@+id/DirectionsButton" />
-
-    <Button
-        android:id="@+id/NearestStationButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/orange"
-        android:text="Find Nearby Stations"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        android:textColorLink="@color/white"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@+id/MapTrackButton"
-        app:layout_constraintStart_toStartOf="@+id/MapTrackButton"
-        app:layout_constraintTop_toBottomOf="@+id/MapTrackButton" />
+        app:layout_constraintStart_toEndOf="@+id/MapSearchButton"
+        app:layout_constraintTop_toTopOf="@+id/MapSearchButton"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/DistanceFromDestination"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/primaryDarkColor"
+        android:background="@drawable/white"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
         android:textAlignment="center"
         android:textSize="20sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/MapTutorialButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/map" />
-
-    <Button
-        android:id="@+id/NavigationButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/orange"
-        android:paddingStart="10dp"
-        android:paddingLeft="0dp"
-        android:paddingTop="4dp"
-        android:paddingEnd="10dp"
-        android:paddingRight="0dp"
-        android:paddingBottom="4dp"
-        android:text="Menu"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        android:textColorLink="@color/white"
-        app:layout_constraintEnd_toStartOf="@+id/guideline9"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/MapAdressSearchBar"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/ButtonForButtons"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:background="@drawable/orange"
-        android:paddingStart="10dp"
-        android:paddingLeft="0dp"
-        android:paddingTop="4dp"
-        android:paddingEnd="10dp"
-        android:paddingRight="0dp"
-        android:paddingBottom="4dp"
-        android:text="More Options"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        android:textColorLink="@color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/MapSearchButton"
-        app:layout_constraintEnd_toEndOf="@+id/MapAdressSearchBar"
-        app:layout_constraintStart_toStartOf="@+id/guideline9"
-        app:layout_constraintTop_toTopOf="@+id/MapSearchButton" />
+        app:layout_constraintTop_toTopOf="@+id/MapTutorialButton" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/MapTutorialButton"
@@ -258,5 +88,161 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent=".5" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/NavigationButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:clickable="true"
+        android:src="@drawable/hambur"
+        app:backgroundTint="@color/primaryDarkColor"
+        app:fabSize="mini"
+        app:layout_constraintBottom_toBottomOf="@+id/MapSearchButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/MapSearchButton" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/MapSearchButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="40dp"
+        android:clickable="true"
+        android:src="@android:drawable/ic_menu_search"
+        app:backgroundTint="@color/primaryDarkColor"
+        app:fabSize="mini"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/ButtonForButtons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:clickable="true"
+        android:rotation="180"
+        android:src="@drawable/quantum_ic_arrow_back_grey600_24"
+        app:fabSize="mini"
+        app:layout_constraintEnd_toEndOf="@+id/NavigationButton"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/MapSearchButton"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+    <HorizontalScrollView
+        android:id="@+id/ButtonsScrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/white"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:scrollbarSize="0dp"
+        android:scrollbarStyle="insideOverlay"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/ButtonForButtons"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ButtonForButtons"
+        app:layout_constraintTop_toTopOf="@+id/ButtonForButtons">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+
+            <Button
+                android:id="@+id/RouteTyping"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp"
+                android:background="@drawable/blue"
+                android:paddingLeft="10dp"
+                android:paddingTop="4dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="4dp"
+                android:text="Type: DRIVING"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textColorLink="@color/white" />
+
+            <Button
+                android:id="@+id/DirectionsButton"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp"
+                android:background="@drawable/blue"
+                android:paddingLeft="10dp"
+                android:paddingTop="4dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="4dp"
+                android:text="Directions"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textColorLink="@color/white" />
+
+            <Button
+                android:id="@+id/MapTrackButton"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp"
+                android:background="@drawable/blue"
+                android:paddingLeft="10dp"
+                android:paddingTop="4dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="4dp"
+                android:text="Track Self"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textColorLink="@color/white" />
+
+            <Button
+                android:id="@+id/NearestAutoShopButton"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp"
+                android:background="@drawable/blue"
+                android:paddingLeft="10dp"
+                android:paddingTop="4dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="4dp"
+                android:text="Autoshops"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textColorLink="@color/white" />
+
+            <Button
+                android:id="@+id/NearestStationButton"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp"
+                android:background="@drawable/blue"
+                android:paddingLeft="10dp"
+                android:paddingTop="4dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="4dp"
+                android:text="Gas Stations"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textColorLink="@color/white" />
+
+            <Button
+                android:id="@+id/GoToMarker"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp"
+                android:background="@drawable/blue"
+                android:paddingLeft="10dp"
+                android:paddingTop="4dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="4dp"
+                android:text="View Selected Page"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textColorLink="@color/white" />
+
+        </LinearLayout>
+    </HorizontalScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -44,6 +44,8 @@ public class Login extends AppCompatActivity {
 
             if (emailTxt.isEmpty()){
                 Toast.makeText(Login.this, "Please Fill Email", Toast.LENGTH_LONG).show();
+            }   else if (passwordTxt.isEmpty()){
+                Toast.makeText(Login.this, "Please Fill Password", Toast.LENGTH_LONG).show();
             }   else    {
                 FBAuth.signInWithEmailAndPassword(emailTxt,passwordTxt).addOnCompleteListener(new OnCompleteListener<AuthResult>(){
                     @Override

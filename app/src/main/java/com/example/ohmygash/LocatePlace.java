@@ -56,9 +56,8 @@ import java.util.Map;
 
 public class LocatePlace extends AppCompatActivity {
 
-    private Button Menu,Filters;
     private TextView textView2,Loading;
-    private FloatingActionButton Refresh;
+    private FloatingActionButton Refresh, Menu,Filters;
     RecyclerView recyclerView;
 
     LocationRequest mLocationRequest;
@@ -95,7 +94,7 @@ public class LocatePlace extends AppCompatActivity {
         FilterStatus = LocatePlaceIntent.getStringExtra("FilterStatus");
         FilterRadius = LocatePlaceIntent.getIntExtra("Radius",10000);
 
-        textView2.setText("GAZZIR\n"+Acctype);
+        textView2.setText(Acctype);
         FBAuth = FirebaseAuth.getInstance();
         FBUser = FBAuth.getCurrentUser();
         if (FBUser == null) {
@@ -116,14 +115,15 @@ public class LocatePlace extends AppCompatActivity {
         });
 
         if (Acctype.matches("Requests")) {
-            Filters.setText("All\nAccounts");
+            Filters.setImageDrawable(getDrawable(R.drawable.multiplepeople));
             Filters.setOnClickListener(view ->{
             Intent intent = new Intent(LocatePlace.this,LocatePlace.class);
             intent.putExtra("AccountTypeToLocate","AllAccounts");
             startActivity(intent);
             });
         } else if (Acctype.matches("Account Reports")) {
-            Filters.setText("New\nReport");
+            textView2.setText("Reports");
+            Filters.setImageDrawable(getDrawable(R.drawable.add_new));
             Filters.setOnClickListener(view ->{
                 String Reportkey = repRef.push().getKey();
                 DatabaseReference NewReport = repRef.child(Reportkey);
@@ -326,7 +326,6 @@ public class LocatePlace extends AppCompatActivity {
                                         }
                                     }
                                 }
-                                Menu.setText("Back");
                                 Menu.setOnClickListener(view -> {
                                     finish();
                                 });
