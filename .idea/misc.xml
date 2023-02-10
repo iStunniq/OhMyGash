@@ -4,9 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/drawable-v24/Orange.xml" value="0.2115" />
+        <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2115" />
         <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/drawable-v24/orange.xml" value="0.1325" />
         <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/drawable-v24/orange_bordered.xml" value="0.2115" />
         <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/drawable/blue.xml" value="0.2115" />
+        <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2115" />
         <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/drawable/white.xml" value="0.2115" />
         <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/drawable/white_banner_background.xml" value="0.2115" />
         <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/layout/activity_add_new_item.xml" value="0.22" />
@@ -40,6 +42,8 @@
         <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/layout/reportitem.xml" value="0.33" />
         <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/layout/toolbar_layout.xml" value="0.19010416666666666" />
         <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/menu/nav_menu.xml" value="0.19010416666666666" />
+        <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2115" />
+        <entry key="..\:/Users/Glen/AndroidStudioProjects/OhMyGash/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.2105" />
       </map>
     </option>
   </component>
